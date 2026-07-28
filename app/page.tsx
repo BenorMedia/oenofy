@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
     <>
@@ -95,9 +97,12 @@ export default function Home() {
           Coming from both wine production and private wine consultancy, we
           imagined OENOFY with a simple idea.
         </p>
-        <img
+        <Image
           src="/assets/home/intro-quote.png"
           alt="To build every collection, cellar and experience as carefully as a tailor made piece. Benjamin and Anastasiia"
+          width={962}
+          height={395}
+          sizes="(max-width: 600px) 100vw, 600px"
           style={{ marginTop: 64, maxWidth: 600, width: "100%", height: "auto" }}
         />
       </div>
@@ -198,14 +203,24 @@ export default function Home() {
           height: "100vh",
           overflow: "hidden",
           fontFamily: "var(--font-montserrat), sans-serif",
-          backgroundImage: "url('/assets/home/quote-bg.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
         }}
       >
+        <Image
+          src="/assets/home/quote-bg.png"
+          alt=""
+          fill
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center", zIndex: 0 }}
+        />
         <div
           id="quote-box"
-          style={{ position: "absolute", left: 120, top: 176, maxWidth: 760 }}
+          style={{
+            position: "absolute",
+            left: 120,
+            top: 176,
+            maxWidth: 760,
+            zIndex: 1,
+          }}
         >
           <p
             id="quote-text"
@@ -239,20 +254,18 @@ export default function Home() {
           fontFamily: "var(--font-montserrat), sans-serif",
         }}
       >
+        <div style={{ position: "relative", height: 700 }}>
+          <Image
+            src="/assets/home/collection1.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+        </div>
         <div
           style={{
             height: 700,
-            backgroundImage: "url('/assets/home/collection1.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <div
-          style={{
-            height: 700,
-            backgroundImage: "url('/assets/home/collection2.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
             position: "relative",
             display: "flex",
             alignItems: "flex-end",
@@ -261,7 +274,14 @@ export default function Home() {
             boxSizing: "border-box",
           }}
         >
-          <div style={{ textAlign: "center" }}>
+          <Image
+            src="/assets/home/collection2.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: "cover", objectPosition: "center", zIndex: 0 }}
+          />
+          <div style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
             <h3
               style={{
                 margin: 0,
@@ -290,14 +310,15 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div
-          style={{
-            height: 700,
-            backgroundImage: "url('/assets/home/collection3.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
+        <div style={{ position: "relative", height: 700 }}>
+          <Image
+            src="/assets/home/collection3.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+        </div>
       </div>
 
       {/* Slider (center card only) */}
@@ -358,12 +379,16 @@ export default function Home() {
             >
               Monaco - YMC
             </h3>
-            <img
+            <Image
               src="/assets/home/ymc-logo.png"
               alt="Yacht Club de Monaco"
+              width={1280}
+              height={720}
+              sizes="(max-width: 480px) 100vw, 480px"
               style={{
                 width: "100%",
                 maxWidth: 480,
+                height: "auto",
                 margin: "40px auto",
                 display: "block",
               }}
@@ -418,11 +443,15 @@ export default function Home() {
             marginBottom: 48,
           }}
         >
-          <img
-            src="/assets/home/news-cyprus.jpg"
-            alt="Discover Cyprus Wine"
-            style={{ width: 320, height: 260, objectFit: "cover" }}
-          />
+          <div style={{ position: "relative", width: 320, height: 260 }}>
+            <Image
+              src="/assets/home/news-cyprus.jpg"
+              alt="Discover Cyprus Wine"
+              fill
+              sizes="320px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
           <div
             style={{
               display: "flex",
@@ -495,11 +524,15 @@ export default function Home() {
             height: "auto",
           }}
         >
-          <img
-            src="/assets/home/news-dhondt.jpg"
-            alt="Dhondt-Grellet"
-            style={{ width: 320, objectFit: "cover", height: 260 }}
-          />
+          <div style={{ position: "relative", width: 320, height: 260 }}>
+            <Image
+              src="/assets/home/news-dhondt.jpg"
+              alt="Dhondt-Grellet"
+              fill
+              sizes="320px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
           <div
             style={{
               display: "flex",
