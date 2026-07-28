@@ -6,6 +6,7 @@
   --color-accent: #ceba9a; /* accent text */
   --color-icon: #f4efea; /* nav ring icon fill (not a text token, kept separate) */
   --color-bg-page: #ffffff; /* plain white section background, not in token doc but reused as-is */
+  --color-preloader-bg: #222323; /* preloader overlay background, from extracted Webflow snippet, not in home-design-tokens.md */
 }
 
 html,

@@ -1,8 +1,11 @@
 import Image from "next/image";
+import Preloader from "../components/Preloader";
 
 export default function Home() {
   return (
     <>
+      <Preloader />
+
       {/* Hero */}
       <div
         style={{
@@ -27,7 +30,12 @@ export default function Home() {
               height: "100%",
               objectFit: "cover",
             }}
-          />
+          >
+            <source
+              src="https://s3.amazonaws.com/webflow-prod-assets/69fdd0067f429dab904ad307/6a69383661b7b1643abe1a63_hero%20video.mp4"
+              type="video/mp4"
+            />
+          </video>
         </div>
 
         <div
