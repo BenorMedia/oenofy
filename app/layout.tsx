@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { montserrat, conso } from "./fonts";
 import SiteNav from "../components/SiteNav";
 import SiteFooter from "../components/SiteFooter";
+import SmoothScroll from "../components/SmoothScroll";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${conso.variable}`}>
       <body>
-        <SiteNav />
-        {children}
-        <SiteFooter />
+        <SmoothScroll>
+          <SiteNav />
+          {children}
+          <SiteFooter />
+        </SmoothScroll>
       </body>
     </html>
   );

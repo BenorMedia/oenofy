@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
 import styles from "./Preloader.module.css";
 
 // Extracted from the client's old Webflow "coming soon" custom-code section.
@@ -90,12 +91,20 @@ export default function Preloader() {
     return () => timers.forEach(clearTimeout);
   }, []);
 
+  const lenis = useLenis();
+
   useEffect(() => {
     document.body.style.overflow = done ? "" : "hidden";
+    if (done) {
+      lenis?.start();
+    } else {
+      lenis?.stop();
+    }
     return () => {
       document.body.style.overflow = "";
+      lenis?.start();
     };
-  }, [done]);
+  }, [done, lenis]);
 
   if (done) return null;
 
