@@ -1,3 +1,13 @@
+:root {
+  /* Design tokens — docs/design-handoff/project/uploads/home-design-tokens.md */
+  --color-text-light: #fff6e7; /* text over images / dark backgrounds */
+  --color-text-dark: #393839; /* text over white / light bg images */
+  --color-bg-block: #eae6db; /* section/block background */
+  --color-accent: #ceba9a; /* accent text */
+  --color-icon: #f4efea; /* nav ring icon fill (not a text token, kept separate) */
+  --color-bg-page: #ffffff; /* plain white section background, not in token doc but reused as-is */
+}
+
 html,
 body {
   margin: 0;
@@ -15,24 +25,15 @@ body {
 }
 
 a {
-  color: #fff6e7;
+  color: var(--color-text-light);
   text-decoration: none;
 }
 
 a:hover {
-  color: #ceba9a;
+  color: var(--color-accent);
 }
 
 @media (max-width: 768px) {
-  #site-nav {
-    padding: 16px 20px !important;
-  }
-  #site-nav a {
-    font-size: 11px !important;
-  }
-  #site-nav .nav-group {
-    gap: 16px !important;
-  }
   #hero-title {
     font-size: 32px !important;
   }

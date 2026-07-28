@@ -17,7 +17,7 @@ export default function Home() {
             muted
             loop
             playsInline
-            poster="/assets/hero-video-placeholder.png"
+            poster="/assets/home/hero-video-placeholder.png"
             style={{
               position: "absolute",
               inset: 0,
@@ -27,103 +27,6 @@ export default function Home() {
             }}
           />
         </div>
-
-        <nav
-          id="site-nav"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 2,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "24px 120px",
-            pointerEvents: "none",
-          }}
-        >
-          <div
-            className="nav-group"
-            style={{ display: "flex", gap: 120, pointerEvents: "auto" }}
-          >
-            <a
-              href="#"
-              style={{
-                fontSize: 14,
-                fontWeight: 400,
-                lineHeight: 1.5,
-                color: "#fff6e7",
-              }}
-            >
-              Conciergerie
-            </a>
-            <a
-              href="#"
-              style={{
-                fontSize: 14,
-                fontWeight: 400,
-                lineHeight: 1.5,
-                color: "#fff6e7",
-              }}
-            >
-              Collection
-            </a>
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: 24,
-              transform: "translateX(-50%)",
-              pointerEvents: "auto",
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="53"
-              height="53"
-              viewBox="0 0 53 53"
-              fill="none"
-            >
-              <path
-                d="M26.4598 0C14.6367 0 5.01855 11.8637 5.01855 26.46C5.01855 41.0563 14.6367 52.92 26.4598 52.92C38.2829 52.92 47.901 41.0428 47.901 26.46C47.901 11.8772 38.2829 0 26.4598 0ZM45.7502 26.4465C45.7502 39.8523 37.0925 50.7556 26.4598 50.7556C15.8271 50.7556 7.16944 39.8523 7.16944 26.4465C7.16944 13.0406 15.8271 2.13736 26.4598 2.13736C37.0925 2.13736 45.7502 13.0406 45.7502 26.4465Z"
-                fill="#F4EFEA"
-              />
-              <path
-                d="M26.46 5.01855C11.8637 5.01855 0 14.6367 0 26.4598C0 38.2829 11.8773 47.9011 26.46 47.9011C41.0428 47.9011 52.92 38.2829 52.92 26.4598C52.92 14.6367 41.0563 5.01855 26.46 5.01855ZM50.7691 26.4463C50.7691 37.079 39.8659 45.7366 26.46 45.7366C13.0542 45.7366 2.15093 37.079 2.15093 26.4463C2.15093 15.8136 13.0542 7.15592 26.46 7.15592C39.8659 7.15592 50.7691 15.8136 50.7691 26.4463Z"
-                fill="#F4EFEA"
-              />
-            </svg>
-          </div>
-          <div
-            className="nav-group"
-            style={{ display: "flex", gap: 120, pointerEvents: "auto" }}
-          >
-            <a
-              href="#"
-              style={{
-                fontSize: 14,
-                fontWeight: 400,
-                lineHeight: 1.5,
-                color: "#fff6e7",
-              }}
-            >
-              Events
-            </a>
-            <a
-              href="#"
-              style={{
-                fontSize: 14,
-                fontWeight: 400,
-                lineHeight: 1.5,
-                color: "#fff6e7",
-              }}
-            >
-              Contact us
-            </a>
-          </div>
-        </nav>
 
         <div
           style={{
@@ -146,7 +49,7 @@ export default function Home() {
               textTransform: "uppercase",
               fontSize: 56,
               lineHeight: 1.15,
-              color: "#fff6e7",
+              color: "var(--color-text-light)",
               letterSpacing: 0,
             }}
           >
@@ -163,7 +66,7 @@ export default function Home() {
         style={{
           width: "100%",
           boxSizing: "border-box",
-          background: "#ffffff",
+          background: "var(--color-bg-page)",
           padding: "160px 120px 60px",
           display: "flex",
           flexDirection: "column",
@@ -181,7 +84,7 @@ export default function Home() {
             fontWeight: 500,
             textTransform: "uppercase",
             lineHeight: 1.5,
-            color: "#393839",
+            color: "var(--color-text-dark)",
           }}
         >
           Every wine finds its origin somewhere between the vine, the terroir
@@ -193,7 +96,7 @@ export default function Home() {
           imagined OENOFY with a simple idea.
         </p>
         <img
-          src="/assets/intro-quote.png"
+          src="/assets/home/intro-quote.png"
           alt="To build every collection, cellar and experience as carefully as a tailor made piece. Benjamin and Anastasiia"
           style={{ marginTop: 64, maxWidth: 600, width: "100%", height: "auto" }}
         />
@@ -215,7 +118,7 @@ export default function Home() {
             muted
             loop
             playsInline
-            poster="/assets/hero-video-placeholder.png"
+            poster="/assets/home/hero-video-placeholder.png"
             style={{
               position: "absolute",
               inset: 0,
@@ -253,7 +156,7 @@ export default function Home() {
               textTransform: "uppercase",
               fontSize: 56,
               lineHeight: 1.25,
-              color: "#fff6e7",
+              color: "var(--color-text-light)",
             }}
           >
             La Conciergerie
@@ -264,7 +167,7 @@ export default function Home() {
               fontSize: 16,
               fontWeight: 400,
               lineHeight: 1.8,
-              color: "#fff6e7",
+              color: "var(--color-text-light)",
             }}
           >
             Oenofy is a private wine concierge working with a limited number
@@ -279,7 +182,7 @@ export default function Home() {
               fontSize: 14,
               fontWeight: 500,
               lineHeight: 1.5,
-              color: "#fff6e7",
+              color: "var(--color-text-light)",
             }}
           >
             Explore La Conciergerie →
@@ -295,7 +198,7 @@ export default function Home() {
           height: "100vh",
           overflow: "hidden",
           fontFamily: "var(--font-montserrat), sans-serif",
-          backgroundImage: "url('/assets/quote-bg.png')",
+          backgroundImage: "url('/assets/home/quote-bg.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -311,7 +214,7 @@ export default function Home() {
               fontSize: 24,
               fontWeight: 700,
               lineHeight: 1.25,
-              color: "#393839",
+              color: "var(--color-text-dark)",
             }}
           >
             &ldquo;Alongside collections and private occasions, a quieter
@@ -328,7 +231,7 @@ export default function Home() {
         style={{
           width: "100%",
           boxSizing: "border-box",
-          background: "#ffffff",
+          background: "var(--color-bg-page)",
           padding: "105px 10px",
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
@@ -339,7 +242,7 @@ export default function Home() {
         <div
           style={{
             height: 700,
-            backgroundImage: "url('/assets/collection1.jpg')",
+            backgroundImage: "url('/assets/home/collection1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -347,7 +250,7 @@ export default function Home() {
         <div
           style={{
             height: 700,
-            backgroundImage: "url('/assets/collection2.jpg')",
+            backgroundImage: "url('/assets/home/collection2.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             position: "relative",
@@ -367,7 +270,7 @@ export default function Home() {
                 textTransform: "uppercase",
                 fontSize: 56,
                 lineHeight: 1.15,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Collection
@@ -380,7 +283,7 @@ export default function Home() {
                 fontSize: 14,
                 fontWeight: 500,
                 lineHeight: 1.5,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Discover →
@@ -390,7 +293,7 @@ export default function Home() {
         <div
           style={{
             height: 700,
-            backgroundImage: "url('/assets/collection3.jpg')",
+            backgroundImage: "url('/assets/home/collection3.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -403,7 +306,7 @@ export default function Home() {
         style={{
           width: "100%",
           boxSizing: "border-box",
-          background: "#ffffff",
+          background: "var(--color-bg-page)",
           padding: "130px 120px",
           fontFamily: "var(--font-montserrat), sans-serif",
         }}
@@ -418,7 +321,7 @@ export default function Home() {
             textTransform: "uppercase",
             fontSize: 56,
             lineHeight: 1.15,
-            color: "#393839",
+            color: "var(--color-text-dark)",
           }}
         >
           Where Wine Becomes Experience
@@ -426,7 +329,7 @@ export default function Home() {
         <div
           id="slider-outer"
           style={{
-            background: "#eae6db",
+            background: "var(--color-bg-block)",
             padding: 42,
             boxSizing: "border-box",
             maxWidth: 1100,
@@ -436,7 +339,7 @@ export default function Home() {
           <div
             id="slider-inner"
             style={{
-              background: "#fff6e7",
+              background: "var(--color-text-light)",
               padding: 32,
               boxSizing: "border-box",
               display: "flex",
@@ -450,13 +353,13 @@ export default function Home() {
                 fontWeight: 700,
                 textTransform: "uppercase",
                 lineHeight: 1.5,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Monaco - YMC
             </h3>
             <img
-              src="/assets/ymc-logo.png"
+              src="/assets/home/ymc-logo.png"
               alt="Yacht Club de Monaco"
               style={{
                 width: "100%",
@@ -471,7 +374,7 @@ export default function Home() {
                 fontSize: 14,
                 fontWeight: 500,
                 lineHeight: 1.5,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               More information →
@@ -486,7 +389,7 @@ export default function Home() {
         style={{
           width: "100%",
           boxSizing: "border-box",
-          background: "#ffffff",
+          background: "var(--color-bg-page)",
           padding: 120,
           fontFamily: "var(--font-montserrat), sans-serif",
         }}
@@ -500,7 +403,7 @@ export default function Home() {
             textTransform: "uppercase",
             fontSize: 56,
             lineHeight: 1.15,
-            color: "#393839",
+            color: "var(--color-text-dark)",
           }}
         >
           News
@@ -516,7 +419,7 @@ export default function Home() {
           }}
         >
           <img
-            src="/assets/news-cyprus.jpg"
+            src="/assets/home/news-cyprus.jpg"
             alt="Discover Cyprus Wine"
             style={{ width: 320, height: 260, objectFit: "cover" }}
           />
@@ -534,7 +437,7 @@ export default function Home() {
                 fontWeight: 800,
                 textTransform: "uppercase",
                 lineHeight: 1.5,
-                color: "#ceba9a",
+                color: "var(--color-accent)",
               }}
             >
               Discover Cyprus Wine
@@ -545,7 +448,7 @@ export default function Home() {
                 fontSize: 16,
                 fontWeight: 600,
                 lineHeight: 1.25,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Where altitude meets rarity.
@@ -556,7 +459,7 @@ export default function Home() {
                 fontSize: 16,
                 fontWeight: 400,
                 lineHeight: 1.25,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Nestled high in the Troodos Mountains, Vouni Panayia is one of
@@ -575,7 +478,7 @@ export default function Home() {
                 fontSize: 14,
                 fontWeight: 500,
                 lineHeight: 1.5,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Discover →
@@ -593,7 +496,7 @@ export default function Home() {
           }}
         >
           <img
-            src="/assets/news-dhondt.jpg"
+            src="/assets/home/news-dhondt.jpg"
             alt="Dhondt-Grellet"
             style={{ width: 320, objectFit: "cover", height: 260 }}
           />
@@ -612,7 +515,7 @@ export default function Home() {
                 fontWeight: 800,
                 textTransform: "uppercase",
                 lineHeight: 1.5,
-                color: "#ceba9a",
+                color: "var(--color-accent)",
               }}
             >
               Dhondt-Grellet
@@ -623,7 +526,7 @@ export default function Home() {
                 fontSize: 16,
                 fontWeight: 600,
                 lineHeight: 1.25,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Precision without excess. Purity without compromise.
@@ -634,7 +537,7 @@ export default function Home() {
                 fontSize: 16,
                 fontWeight: 400,
                 lineHeight: 1.25,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Among the most compelling names of Champagne&apos;s new
@@ -654,7 +557,7 @@ export default function Home() {
                 fontSize: 14,
                 fontWeight: 500,
                 lineHeight: 1.5,
-                color: "#393839",
+                color: "var(--color-text-dark)",
               }}
             >
               Discover →

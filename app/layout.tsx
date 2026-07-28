@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { montserrat, conso } from "./fonts";
+import SiteNav from "../components/SiteNav";
+import SiteFooter from "../components/SiteFooter";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.variable} ${conso.variable}`}>
-      <body>{children}</body>
+      <body>
+        <SiteNav />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }
