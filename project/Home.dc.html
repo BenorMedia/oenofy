@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style id="__om-edit-overrides"></style>
+  <style>
+    html, body { overflow-x: hidden; max-width: 100%; }
+    @font-face { font-family: "Conso"; src: url("./fonts/Conso-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+    body { margin: 0; }
+    a { color: #fff6e7; text-decoration: none; }
+    a:hover { color: #ceba9a; }
+    @media (max-width: 768px) {
+      #site-nav { padding: 16px 20px !important; }
+      #site-nav a { font-size: 11px !important; }
+      #site-nav .nav-group { gap: 16px !important; }
+      #hero-title { font-size: 32px !important; }
+      #intro-section { padding: 100px 24px 40px !important; }
+      #intro-copy { font-size: 19px !important; }
+      #conciergerie-box { left: 24px !important; right: 24px !important; bottom: 100px !important; max-width: none !important; }
+      #conciergerie-title { font-size: 34px !important; }
+      #quote-box { left: 24px !important; right: 24px !important; top: 100px !important; max-width: none !important; }
+      #quote-text { font-size: 18px !important; }
+      #collection-grid { grid-template-columns: 1fr !important; padding: 48px 20px !important; }
+      #collection-grid > div { height: 320px !important; }
+      #slider-section { padding: 80px 24px !important; }
+      #slider-title { font-size: 32px !important; }
+      #slider-outer { padding: 20px !important; }
+      #slider-inner { padding: 20px !important; }
+      #news-section { padding: 80px 24px !important; }
+      #news-title { font-size: 32px !important; }
+      .news-row { grid-template-columns: 1fr !important; gap: 20px !important; }
+      .news-row img { width: 100% !important; height: 220px !important; }
+      .news-row h3 { font-size: 24px !important; }
+    }
+  </style>
+  <script src="./image-slot.js"></script>
+</helmet>
+
+<div style="position:relative;width:100%;height:100vh;overflow:hidden;font-family:Montserrat,sans-serif;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <image-slot id="hero-bg" shape="rect" fit="cover" placeholder="Drop hero video/image — draped wine-red leather panels with hand reaching in"></image-slot>
+  </div>
+
+  <nav id="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:24px 120px;pointer-events:none;">
+    <div class="nav-group" style="display:flex;gap:120px;pointer-events:auto;">
+      <a href="#" style="font-size:14px;font-weight:400;line-height:1.5;color:#fff6e7;">Conciergerie</a>
+      <a href="#" style="font-size:14px;font-weight:400;line-height:1.5;color:#fff6e7;">Collection</a>
+    </div>
+    <div style="position:absolute;left:50%;top:24px;transform:translateX(-50%);pointer-events:auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="53" height="53" viewBox="0 0 53 53" fill="none">
+        <path d="M26.4598 0C14.6367 0 5.01855 11.8637 5.01855 26.46C5.01855 41.0563 14.6367 52.92 26.4598 52.92C38.2829 52.92 47.901 41.0428 47.901 26.46C47.901 11.8772 38.2829 0 26.4598 0ZM45.7502 26.4465C45.7502 39.8523 37.0925 50.7556 26.4598 50.7556C15.8271 50.7556 7.16944 39.8523 7.16944 26.4465C7.16944 13.0406 15.8271 2.13736 26.4598 2.13736C37.0925 2.13736 45.7502 13.0406 45.7502 26.4465Z" fill="#F4EFEA"></path>
+        <path d="M26.46 5.01855C11.8637 5.01855 0 14.6367 0 26.4598C0 38.2829 11.8773 47.9011 26.46 47.9011C41.0428 47.9011 52.92 38.2829 52.92 26.4598C52.92 14.6367 41.0563 5.01855 26.46 5.01855ZM50.7691 26.4463C50.7691 37.079 39.8659 45.7366 26.46 45.7366C13.0542 45.7366 2.15093 37.079 2.15093 26.4463C2.15093 15.8136 13.0542 7.15592 26.46 7.15592C39.8659 7.15592 50.7691 15.8136 50.7691 26.4463Z" fill="#F4EFEA"></path>
+      </svg>
+    </div>
+    <div class="nav-group" style="display:flex;gap:120px;pointer-events:auto;">
+      <a href="#" style="font-size:14px;font-weight:400;line-height:1.5;color:#fff6e7;">Events</a>
+      <a href="#" style="font-size:14px;font-weight:400;line-height:1.5;color:#fff6e7;">Contact us</a>
+    </div>
+  </nav>
+
+  <div style="position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+    <h1 id="hero-title" style="margin:0;text-align:center;font-family:Conso,serif;font-weight:400;text-transform:uppercase;font-size:56px;line-height:1.15;color:#fff6e7;letter-spacing:0;">From Quiet Cellar<br>To Private Hands</h1>
+  </div>
+</div>
+
+<div id="intro-section" style="width:100%;box-sizing:border-box;background:#ffffff;padding:160px 120px 60px;display:flex;flex-direction:column;align-items:center;font-family:Montserrat,sans-serif;">
+  <p id="intro-copy" style="margin:0;max-width:1200px;text-align:center;font-size:30px;font-weight:500;text-transform:uppercase;line-height:1.5;color:#393839;">
+    Every wine finds its origin somewhere between the vine, the terroir and the hands that shape it. Long before reaching the table, it carries a story, a place and the vision of those who created it.
+    <br><br>
+    Coming from both wine production and private wine consultancy, we imagined OENOFY with a simple idea.
+  </p>
+  <img src="./assets/intro-quote.png" alt="To build every collection, cellar and experience as carefully as a tailor made piece. Benjamin and Anastasiia" style="margin-top:64px;max-width:600px;width:100%;height:auto;">
+</div>
+
+<div style="position:relative;width:100%;height:100vh;overflow:hidden;font-family:Montserrat,sans-serif;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <image-slot id="conciergerie-bg" shape="rect" fit="cover" src="./assets/hero-video-placeholder.png" placeholder="Drop conciergerie video/image"></image-slot>
+  </div>
+  <div style="position:absolute;inset:0;z-index:1;background:rgba(0,0,0,0.35);pointer-events:none;"></div>
+  <div id="conciergerie-box" style="position:absolute;left:120px;bottom:176px;z-index:2;max-width:640px;">
+    <h2 id="conciergerie-title" style="margin:0;font-family:Conso,serif;font-weight:400;text-transform:uppercase;font-size:56px;line-height:1.25;color:#fff6e7;">La Conciergerie</h2>
+    <p style="margin:26.4px 0 0;font-size:16px;font-weight:400;line-height:1.8;color:#fff6e7;">Oenofy is a private wine concierge working with a limited number of clients on collections, private events and collector objects conceived around wine.</p>
+    <a href="#" style="display:inline-block;margin-top:35.2px;font-size:14px;font-weight:500;line-height:1.5;color:#fff6e7;">Explore La Conciergerie →</a>
+  </div>
+</div>
+
+<div style="position:relative;width:100%;height:100vh;overflow:hidden;font-family:Montserrat,sans-serif;background-image:url('./assets/quote-bg.png');background-size:cover;background-position:center;">
+  <div id="quote-box" style="position:absolute;left:120px;top:176px;max-width:760px;">
+    <p id="quote-text" style="margin:0;font-size:24px;font-weight:700;line-height:1.25;color:#393839;">“Alongside collections and private occasions, a quieter expression of the Oenofy world exists. Developed with selected designers and artisans, these pieces reflect the same attention to detail, materiality and time.”</p>
+  </div>
+</div>
+
+<div id="collection-grid" style="width:100%;box-sizing:border-box;background:#ffffff;padding:105px 10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;font-family:Montserrat,sans-serif;">
+  <div style="height:700px;background-image:url('./assets/collection1.jpg');background-size:cover;background-position:center;"></div>
+  <div style="height:700px;background-image:url('./assets/collection2.jpg');background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end;justify-content:center;padding-bottom:80px;box-sizing:border-box;">
+    <div style="text-align:center;">
+      <h3 style="margin:0;font-family:Conso,serif;font-weight:400;text-transform:uppercase;font-size:56px;line-height:1.15;color:#393839;">Collection</h3>
+      <a href="#" style="display:inline-block;margin-top:24px;font-size:14px;font-weight:500;line-height:1.5;color:#393839;">Discover →</a>
+    </div>
+  </div>
+  <div style="height:700px;background-image:url('./assets/collection3.jpg');background-size:cover;background-position:center;"></div>
+</div>
+
+<div id="slider-section" style="width:100%;box-sizing:border-box;background:#ffffff;padding:130px 120px;font-family:Montserrat,sans-serif;">
+  <h2 id="slider-title" style="margin:0 0 48px;text-align:center;font-family:Conso,serif;font-weight:400;text-transform:uppercase;font-size:56px;line-height:1.15;color:#393839;">Where Wine Becomes Experience</h2>
+  <div id="slider-outer" style="background:#eae6db;padding:42px;box-sizing:border-box;max-width:1100px;margin:0 auto;">
+    <div id="slider-inner" style="background:#fff6e7;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;">
+      <h3 style="margin:0;font-size:34px;font-weight:700;text-transform:uppercase;line-height:1.5;color:#393839;">Monaco - YMC</h3>
+      <img src="./assets/ymc-logo.png" alt="Yacht Club de Monaco" style="width:100%;max-width:480px;margin:40px auto;display:block;">
+      <a href="#" style="font-size:14px;font-weight:500;line-height:1.5;color:#393839;">More information →</a>
+    </div>
+  </div>
+</div>
+
+<div id="news-section" style="width:100%;box-sizing:border-box;background:#ffffff;padding:120px;font-family:Montserrat,sans-serif;">
+  <h2 id="news-title" style="margin:0 0 64px;font-family:Conso,serif;font-weight:400;text-transform:uppercase;font-size:56px;line-height:1.15;color:#393839;">News</h2>
+
+  <div class="news-row" style="display:grid;grid-template-columns:320px 1fr;gap:48px;margin-bottom:48px;">
+    <img src="./assets/news-cyprus.jpg" alt="Discover Cyprus Wine" style="width: 320px; height: 260px; object-fit: cover">
+    <div style="display: flex; flex-direction: column; margin-bottom: auto">
+      <h3 style="margin:0;font-size:34px;font-weight:800;text-transform:uppercase;line-height:1.5;color:#ceba9a;">Discover Cyprus Wine</h3>
+      <p style="margin:16px 0 0;font-size:16px;font-weight:600;line-height:1.25;color:#393839;">Where altitude meets rarity.</p>
+      <p style="margin:16px 0 0;font-size:16px;font-weight:400;line-height:1.25;color:#393839;">Nestled high in the Troodos Mountains, Vouni Panayia is one of Cyprus' most remarkable estates. Its high-altitude vineyards, indigenous grape varieties and meticulous micro-vinifications produce wines of exceptional precision and character. Crafted in extremely limited quantities, each cuvée reflects a distinctive expression of Cyprus' mountainous terroir and a commitment to preserving the island's unique winemaking heritage.</p>
+      <a href="#" style="margin-top:35px;font-size:14px;font-weight:500;line-height:1.5;color:#393839;">Discover →</a>
+    </div>
+  </div>
+
+  <div class="news-row" style="display: grid; grid-template-columns: 320px 1fr; gap: 48px; height: auto">
+    <img src="./assets/news-dhondt.jpg" alt="Dhondt-Grellet" style="width: 320px; object-fit: cover; height: 260px">
+    <div style="display: flex; flex-direction: column; height: auto; margin-bottom: auto">
+      <h3 style="margin:0;font-size:34px;font-weight:800;text-transform:uppercase;line-height:1.5;color:#ceba9a;">Dhondt-Grellet</h3>
+      <p style="margin:16px 0 0;font-size:16px;font-weight:600;line-height:1.25;color:#393839;">Precision without excess. Purity without compromise.</p>
+      <p style="margin:16px 0 0;font-size:16px;font-weight:400;line-height:1.25;color:#393839;">Among the most compelling names of Champagne's new generation, Dhondt-Grellet has earned a reputation for producing remarkably precise, terroir-driven wines. Working primarily with old Chardonnay vines on the Côte des Blancs, the estate embraces low-intervention winemaking, careful élevage and limited production to reveal the character of each individual parcel. Every bottle reflects balance, tension and quiet complexity — champagnes made for those who value authenticity over prestige alone.</p>
+      <a href="#" style="margin-top:35px;font-size:14px;font-weight:500;line-height:1.5;color:#393839;">Discover →</a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+</body>
+</html>
