@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLenis } from "lenis/react";
+import { ScrollTrigger } from "../lib/gsap";
 import styles from "./Preloader.module.css";
 
 // Extracted from the client's old Webflow "coming soon" custom-code section.
@@ -97,6 +98,10 @@ export default function Preloader() {
     document.body.style.overflow = done ? "" : "hidden";
     if (done) {
       lenis?.start();
+      // Sections behind the overlay (e.g. Hero's parallax) may have had
+      // their ScrollTrigger created while scroll was locked — positions
+      // can be stale until we force a recalculation here.
+      ScrollTrigger.refresh();
     } else {
       lenis?.stop();
     }

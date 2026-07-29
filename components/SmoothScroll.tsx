@@ -23,6 +23,15 @@ function GsapTicker() {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    // Any ScrollTriggers created before Lenis took over (e.g. while the
+    // preloader has scroll locked) can end up with stale cached positions.
+    // Recalculate once Lenis is actually driving scroll, and again once
+    // everything (fonts, video, images) has finished loading and settled.
+    ScrollTrigger.refresh();
+    window.addEventListener("load", () => ScrollTrigger.refresh(), {
+      once: true,
+    });
+
     return () => {
       activeLenis.off("scroll", ScrollTrigger.update);
       gsap.ticker.remove(raf);
