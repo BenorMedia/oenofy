@@ -35,15 +35,6 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  #hero-title {
-    font-size: 32px !important;
-  }
-  #intro-section {
-    padding: 100px 24px 40px !important;
-  }
-  #intro-copy {
-    font-size: 19px !important;
-  }
   #conciergerie-box {
     left: 24px !important;
     right: 24px !important;

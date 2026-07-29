@@ -1,119 +1,17 @@
 import Image from "next/image";
 import Preloader from "../components/Preloader";
+import Hero from "../components/Hero";
+import IntroSection from "../components/IntroSection";
+import "./home.css";
 
 export default function Home() {
   return (
     <>
       <Preloader />
 
-      {/* Hero */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100vh",
-          overflow: "hidden",
-          fontFamily: "var(--font-montserrat), sans-serif",
-        }}
-      >
-        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/assets/home/hero-video-placeholder.png"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          >
-            <source
-              src="https://s3.amazonaws.com/webflow-prod-assets/69fdd0067f429dab904ad307/6a69383661b7b1643abe1a63_hero%20video.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </div>
+      <Hero />
 
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            pointerEvents: "none",
-          }}
-        >
-          <h1
-            id="hero-title"
-            style={{
-              margin: 0,
-              textAlign: "center",
-              fontFamily: "var(--font-conso), serif",
-              fontWeight: 400,
-              textTransform: "uppercase",
-              fontSize: 56,
-              lineHeight: 1.15,
-              color: "var(--color-text-light)",
-              letterSpacing: 0,
-            }}
-          >
-            From Quiet Cellar
-            <br />
-            To Private Hands
-          </h1>
-        </div>
-      </div>
-
-      {/* Intro */}
-      <div
-        id="intro-section"
-        style={{
-          width: "100%",
-          boxSizing: "border-box",
-          background: "var(--color-bg-page)",
-          padding: "160px 120px 60px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          fontFamily: "var(--font-montserrat), sans-serif",
-        }}
-      >
-        <p
-          id="intro-copy"
-          style={{
-            margin: 0,
-            maxWidth: 1200,
-            textAlign: "center",
-            fontSize: 30,
-            fontWeight: 500,
-            textTransform: "uppercase",
-            lineHeight: 1.5,
-            color: "var(--color-text-dark)",
-          }}
-        >
-          Every wine finds its origin somewhere between the vine, the terroir
-          and the hands that shape it. Long before reaching the table, it
-          carries a story, a place and the vision of those who created it.
-          <br />
-          <br />
-          Coming from both wine production and private wine consultancy, we
-          imagined OENOFY with a simple idea.
-        </p>
-        <Image
-          src="/assets/home/intro-quote.png"
-          alt="To build every collection, cellar and experience as carefully as a tailor made piece. Benjamin and Anastasiia"
-          width={962}
-          height={395}
-          sizes="(max-width: 600px) 100vw, 600px"
-          style={{ marginTop: 64, maxWidth: 600, width: "100%", height: "auto" }}
-        />
-      </div>
+      <IntroSection />
 
       {/* Conciergerie */}
       <div
