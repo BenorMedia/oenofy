@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLenis } from "lenis/react";
 import { ScrollTrigger } from "../lib/gsap";
 import styles from "./Preloader.module.css";
 
@@ -92,24 +91,18 @@ export default function Preloader() {
     return () => timers.forEach(clearTimeout);
   }, []);
 
-  const lenis = useLenis();
-
   useEffect(() => {
     document.body.style.overflow = done ? "" : "hidden";
     if (done) {
-      lenis?.start();
-      // Sections behind the overlay (e.g. Hero's parallax) may have had
-      // their ScrollTrigger created while scroll was locked — positions
-      // can be stale until we force a recalculation here.
+      // Hero's parallax ScrollTrigger gets created while scroll is still
+      // locked here — recalculate its positions now that the real,
+      // scrollable page is what's actually behind it.
       ScrollTrigger.refresh();
-    } else {
-      lenis?.stop();
     }
     return () => {
       document.body.style.overflow = "";
-      lenis?.start();
     };
-  }, [done, lenis]);
+  }, [done]);
 
   if (done) return null;
 
