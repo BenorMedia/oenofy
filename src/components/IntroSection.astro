@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import introQuote from "../assets/home/intro-quote.png";
+---
+
+<div class="c-intro">
+  <p class="c-intro__copy" data-intro-copy>
+    Every wine finds its origin somewhere between the vine, the terroir
+    and the hands that shape it. Long before reaching the table, it
+    carries a story, a place and the vision of those who created it.
+    <br />
+    <br />
+    Coming from both wine production and private wine consultancy, we
+    imagined OENOFY with a simple idea.
+  </p>
+  <Image
+    src={introQuote}
+    alt="To build every collection, cellar and experience as carefully as a tailor made piece. Benjamin and Anastasiia"
+    width={962}
+    height={395}
+    sizes="(max-width: 600px) 100vw, 600px"
+    class="c-intro__signature"
+  />
+</div>
+
+<script>
+  import "../scripts/intro-animations.js";
+</script>

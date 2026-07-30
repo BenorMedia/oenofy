@@ -1,4 +1,4 @@
-.nav {
+.c-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,23 +9,23 @@
   justify-content: space-between;
   padding: 24px 120px;
   pointer-events: none;
-  font-family: var(--font-montserrat), sans-serif;
+  font-family: var(--font-montserrat);
 }
 
-.navGroup {
+.c-nav__group {
   display: flex;
   gap: 120px;
   pointer-events: auto;
 }
 
-.link {
+.c-nav__link {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--color-text-light);
 }
 
-.mark {
+.c-nav__mark {
   position: absolute;
   left: 50%;
   top: 24px;
@@ -34,13 +34,13 @@
 }
 
 @media (max-width: 768px) {
-  .nav {
+  .c-nav {
     padding: 16px 20px !important;
   }
-  .link {
+  .c-nav__link {
     font-size: 11px !important;
   }
-  .navGroup {
+  .c-nav__group {
     gap: 16px !important;
   }
 }

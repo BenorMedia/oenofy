@@ -1,0 +1,388 @@
+/* Homepage styles. Ported 1:1 from Next.js app/home.css — already used
+   the c- naming convention, no renaming needed. Sections below Hero/Intro
+   (Conciergerie, Quote, Collection, Slider, News) added here too, converted
+   from inline styles in the old page.tsx into real classes. */
+
+/* Utility — absolute-fill, object-fit: cover. Used for background/fill
+   images across Quote, Collection, and News sections (replaces next/image
+   `fill` prop, which astro:assets doesn't have an equivalent for). */
+.cc-fill_cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Hero */
+
+.c-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-montserrat);
+}
+
+.c-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.c-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.c-hero__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.c-hero__title {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--color-text-light);
+  letter-spacing: 0;
+}
+
+/* Intro */
+
+.c-intro {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--color-bg-page);
+  padding: 160px 120px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-montserrat);
+}
+
+.c-intro__copy {
+  margin: 0;
+  max-width: 1200px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+/* Split-text words start dimmed; GSAP animates each word to opacity 1 as
+   the reader scrolls through the paragraph. Falls back to fully-opaque,
+   readable text if JS never runs, since this only targets the generated
+   word spans, not the paragraph itself. */
+.c-intro__copy .split-word {
+  opacity: 1;
+}
+
+.c-intro__signature {
+  margin-top: 64px;
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+}
+
+/* Conciergerie */
+
+.c-conciergerie {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-montserrat);
+}
+
+.c-conciergerie__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.c-conciergerie__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.c-conciergerie__box {
+  position: absolute;
+  left: 120px;
+  bottom: 176px;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.c-conciergerie__title {
+  margin: 0;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 56px;
+  line-height: 1.25;
+  color: var(--color-text-light);
+}
+
+.c-conciergerie__copy {
+  margin: 26.4px 0 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--color-text-light);
+}
+
+.c-conciergerie__link {
+  display: inline-block;
+  margin-top: 35.2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-light);
+}
+
+/* Quote */
+
+.c-quote {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-montserrat);
+}
+
+.c-quote__box {
+  position: absolute;
+  left: 120px;
+  top: 176px;
+  max-width: 760px;
+  z-index: 1;
+}
+
+.c-quote__text {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-text-dark);
+}
+
+/* Collection grid */
+
+.c-collection {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--color-bg-page);
+  padding: 105px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+  font-family: var(--font-montserrat);
+}
+
+.c-collection__item {
+  position: relative;
+  height: 700px;
+}
+
+.c-collection__item--center {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 80px;
+  box-sizing: border-box;
+}
+
+.c-collection__caption {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.c-collection__title {
+  margin: 0;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--color-text-dark);
+}
+
+.c-collection__link {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+/* Slider (center card only, for now) */
+
+.c-slider {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--color-bg-page);
+  padding: 130px 120px;
+  font-family: var(--font-montserrat);
+}
+
+.c-slider__title {
+  margin: 0 0 48px;
+  text-align: center;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--color-text-dark);
+}
+
+.c-slider__outer {
+  background: var(--color-bg-block);
+  padding: 42px;
+  box-sizing: border-box;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.c-slider__inner {
+  background: var(--color-text-light);
+  padding: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.c-slider__card-title {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+.c-slider__logo {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin: 40px auto;
+  display: block;
+}
+
+.c-slider__link {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+/* News */
+
+.c-news {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--color-bg-page);
+  padding: 120px;
+  font-family: var(--font-montserrat);
+}
+
+.c-news__title {
+  margin: 0 0 64px;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--color-text-dark);
+}
+
+.c-news__row {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.c-news__row:last-child {
+  margin-bottom: 0;
+}
+
+.c-news__image {
+  position: relative;
+  width: 320px;
+  height: 260px;
+}
+
+.c-news__body {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: auto;
+}
+
+.c-news__item-title {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-news__subtitle {
+  margin: 16px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-text-dark);
+}
+
+.c-news__copy {
+  margin: 16px 0 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-text-dark);
+}
+
+.c-news__link {
+  display: inline-block;
+  margin-top: 35px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+@media (max-width: 768px) {
+  .c-hero__title {
+    font-size: 32px !important;
+  }
+  .c-intro {
+    padding: 100px 24px 40px !important;
+  }
+  .c-intro__copy {
+    font-size: 19px !important;
+  }
+}
