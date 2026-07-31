@@ -21,6 +21,10 @@ import "../styles/home.css";
 
   <Hero />
 
+  <!-- Everything below the hero scrolls up and over it as one unit.
+       The hero is position:fixed (see .c-hero); this wrapper is the
+       opaque, higher-z-index flow that rides over it. -->
+  <div class="c-page-flow">
   <IntroSection />
 
   <!-- Conciergerie -->
@@ -149,5 +153,6 @@ import "../styles/home.css";
         <a href="#" class="c-news__link">Discover →</a>
       </div>
     </div>
+  </div>
   </div>
 </BaseLayout>

@@ -18,19 +18,30 @@
 /* Hero */
 
 .c-hero {
-  /* Sticky, not relative: the hero pins to the top of the viewport and
-     stays there while the page scrolls, so the next section (.c-intro,
-     opaque + higher z-index) rides up and over it. Pure-CSS overlap —
-     no scroll-driven JS, so it can never desync from the scrollbar and
-     is smooth by construction. */
-  position: sticky;
+  /* Fixed, not sticky: the hero is locked to the viewport and never
+     moves on scroll. The whole page (.c-page-flow) rides up and over it.
+     Fixed (vs sticky) also sidesteps the overflow-x:hidden on html/body
+     in global.css, which silently breaks position:sticky. */
+  position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;
   font-family: var(--font-montserrat);
-  /* Below .c-intro (z-index: 1) so Intro covers it as it scrolls past. */
+  /* Behind .c-page-flow (z-index: 1) so the page covers it on scroll. */
   z-index: 0;
+}
+
+/* All content below the hero. Sits above the fixed hero and starts one
+   viewport down, so the hero shows first, then this whole block scrolls
+   up over it and — once its top reaches the top of the screen — the
+   page continues scrolling normally. Opaque sections inside it keep the
+   hero hidden from then on. */
+.c-page-flow {
+  position: relative;
+  z-index: 1;
+  margin-top: 100vh;
 }
 
 .c-hero__media {
@@ -73,13 +84,10 @@
 /* Intro */
 
 .c-intro {
-  position: relative;
-  /* Above the sticky .c-hero (z-index: 0). Combined with the opaque
-     background below, this is what makes Intro visibly cover the pinned
-     hero as it scrolls up over it. */
-  z-index: 1;
   width: 100%;
   box-sizing: border-box;
+  /* Opaque — this is the first thing that covers the hero as the page
+     scrolls up over it. */
   background: var(--color-bg-page);
   padding: 160px 120px 60px;
   display: flex;
