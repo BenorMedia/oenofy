@@ -3,13 +3,28 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 120px;
   pointer-events: none;
   font-family: var(--font-montserrat);
+  /* Slide (hide/show) + background fade when scroll state changes. */
+  transition: transform 0.4s ease, background-color 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+
+/* Scrolled down: dark blurred bar. */
+.c-nav.is-scrolled {
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* Scrolling down: slid up out of view. */
+.c-nav.is-hidden {
+  transform: translateY(-100%);
 }
 
 .c-nav__group {
@@ -26,11 +41,20 @@
 }
 
 .c-nav__mark {
-  position: absolute;
-  left: 50%;
-  top: 24px;
-  transform: translateX(-50%);
   pointer-events: auto;
+}
+
+.c-nav__mark svg {
+  width: 55px;
+  height: 55px;
+  /* Smooth resize when the scrolled state kicks in. */
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+/* Scrolled down: smaller logo. */
+.c-nav.is-scrolled .c-nav__mark svg {
+  width: 40px;
+  height: 40px;
 }
 
 @media (max-width: 768px) {
