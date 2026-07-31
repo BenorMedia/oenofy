@@ -56,35 +56,43 @@ import "../styles/home.css";
     </div>
   </div>
 
-  <!-- Quote -->
-  <div class="c-quote">
-    <Image src={quoteBg} alt="" class="cc-fill_cover" />
-    <div class="c-quote__box">
-      <p class="c-quote__text">
-        &ldquo;Alongside collections and private occasions, a quieter
-        expression of the Oenofy world exists. Developed with selected
-        designers and artisans, these pieces reflect the same attention to
-        detail, materiality and time.&rdquo;
-      </p>
-    </div>
-  </div>
-  </div>
-
-  <!-- Collection gallery -->
-  <div class="c-collection">
-    <div class="c-collection__item">
-      <Image src={collection1} alt="" class="cc-fill_cover" />
-    </div>
-    <div class="c-collection__item c-collection__item--center">
-      <Image src={collection2} alt="" class="cc-fill_cover" />
-      <div class="c-collection__caption">
-        <h3 class="c-collection__title">Collection</h3>
-        <a href="#" class="c-collection__link">Discover →</a>
+  <!-- Quote → collection-reveal stage. On desktop this gets pinned:
+       the quote image/text is the backdrop, a dark overlay fades in, and
+       the 3 collection cards slide up over it one by one. On mobile the
+       pin is skipped and the cards reveal as a normal stacked section. -->
+  <div class="c-quote" data-collection-stage>
+    <div class="c-quote__display">
+      <Image src={quoteBg} alt="" class="cc-fill_cover" />
+      <div class="c-quote__box">
+        <p class="c-quote__text">
+          &ldquo;Alongside collections and private occasions, a quieter
+          expression of the Oenofy world exists. Developed with selected
+          designers and artisans, these pieces reflect the same attention to
+          detail, materiality and time.&rdquo;
+        </p>
       </div>
     </div>
-    <div class="c-collection__item">
-      <Image src={collection3} alt="" class="cc-fill_cover" />
+
+    <!-- Dark overlay — fades in over the quote before the cards arrive. -->
+    <div class="c-collection__overlay" data-collection-overlay></div>
+
+    <!-- Collection cards — slide up one by one over the overlay. -->
+    <div class="c-collection" data-collection-cards>
+      <div class="c-collection__item" data-collection-card>
+        <Image src={collection1} alt="" class="cc-fill_cover" />
+      </div>
+      <div class="c-collection__item c-collection__item--center" data-collection-card>
+        <Image src={collection2} alt="" class="cc-fill_cover" />
+        <div class="c-collection__caption">
+          <h3 class="c-collection__title">Collection</h3>
+          <a href="#" class="c-collection__link">Discover →</a>
+        </div>
+      </div>
+      <div class="c-collection__item" data-collection-card>
+        <Image src={collection3} alt="" class="cc-fill_cover" />
+      </div>
     </div>
+  </div>
   </div>
 
   <!-- Slider (center card only) -->
@@ -162,3 +170,7 @@ import "../styles/home.css";
   </div>
   </div>
 </BaseLayout>
+
+<script>
+  import "../scripts/collection-animations.js";
+</script>

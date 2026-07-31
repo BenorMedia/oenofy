@@ -207,6 +207,13 @@
   font-family: var(--font-montserrat);
 }
 
+/* Quote image + text, filling the stage as the backdrop. On mobile this
+   becomes a normal 100vh block so the cards can stack below it. */
+.c-quote__display {
+  position: absolute;
+  inset: 0;
+}
+
 .c-quote__box {
   position: absolute;
   left: 120px;
@@ -225,11 +232,28 @@
 
 /* Collection grid */
 
+/* Collection reveal — the cards live inside the pinned Quote stage and
+   slide up over a dark overlay (desktop). Mobile falls back to a normal
+   stacked section (see the media query at the bottom of this file). */
+
+/* Dark overlay that fades in over the quote before the cards arrive.
+   Starts transparent; the pinned timeline drives opacity. */
+.c-collection__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Cards container — fills the stage, above the overlay. */
 .c-collection {
-  width: 100%;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
   box-sizing: border-box;
-  background: var(--color-bg-page);
-  padding: 105px 10px;
+  padding: 80px 40px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
@@ -238,7 +262,8 @@
 
 .c-collection__item {
   position: relative;
-  height: 700px;
+  height: 100%;
+  overflow: hidden;
 }
 
 .c-collection__item--center {
@@ -262,7 +287,7 @@
   text-transform: uppercase;
   font-size: 56px;
   line-height: 1.15;
-  color: var(--color-text-dark);
+  color: var(--color-text-light);
 }
 
 .c-collection__link {
@@ -271,7 +296,7 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
-  color: var(--color-text-dark);
+  color: var(--color-text-light);
 }
 
 /* Slider (center card only, for now) */
@@ -445,13 +470,34 @@
     font-size: 18px !important;
   }
 
-  /* Collection grid */
+  /* Collection reveal — mobile fallback (no pin). The stage grows to fit
+     content, the quote shows as a normal 100vh block, and the cards stack
+     below it in normal flow with a simple reveal (see collection JS). */
+  .c-quote {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .c-quote__display {
+    position: relative !important;
+    height: 100vh !important;
+  }
+  .c-collection__overlay {
+    display: none !important;
+  }
   .c-collection {
+    position: static !important;
+    z-index: auto !important;
+    background: var(--color-bg-page) !important;
     grid-template-columns: 1fr !important;
     padding: 48px 20px !important;
   }
   .c-collection__item {
     height: 320px !important;
+    transform: none !important;
+  }
+  .c-collection__title,
+  .c-collection__link {
+    color: var(--color-text-light) !important;
   }
 
   /* Slider */
