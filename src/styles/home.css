@@ -385,4 +385,68 @@
   .c-intro__copy {
     font-size: 19px !important;
   }
+
+  /* Conciergerie */
+  .c-conciergerie__box {
+    left: 24px !important;
+    right: 24px !important;
+    bottom: 100px !important;
+    max-width: none !important;
+  }
+  .c-conciergerie__title {
+    font-size: 34px !important;
+  }
+
+  /* Quote */
+  .c-quote__box {
+    left: 24px !important;
+    right: 24px !important;
+    top: 100px !important;
+    max-width: none !important;
+  }
+  .c-quote__text {
+    font-size: 18px !important;
+  }
+
+  /* Collection grid */
+  .c-collection {
+    grid-template-columns: 1fr !important;
+    padding: 48px 20px !important;
+  }
+  .c-collection__item {
+    height: 320px !important;
+  }
+
+  /* Slider */
+  .c-slider {
+    padding: 80px 24px !important;
+  }
+  .c-slider__title {
+    font-size: 32px !important;
+  }
+  .c-slider__outer {
+    padding: 20px !important;
+  }
+  .c-slider__inner {
+    padding: 20px !important;
+  }
+
+  /* News */
+  .c-news {
+    padding: 80px 24px !important;
+  }
+  .c-news__title {
+    font-size: 32px !important;
+  }
+  .c-news__row {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .c-news__image {
+    width: 100% !important;
+    height: 220px !important;
+  }
+  .c-news__item-title {
+    font-size: 24px !important;
+  }
 }
