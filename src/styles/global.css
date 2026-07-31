@@ -1,12 +1,29 @@
+/* Conso — local file, same as next/font/local before */
+@font-face {
+  font-family: "Conso";
+  src: url("/fonts/Conso-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* Design tokens — docs/design-handoff/project/uploads/home-design-tokens.md */
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-conso: "Conso", serif;
+
+  /* Design tokens — ported as-is from app/globals.css /
+     docs/design-handoff/project/uploads/home-design-tokens.md */
   --color-text-light: #fff6e7; /* text over images / dark backgrounds */
   --color-text-dark: #393839; /* text over white / light bg images */
   --color-bg-block: #eae6db; /* section/block background */
   --color-accent: #ceba9a; /* accent text */
-  --color-icon: #f4efea; /* nav ring icon fill (not a text token, kept separate) */
-  --color-bg-page: #ffffff; /* plain white section background, not in token doc but reused as-is */
-  --color-preloader-bg: #222323; /* preloader overlay background, from extracted Webflow snippet, not in home-design-tokens.md */
+  --color-icon: #f4efea; /* nav ring icon fill, not a text token */
+  --color-bg-page: #ffffff; /* plain white section background */
+  --color-preloader-bg: #222323; /* preloader overlay, extracted from Webflow snippet */
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html,
@@ -15,14 +32,7 @@ body {
   padding: 0;
   max-width: 100%;
   overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-montserrat), sans-serif;
+  font-family: var(--font-montserrat);
 }
 
 a {
@@ -34,6 +44,9 @@ a:hover {
   color: var(--color-accent);
 }
 
+/* Mobile overrides — ported as-is from globals.css. IDs kept for now to
+   match the original selectors 1:1; can be refactored to cc- utility
+   classes in a follow-up pass once the migration is verified. */
 @media (max-width: 768px) {
   #conciergerie-box {
     left: 24px !important;

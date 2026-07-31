@@ -1,4 +1,4 @@
-.root {
+.c-preloader {
   --icon-stroke-final: 3.4px;
   --final-horizontal-sx: 1.12;
   --final-horizontal-sy: 0.91;
@@ -15,12 +15,12 @@
   transition: opacity 500ms ease;
 }
 
-.root.fadingOut {
+.c-preloader.is-fading-out {
   opacity: 0;
   pointer-events: none;
 }
 
-.logoStage {
+.c-preloader__logo-stage {
   --logo-width: clamp(260px, 33vw, 430px);
   --logo-height: calc(var(--logo-width) * 0.12796);
 
@@ -39,18 +39,18 @@
     transform 1700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.iconUp .logoStage {
+.is-icon-up .c-preloader__logo-stage {
   top: 8.5%;
   transform: translate(-50%, -50%) scale(0.7);
 }
 
-.splitLogo,
-.transitionOs {
+.c-preloader__split-logo,
+.c-preloader__transition-os {
   position: absolute;
   inset: 0;
 }
 
-.glyph {
+.c-preloader__glyph {
   position: absolute;
   top: 50%;
   display: block;
@@ -67,11 +67,11 @@
     transform 1450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.glyphLetter {
+.c-preloader__glyph--letter {
   transform: translate(-50%, -50%);
 }
 
-.glyphO {
+.c-preloader__glyph--o {
   width: 14.68%;
   transform: translate(-50%, -50%) scaleX(0.92) scaleY(1.06);
   transition:
@@ -79,30 +79,30 @@
     transform 1450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.glyphO1 {
+.c-preloader__glyph--o1 {
   left: 7.34%;
 }
-.glyphE {
+.c-preloader__glyph--e {
   left: 25.23%;
   width: 9.42%;
 }
-.glyphN {
+.c-preloader__glyph--n {
   left: 41.45%;
   width: 11.35%;
 }
-.glyphO2 {
+.c-preloader__glyph--o2 {
   left: 60.3%;
 }
-.glyphF {
+.c-preloader__glyph--f {
   left: 77.94%;
   width: 8.91%;
 }
-.glyphY {
+.c-preloader__glyph--y {
   left: 94.08%;
   width: 11.7%;
 }
 
-.transitionO {
+.c-preloader__transition-o {
   position: absolute;
   top: 50%;
 
@@ -123,7 +123,7 @@
     transform 1450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.transitionO1 {
+.c-preloader__transition-o--1 {
   left: 7.34%;
   --tx: 0px;
   --sx: 0.92;
@@ -132,7 +132,7 @@
     scaleY(var(--sy));
 }
 
-.transitionO2 {
+.c-preloader__transition-o--2 {
   left: 60.3%;
   --tx: 0px;
   --sx: 0.92;
@@ -141,7 +141,7 @@
     scaleY(var(--sy));
 }
 
-.finalLogo {
+.c-preloader__final-logo {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -155,53 +155,54 @@
   transition: opacity 0ms linear;
 }
 
-.finalLogoVisible .finalLogo {
+.is-final-logo-visible .c-preloader__final-logo {
   opacity: 1;
 }
 
-/* State modifiers — applied on the root overlay, affecting descendants */
+/* State modifiers — is- classes applied on the root overlay (.c-preloader),
+   affecting descendants via these selectors */
 
-.dimmed .glyph {
+.is-dimmed .c-preloader__glyph {
   opacity: 0.42;
 }
 
-.osHidden .glyphO {
+.is-os-hidden .c-preloader__glyph--o {
   opacity: 0;
 }
 
-.lettersHidden .glyphLetter {
+.is-letters-hidden .c-preloader__glyph--letter {
   opacity: 0;
 }
 
-.lettersHidden .transitionO {
+.is-letters-hidden .c-preloader__transition-o {
   opacity: 1;
 }
 
-.osConverging .transitionO1 {
+.is-os-converging .c-preloader__transition-o--1 {
   --tx: calc(var(--logo-width) * 0.4266);
   --sx: var(--final-horizontal-sx);
   --sy: var(--final-horizontal-sy);
 }
 
-.osConverging .transitionO2 {
+.is-os-converging .c-preloader__transition-o--2 {
   --tx: calc(var(--logo-width) * -0.103);
   --sx: var(--final-vertical-sx);
   --sy: var(--final-vertical-sy);
 }
 
-.finalLogoVisible .transitionOs {
+.is-final-logo-visible .c-preloader__transition-os {
   opacity: 0;
   transition: opacity 120ms linear 120ms;
 }
 
 @media (max-width: 991px) {
-  .logoStage {
+  .c-preloader__logo-stage {
     --logo-width: clamp(230px, 45vw, 360px);
   }
 }
 
 @media (max-width: 767px) {
-  .root {
+  .c-preloader {
     --icon-stroke-final: 2.55px;
     --final-horizontal-sx: 1.1;
     --final-horizontal-sy: 0.92;
@@ -209,24 +210,24 @@
     --final-vertical-sy: 1.14;
   }
 
-  .logoStage {
+  .c-preloader__logo-stage {
     --logo-width: clamp(230px, 70vw, 330px);
     top: 49%;
   }
 
-  .iconUp .logoStage {
+  .is-icon-up .c-preloader__logo-stage {
     top: 8%;
     transform: translate(-50%, -50%) scale(0.7);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .root,
-  .logoStage,
-  .glyph,
-  .transitionO,
-  .finalLogo,
-  .transitionOs {
+  .c-preloader,
+  .c-preloader__logo-stage,
+  .c-preloader__glyph,
+  .c-preloader__transition-o,
+  .c-preloader__final-logo,
+  .c-preloader__transition-os {
     transition-duration: 0.01ms !important;
   }
 }

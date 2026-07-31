@@ -1,5 +1,3 @@
-"use client";
-
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -8,9 +6,9 @@ import { SplitText } from "gsap/SplitText";
 // for commercial use since Webflow's April 2025 release — no Club GSAP
 // license/registry needed, just the standard `gsap` package.
 //
-// Registered once here; every component that needs GSAP should import
-// gsap/ScrollTrigger/SplitText from this module instead of "gsap" directly,
-// so plugins are always registered before use.
+// Registered once here; every script that needs GSAP should import from
+// this module instead of "gsap" directly, so plugins are always
+// registered before use.
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export { gsap, ScrollTrigger, SplitText };
