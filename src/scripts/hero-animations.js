@@ -1,7 +1,9 @@
 import { gsap } from "./gsap-setup.js";
+import { createSectionOverlap } from "./section-overlap.js";
 
 const section = document.querySelector("[data-hero]");
 const video = section?.querySelector("[data-hero-video]");
+const nextSection = document.querySelector(".c-intro");
 
 if (section && video) {
   const mm = gsap.matchMedia();
@@ -23,5 +25,9 @@ if (section && video) {
         scrub: true,
       },
     });
+
+    // Intro slides up and covers the last 120px of the hero as the
+    // reader scrolls past — see section-overlap.js for how/why.
+    createSectionOverlap(section, nextSection, 120);
   });
 }

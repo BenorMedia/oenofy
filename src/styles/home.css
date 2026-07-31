@@ -23,6 +23,9 @@
   height: 100vh;
   overflow: hidden;
   font-family: var(--font-montserrat);
+  /* Stays below .c-intro (z-index: 1) so Intro can slide up and cover
+     it during the scroll-overlap effect — see section-overlap.js. */
+  z-index: 0;
 }
 
 .c-hero__media {
@@ -65,6 +68,11 @@
 /* Intro */
 
 .c-intro {
+  position: relative;
+  /* Above .c-hero (z-index: 0) — combined with the opaque background
+     above, this is what makes Intro visibly cover Hero during the
+     scroll-overlap effect instead of just sitting at the same z level. */
+  z-index: 1;
   width: 100%;
   box-sizing: border-box;
   background: var(--color-bg-page);
