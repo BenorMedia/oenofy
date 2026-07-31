@@ -26,8 +26,9 @@ if (section && video) {
       },
     });
 
-    // Intro slides up and covers the last 120px of the hero as the
-    // reader scrolls past — see section-overlap.js for how/why.
+    // Intro eases up over the hero's full scroll-through, covering up
+    // to 120px of it by the time the hero scrolls away — see
+    // section-overlap.js for how/why this stays smooth (no pin snap).
     createSectionOverlap(section, nextSection, 120);
   });
 }
