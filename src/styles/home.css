@@ -18,13 +18,18 @@
 /* Hero */
 
 .c-hero {
-  position: relative;
+  /* Sticky, not relative: the hero pins to the top of the viewport and
+     stays there while the page scrolls, so the next section (.c-intro,
+     opaque + higher z-index) rides up and over it. Pure-CSS overlap —
+     no scroll-driven JS, so it can never desync from the scrollbar and
+     is smooth by construction. */
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;
   font-family: var(--font-montserrat);
-  /* Stays below .c-intro (z-index: 1) so Intro can slide up and cover
-     it during the scroll-overlap effect — see section-overlap.js. */
+  /* Below .c-intro (z-index: 1) so Intro covers it as it scrolls past. */
   z-index: 0;
 }
 
@@ -69,9 +74,9 @@
 
 .c-intro {
   position: relative;
-  /* Above .c-hero (z-index: 0) — combined with the opaque background
-     above, this is what makes Intro visibly cover Hero during the
-     scroll-overlap effect instead of just sitting at the same z level. */
+  /* Above the sticky .c-hero (z-index: 0). Combined with the opaque
+     background below, this is what makes Intro visibly cover the pinned
+     hero as it scrolls up over it. */
   z-index: 1;
   width: 100%;
   box-sizing: border-box;
