@@ -27,6 +27,10 @@ import "../styles/home.css";
   <div class="c-page-flow">
   <IntroSection />
 
+  <!-- Conciergerie + Quote form a sticky-overlap pair: Conciergerie
+       holds at the top while Quote scrolls up and over it (same effect
+       as the hero). See .c-overlap / .c-conciergerie in home.css. -->
+  <div class="c-overlap">
   <!-- Conciergerie -->
   <div class="c-conciergerie">
     <div class="c-conciergerie__media">
@@ -35,9 +39,10 @@ import "../styles/home.css";
         muted
         loop
         playsinline
-        poster="/assets/home/hero-video-placeholder.png"
         class="cc-fill_cover"
-      ></video>
+      >
+        <source src="/assets/home/conciergerie-placeholder.mp4" type="video/mp4" />
+      </video>
     </div>
     <div class="c-conciergerie__overlay"></div>
     <div class="c-conciergerie__box">
@@ -62,6 +67,7 @@ import "../styles/home.css";
         detail, materiality and time.&rdquo;
       </p>
     </div>
+  </div>
   </div>
 
   <!-- Collection gallery -->

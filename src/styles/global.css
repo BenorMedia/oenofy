@@ -31,7 +31,10 @@ body {
   margin: 0;
   padding: 0;
   max-width: 100%;
-  overflow-x: hidden;
+  /* clip (not hidden) prevents horizontal overflow WITHOUT creating a
+     scroll container — hidden would silently break position:sticky
+     (used by the Conciergerie/Quote overlap). */
+  overflow-x: clip;
   font-family: var(--font-montserrat);
 }
 

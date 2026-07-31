@@ -123,8 +123,22 @@
 
 /* Conciergerie */
 
-.c-conciergerie {
+/* Conciergerie + Quote overlap pair. This relative wrapper is the
+   containing block that bounds Conciergerie's sticky range, so it
+   releases right after Quote has scrolled past — not for the rest of
+   the page. Reusable for other overlap pairs later. */
+.c-overlap {
   position: relative;
+}
+
+.c-conciergerie {
+  /* Sticky (not relative): Conciergerie holds at the top of the viewport
+     while Quote scrolls up and over it — the same reveal as the hero,
+     but bounded to this pair. Relies on overflow-x:clip (not hidden) on
+     html/body, so the sticky isn't broken by a scroll container. */
+  position: sticky;
+  top: 0;
+  z-index: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -141,7 +155,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.7);
   pointer-events: none;
 }
 
@@ -184,6 +198,9 @@
 
 .c-quote {
   position: relative;
+  /* Above the sticky .c-conciergerie (z-index: 0) so it covers it as it
+     scrolls up over it. Its full-cover background image is opaque. */
+  z-index: 1;
   width: 100%;
   height: 100vh;
   overflow: hidden;
