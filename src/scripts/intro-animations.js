@@ -14,7 +14,7 @@ if (copy) {
       wordsClass: "split-word",
     });
 
-    gsap.set(split.words, { opacity: 0.5 });
+    gsap.set(split.words, { opacity: 0.3 });
 
     gsap.to(split.words, {
       opacity: 1,
