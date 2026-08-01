@@ -299,13 +299,13 @@
   color: var(--color-text-dark);
 }
 
-/* Slider (center card only, for now) */
+/* Slider — centered carousel */
 
 .c-slider {
   width: 100%;
   box-sizing: border-box;
   background: var(--color-bg-page);
-  padding: 130px 120px;
+  padding: 130px 0;
   font-family: var(--font-montserrat);
 }
 
@@ -320,12 +320,49 @@
   color: var(--color-text-dark);
 }
 
+/* Viewport clips the track; --slide-w controls how much of the active
+   slide shows (the rest of the width becomes the prev/next peeks). */
+.c-slider__viewport {
+  --slide-w: 66%;
+  --slide-gap: 24px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.c-slider__track {
+  position: relative;
+  display: flex;
+  gap: var(--slide-gap);
+  will-change: transform;
+}
+
+.c-slider__slide {
+  position: relative;
+  flex: 0 0 var(--slide-w);
+  box-sizing: border-box;
+}
+
+/* Dim overlay for the non-active (peek) slides — keeps the slide's shape
+   and sharpness (no filter blur); the active slide clears it. */
+.c-slider__slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-page);
+  opacity: 0.55;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.c-slider__slide.is-active .c-slider__slide-overlay {
+  opacity: 0;
+}
+
 .c-slider__outer {
   background: var(--color-bg-block);
   padding: 42px;
   box-sizing: border-box;
-  max-width: 1100px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .c-slider__inner {
@@ -358,6 +395,49 @@
   font-weight: 500;
   line-height: 1.5;
   color: var(--color-text-dark);
+}
+
+/* Circular nav arrows, centered vertically and sitting over the edges of
+   the active slide. Frosted via backdrop-filter (not a solid fill). The
+   circle is an intentional exception to the no-border-radius rule. */
+.c-slider__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(57, 56, 57, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.c-slider__arrow:hover {
+  background: rgba(57, 56, 57, 0.5);
+}
+
+.c-slider__arrow--prev {
+  left: calc((100% - var(--slide-w)) / 2);
+  transform: translate(-50%, -50%);
+}
+
+.c-slider__arrow--next {
+  left: calc((100% + var(--slide-w)) / 2);
+  transform: translate(-50%, -50%);
+}
+
+/* At the ends of a non-looping range. */
+.c-slider__arrow.is-disabled {
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 /* News */
@@ -502,16 +582,25 @@
 
   /* Slider */
   .c-slider {
-    padding: 80px 24px !important;
+    padding: 80px 0 !important;
   }
   .c-slider__title {
     font-size: 32px !important;
+    padding: 0 24px !important;
+  }
+  .c-slider__viewport {
+    --slide-w: 82% !important;
+    --slide-gap: 12px !important;
   }
   .c-slider__outer {
     padding: 20px !important;
   }
   .c-slider__inner {
     padding: 20px !important;
+  }
+  .c-slider__arrow {
+    width: 44px !important;
+    height: 44px !important;
   }
 
   /* News */

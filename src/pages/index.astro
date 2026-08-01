@@ -95,20 +95,50 @@ import "../styles/home.css";
   </div>
   </div>
 
-  <!-- Slider (center card only) -->
+  <!-- Slider — centered carousel: active slide centered, prev/next peek
+       at the edges (dimmed via overlay, not filter-blur). 4 identical
+       placeholder slides until the client sends real content. -->
   <div class="c-slider">
     <h2 class="c-slider__title">Where Wine Becomes Experience</h2>
-    <div class="c-slider__outer">
-      <div class="c-slider__inner">
-        <h3 class="c-slider__card-title">Monaco - YMC</h3>
-        <Image
-          src={ymcLogo}
-          alt="Yacht Club de Monaco"
-          width={480}
-          class="c-slider__logo"
-        />
-        <a href="#" class="c-slider__link">More information →</a>
+    <div class="c-slider__viewport" data-slider>
+      <div class="c-slider__track" data-slider-track>
+        {Array.from({ length: 4 }).map(() => (
+          <div class="c-slider__slide" data-slider-slide>
+            <div class="c-slider__outer">
+              <div class="c-slider__inner">
+                <h3 class="c-slider__card-title">Monaco - YMC</h3>
+                <Image
+                  src={ymcLogo}
+                  alt="Yacht Club de Monaco"
+                  width={480}
+                  class="c-slider__logo"
+                />
+                <a href="#" class="c-slider__link">More information →</a>
+              </div>
+            </div>
+            <div class="c-slider__slide-overlay"></div>
+          </div>
+        ))}
       </div>
+
+      <button
+        class="c-slider__arrow c-slider__arrow--prev"
+        data-slider-prev
+        aria-label="Previous slide"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 6 9 12 15 18"></polyline>
+        </svg>
+      </button>
+      <button
+        class="c-slider__arrow c-slider__arrow--next"
+        data-slider-next
+        aria-label="Next slide"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 6 15 12 9 18"></polyline>
+        </svg>
+      </button>
     </div>
   </div>
 
@@ -173,4 +203,5 @@ import "../styles/home.css";
 
 <script>
   import "../scripts/collection-animations.js";
+  import "../scripts/slider.js";
 </script>
