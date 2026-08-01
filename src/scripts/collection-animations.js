@@ -27,16 +27,23 @@ if (stage && overlay && cards.length) {
     "(min-width: 769px) and (prefers-reduced-motion: no-preference)",
     () => {
       gsap.set(cards, { yPercent: 120, autoAlpha: 0 });
-      gsap.set(overlay, { opacity: 0 });
+      gsap.set(overlay, { autoAlpha: 0 });
 
-      // Self-playing 1-by-1 reveal. fromTo so every (re)play restarts
-      // cleanly from hidden/below regardless of the cards' current state.
-      const cardsTl = gsap.timeline({ paused: true });
-      cardsTl
+      // Self-playing reveal (time-based, NOT scroll-scrubbed): the dark
+      // overlay fades in first, then the three cards slide up one by one.
+      // fromTo so every (re)play restarts cleanly from the hidden state.
+      const revealTl = gsap.timeline({ paused: true });
+      revealTl
+        .fromTo(
+          overlay,
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 0.4, ease: "power2.out" }
+        )
         .fromTo(
           cards[0],
           { yPercent: 120, autoAlpha: 0 },
-          { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }
+          { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" },
+          "-=0.1"
         )
         .fromTo(
           cards[1],
@@ -51,8 +58,8 @@ if (stage && overlay && cards.length) {
           "-=0.2"
         );
 
-      const PLAY_AT = 0.15; // reveal fires ~15% into the pin
-      const RESET_AT = 0.1; // hysteresis so it can't flicker at the edge
+      const PLAY_AT = 0.1; // reveal waits ~10% after the quote pins
+      const RESET_AT = 0.05; // hysteresis so it can't flicker at the edge
       let revealed = false;
       let fadeTween = null; // scroll-up fade-out, tracked so we can cancel it
 
@@ -62,34 +69,33 @@ if (stage && overlay && cards.length) {
         end: "+=150%",
         pin: true,
         onUpdate: (self) => {
-          // Dark overlay fades in over the first ~10% of the pin.
-          gsap.set(overlay, {
-            opacity: gsap.utils.clamp(0, 1, self.progress / 0.1),
-          });
-
           if (self.progress >= PLAY_AT && !revealed) {
-            // Scrolling down past the trigger: play the 1-by-1 reveal,
-            // then the cards hold for the rest of the pin. Cancel any
-            // in-flight fade-out first (but NOT the timeline's own tweens).
+            // Scrolling down past the trigger: play the reveal (overlay,
+            // then cards 1-by-1), which then holds for the rest of the
+            // pin. Cancel any in-flight fade-out first (but NOT the
+            // timeline's own tweens).
             revealed = true;
             if (fadeTween) {
               fadeTween.kill();
               fadeTween = null;
             }
-            cardsTl.restart();
+            revealTl.restart();
           } else if (self.progress <= RESET_AT && revealed) {
-            // Scrolling back up: fade the cards out in place (no
+            // Scrolling back up: fade overlay + cards out in place (no
             // slide-down); timeline stays armed to replay from the start.
             revealed = false;
-            cardsTl.pause();
-            fadeTween = gsap.to(cards, { autoAlpha: 0, duration: 0.3 });
+            revealTl.pause();
+            fadeTween = gsap.to([overlay, ...cards], {
+              autoAlpha: 0,
+              duration: 0.3,
+            });
           }
         },
       });
 
       return () => {
         st.kill();
-        cardsTl.kill();
+        revealTl.kill();
         if (fadeTween) fadeTween.kill();
         gsap.set([cards, overlay], { clearProps: "all" });
       };
