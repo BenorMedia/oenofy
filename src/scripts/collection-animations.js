@@ -66,7 +66,7 @@ if (stage && overlay && cards.length) {
       const st = ScrollTrigger.create({
         trigger: stage,
         start: "top top",
-        end: "+=150%",
+        end: "+=120%",
         pin: true,
         onUpdate: (self) => {
           if (self.progress >= PLAY_AT && !revealed) {
