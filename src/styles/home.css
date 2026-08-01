@@ -253,7 +253,7 @@
   inset: 0;
   z-index: 3;
   box-sizing: border-box;
-  padding: 80px 40px;
+  padding: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
