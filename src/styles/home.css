@@ -343,19 +343,25 @@
   box-sizing: border-box;
 }
 
-/* Dim overlay for the non-active (peek) slides — keeps the slide's shape
-   and sharpness (no filter blur); the active slide clears it. */
+/* Frosted look for the non-active (peek) slides: backdrop-filter blurs
+   the slide *behind* the overlay while the overlay itself stays a clean
+   rectangle, so the slide keeps its shape (no filter-blur distortion).
+   The active slide clears the blur/tint. */
 .c-slider__slide-overlay {
   position: absolute;
   inset: 0;
-  background: var(--color-bg-page);
-  opacity: 0.55;
-  transition: opacity 0.5s ease;
+  background-color: rgba(255, 255, 255, 0.25);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease,
+    background-color 0.5s ease;
   pointer-events: none;
 }
 
 .c-slider__slide.is-active .c-slider__slide-overlay {
-  opacity: 0;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
 }
 
 .c-slider__outer {
@@ -425,13 +431,13 @@
 }
 
 .c-slider__arrow--prev {
-  left: calc((100% - var(--slide-w)) / 2);
-  transform: translate(-50%, -50%);
+  left: 25px;
+  transform: translateY(-50%);
 }
 
 .c-slider__arrow--next {
-  left: calc((100% + var(--slide-w)) / 2);
-  transform: translate(-50%, -50%);
+  right: 25px;
+  transform: translateY(-50%);
 }
 
 /* At the ends of a non-looping range. */
