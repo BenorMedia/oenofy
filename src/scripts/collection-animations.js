@@ -54,6 +54,7 @@ if (stage && overlay && cards.length) {
       const PLAY_AT = 0.15; // reveal fires ~15% into the pin
       const RESET_AT = 0.1; // hysteresis so it can't flicker at the edge
       let revealed = false;
+      let fadeTween = null; // scroll-up fade-out, tracked so we can cancel it
 
       const st = ScrollTrigger.create({
         trigger: stage,
@@ -68,16 +69,20 @@ if (stage && overlay && cards.length) {
 
           if (self.progress >= PLAY_AT && !revealed) {
             // Scrolling down past the trigger: play the 1-by-1 reveal,
-            // then the cards hold for the rest of the pin.
+            // then the cards hold for the rest of the pin. Cancel any
+            // in-flight fade-out first (but NOT the timeline's own tweens).
             revealed = true;
-            gsap.killTweensOf(cards);
+            if (fadeTween) {
+              fadeTween.kill();
+              fadeTween = null;
+            }
             cardsTl.restart();
           } else if (self.progress <= RESET_AT && revealed) {
             // Scrolling back up: fade the cards out in place (no
             // slide-down); timeline stays armed to replay from the start.
             revealed = false;
             cardsTl.pause();
-            gsap.to(cards, { autoAlpha: 0, duration: 0.3, overwrite: true });
+            fadeTween = gsap.to(cards, { autoAlpha: 0, duration: 0.3 });
           }
         },
       });
@@ -85,7 +90,7 @@ if (stage && overlay && cards.length) {
       return () => {
         st.kill();
         cardsTl.kill();
-        gsap.killTweensOf(cards);
+        if (fadeTween) fadeTween.kill();
         gsap.set([cards, overlay], { clearProps: "all" });
       };
     }
