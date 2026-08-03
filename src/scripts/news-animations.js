@@ -1,9 +1,10 @@
-import { gsap, ScrollTrigger } from "./gsap-setup.js";
+import { gsap } from "./gsap-setup.js";
 
-// News scroll flow. Each row's text stays put while its left image pans
-// downward as the row travels through the viewport — a scrubbed vertical
-// parallax. Read top to bottom, the images drift down row by row while
-// the copy on the right holds still.
+// News scroll flow. The text on the right stays put; each row's left
+// image (the whole frame) slides vertically as the row travels through
+// the viewport. Earlier rows are layered above later ones, so as an
+// upper image drifts down it overlaps into the next row's image — the
+// images slide over one another instead of just panning in place.
 
 const rows = gsap.utils.toArray(".c-news__row");
 
@@ -11,18 +12,25 @@ if (rows.length) {
   const mm = gsap.matchMedia();
 
   mm.add("(prefers-reduced-motion: no-preference)", () => {
-    const tweens = rows.map((row) => {
-      const media = row.querySelector(".c-news__media");
-      if (!media) return null;
+    const frames = [];
 
-      // -12% (top of the image showing) as the row enters, to +12%
-      // (bottom showing) as it leaves — i.e. the image moves down as the
-      // page scrolls down. The 140% media height absorbs the travel.
-      return gsap.fromTo(
-        media,
-        { yPercent: -12 },
+    rows.forEach((row, i) => {
+      const frame = row.querySelector(".c-news__image");
+      if (!frame) return;
+      frames.push(frame);
+
+      // Earlier rows sit above later ones so their image overlaps the
+      // one below during the slide.
+      frame.style.zIndex = String(rows.length - i);
+
+      // Whole frame slides down as the row scrolls past: at rest (row
+      // centered) it's ~0; entering it sits higher, leaving it sits lower
+      // and overlaps into the next row's image.
+      gsap.fromTo(
+        frame,
+        { yPercent: -22 },
         {
-          yPercent: 12,
+          yPercent: 22,
           ease: "none",
           scrollTrigger: {
             trigger: row,
@@ -35,8 +43,10 @@ if (rows.length) {
     });
 
     return () => {
-      tweens.forEach((t) => t && t.scrollTrigger && t.scrollTrigger.kill());
-      gsap.set(".c-news__media", { clearProps: "transform" });
+      frames.forEach((f) => {
+        f.style.zIndex = "";
+      });
+      gsap.set(frames, { clearProps: "transform" });
     };
   });
 }
