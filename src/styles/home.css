@@ -505,6 +505,7 @@
 .c-news__media {
   position: sticky;
   top: calc(50vh - 355px);
+  margin: 32px 0;
   flex: 0 0 440px;
   width: 440px;
   height: 310px;
@@ -512,7 +513,7 @@
 }
 
 /* Stacked images inside the stage. Later ones sit on top and start
-   clipped (hidden); JS reveals them top-to-bottom on scroll. */
+   clipped (hidden); JS reveals them bottom-to-top on scroll. */
 .c-news__media-img {
   position: absolute;
   inset: 0;
@@ -530,10 +531,9 @@
 .c-news__body {
   display: flex;
   flex-direction: column;
-  padding: 0 40px;
-  /* Each block gets its own scroll length so its image reveal has room
-     to play and the pinned stage has something to hold through. */
-  min-height: 70vh;
+  padding: 40px;
+  min-height: 380px;
+  max-height: 380px;
 }
 
 .c-news__item-title {
