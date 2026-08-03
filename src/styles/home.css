@@ -305,17 +305,17 @@
   width: 100%;
   box-sizing: border-box;
   background: var(--color-bg-page);
-  padding: 130px 0;
+  padding: 8.125rem 0;
   font-family: var(--font-montserrat);
 }
 
 .c-slider__title {
-  margin: 0 0 48px;
+  margin: 0 0 3rem;
   text-align: center;
   font-family: var(--font-conso);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 56px;
+  font-size: 3.5rem;
   line-height: 1.15;
   color: var(--color-text-dark);
 }
@@ -324,7 +324,7 @@
    slide shows (the rest of the width becomes the prev/next peeks). */
 .c-slider__viewport {
   --slide-w: 66%;
-  --slide-gap: 24px;
+  --slide-gap: 1.5rem;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -366,14 +366,14 @@
 
 .c-slider__outer {
   background: var(--color-bg-block);
-  padding: 42px;
+  padding: 2.625rem;
   box-sizing: border-box;
   width: 100%;
 }
 
 .c-slider__inner {
   background: var(--color-text-light);
-  padding: 32px;
+  padding: 2rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -381,7 +381,7 @@
 
 .c-slider__card-title {
   margin: 0;
-  font-size: 34px;
+  font-size: 2.125rem;
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1.5;
@@ -390,14 +390,14 @@
 
 .c-slider__logo {
   width: 100%;
-  max-width: 480px;
+  max-width: 30rem;
   height: auto;
-  margin: 40px auto;
+  margin: 2.5rem auto;
   display: block;
 }
 
 .c-slider__link {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
   color: var(--color-text-dark);
@@ -413,8 +413,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 3.5rem;
+  height: 3.5rem;
   padding: 0;
   border: none;
   border-radius: 50%;
@@ -431,20 +431,15 @@
 }
 
 .c-slider__arrow--prev {
-  left: 25px;
+  left: 1.5625rem;
   transform: translateY(-50%);
 }
 
 .c-slider__arrow--next {
-  right: 25px;
+  right: 1.5625rem;
   transform: translateY(-50%);
 }
 
-/* At the ends of a non-looping range. */
-.c-slider__arrow.is-disabled {
-  opacity: 0.25;
-  pointer-events: none;
-}
 
 /* Form — placeholder until the design arrives. Full-height so the news
    scroll has somewhere to land. */
