@@ -481,6 +481,20 @@
   position: relative;
   width: 320px;
   height: 260px;
+  overflow: hidden;
+}
+
+/* Taller than the frame so it has headroom to pan vertically without
+   ever exposing an edge. news-animations.js scrubs its yPercent. */
+.c-news__media {
+  position: absolute;
+  left: 0;
+  top: -20%;
+  width: 100%;
+  height: 140%;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
 }
 
 .c-news__body {
