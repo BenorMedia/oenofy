@@ -466,27 +466,35 @@
   color: var(--color-text-dark);
 }
 
-.c-news__row {
+/* All rows share one grid so every image is a direct grid item with the
+   grid as its containing block — that's what lets the sticky images
+   stack/accumulate across rows instead of being trapped per-row. The
+   generous row-gap gives each image a long hold before the next one
+   scrolls up and covers it. */
+.c-news__grid {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 48px;
-  margin-bottom: 48px;
+  grid-template-columns: 260px 1fr;
+  column-gap: 48px;
+  row-gap: 35vh;
+  align-items: start;
 }
 
-.c-news__row:last-child {
-  margin-bottom: 0;
+/* Row box disappears; its image + body become direct grid items. */
+.c-news__row {
+  display: contents;
 }
 
 .c-news__image {
-  position: relative;
-  width: 320px;
+  /* Sticks centered in the viewport and holds there while the row's text
+     scrolls past; later images scroll up and stack over it. */
+  position: sticky;
+  top: calc(50vh - 130px);
+  width: 260px;
   height: 260px;
   overflow: hidden;
-  will-change: transform;
 }
 
-/* Fills the frame exactly — the whole frame is what slides/overlaps
-   (see news-animations.js), so the image doesn't pan inside it. */
+/* Fills the frame exactly. */
 .c-news__media {
   position: absolute;
   inset: 0;
@@ -629,11 +637,12 @@
   .c-news__title {
     font-size: 32px !important;
   }
-  .c-news__row {
+  .c-news__grid {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    row-gap: 40px !important;
   }
   .c-news__image {
+    position: static !important;
     width: 100% !important;
     height: 220px !important;
   }
