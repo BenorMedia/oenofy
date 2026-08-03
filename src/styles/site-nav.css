@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 120px;
+  padding: 1.5rem 7.5rem;
   pointer-events: none;
   font-family: var(--font-montserrat);
   /* Slide (hide/show) + background fade when scroll state changes. */
@@ -29,12 +29,12 @@
 
 .c-nav__group {
   display: flex;
-  gap: 120px;
+  gap: 7.5rem;
   pointer-events: auto;
 }
 
 .c-nav__link {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
   color: var(--color-text-light);
@@ -45,16 +45,16 @@
 }
 
 .c-nav__mark svg {
-  width: 55px;
-  height: 55px;
+  width: 3.4375rem;
+  height: 3.4375rem;
   /* Smooth resize when the scrolled state kicks in. */
   transition: width 0.2s ease, height 0.2s ease;
 }
 
 /* Scrolled down: smaller logo. */
 .c-nav.is-scrolled .c-nav__mark svg {
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 @media (max-width: 768px) {

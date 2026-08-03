@@ -38,6 +38,22 @@ body {
   font-family: var(--font-montserrat);
 }
 
+/* Fluid rem base. All rem values across the site are authored as
+   px ÷ 16, so at a 1920px viewport (root = 16px) they render at their
+   design size, then scale proportionally within the clamp bounds:
+   min 13px (~laptops don't shrink too far) / max 20px (4K doesn't blow
+   up). Mobile switches to a fixed base so section px overrides stay
+   predictable. */
+html {
+  font-size: clamp(13px, 0.833vw, 20px);
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 a {
   color: var(--color-text-light);
   text-decoration: none;
