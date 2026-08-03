@@ -446,13 +446,34 @@
   pointer-events: none;
 }
 
+/* Form — placeholder until the design arrives. Full-height so the news
+   scroll has somewhere to land. */
+.c-form {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-block);
+  font-family: var(--font-montserrat);
+}
+
+.c-form__placeholder {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  opacity: 0.4;
+}
+
 /* News */
 
 .c-news {
   width: 100%;
   box-sizing: border-box;
   background: var(--color-bg-page);
-  padding: 120px;
+  padding: 120px 60px;
   font-family: var(--font-montserrat);
 }
 
@@ -468,15 +489,14 @@
 
 /* All rows share one grid so every image is a direct grid item with the
    grid as its containing block — that's what lets the sticky images
-   stack/accumulate across rows instead of being trapped per-row. The
-   generous row-gap gives each image a long hold before the next one
-   scrolls up and covers it. */
+   stack across rows instead of being trapped per-row. As each image
+   sticks and the next one scrolls up, the newer image (later in DOM, so
+   on top) cuts/covers the held one — only one image reads at a time. */
 .c-news__grid {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  column-gap: 48px;
-  row-gap: 35vh;
-  align-items: start;
+  grid-template-columns: 440px 1fr;
+  column-gap: 0;
+  row-gap: 3vh;
 }
 
 /* Row box disappears; its image + body become direct grid items. */
@@ -485,12 +505,11 @@
 }
 
 .c-news__image {
-  /* Sticks centered in the viewport and holds there while the row's text
-     scrolls past; later images scroll up and stack over it. */
   position: sticky;
-  top: calc(50vh - 130px);
-  width: 260px;
-  height: 260px;
+  top: calc(50vh - 355px);
+  align-self: start;
+  width: 440px;
+  height: 310px;
   overflow: hidden;
 }
 
@@ -507,7 +526,7 @@
 .c-news__body {
   display: flex;
   flex-direction: column;
-  margin-bottom: auto;
+  padding: 0 40px;
 }
 
 .c-news__item-title {
@@ -537,7 +556,8 @@
 
 .c-news__link {
   display: inline-block;
-  margin-top: 35px;
+  margin-top: auto;
+  padding-top: 35px;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
