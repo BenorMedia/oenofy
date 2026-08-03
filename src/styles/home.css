@@ -664,24 +664,29 @@
   .c-news__title {
     font-size: 32px !important;
   }
-  .c-news__grid {
-    flex-direction: column;
-  }
+  /* Keep the desktop 2-column sticky layout on mobile, just scaled down:
+     smaller image, smaller type, description hidden. */
   .c-news__media {
-    position: sticky !important;
-    top: 80px !important;
-    flex: 0 0 auto !important;
-    width: 100% !important;
-    height: 240px !important;
-  }
-  .c-news__bodies {
-    width: 100% !important;
+    flex: 0 0 130px !important;
+    width: 130px !important;
+    height: 170px !important;
+    top: calc(50vh - 85px) !important;
   }
   .c-news__body {
-    padding: 24px 0 !important;
-    min-height: 60vh !important;
+    padding: 0 0 0 20px !important;
+    min-height: 55vh !important;
   }
   .c-news__item-title {
-    font-size: 24px !important;
+    font-size: 20px !important;
+  }
+  .c-news__subtitle {
+    font-size: 13px !important;
+  }
+  .c-news__copy {
+    display: none !important;
+  }
+  .c-news__link {
+    font-size: 12px !important;
+    padding-top: 20px !important;
   }
 }
