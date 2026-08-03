@@ -45,9 +45,11 @@ if (media && imgs.length && imgs.length === bodies.length) {
           ease: "none",
           scrollTrigger: {
             trigger: bodies[i],
-            // Start as this block enters the stage (its top reaches the
-            // stage bottom); run for exactly one body-height of scroll.
-            start: () => `top ${stageScreenTop() + media.offsetHeight}px`,
+            // Start as this block's top reaches the TOP of the stage; run
+            // for exactly one body-height of scroll. Anchoring to the
+            // stage top (read live) keeps the reveal parallel to the body
+            // regardless of the stage's `top` offset.
+            start: () => `top ${stageScreenTop()}px`,
             end: () => `+=${bodies[i].offsetHeight}`,
             scrub: true,
             invalidateOnRefresh: true,
