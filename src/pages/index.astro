@@ -13,6 +13,45 @@ import ymcLogo from "../assets/home/ymc-logo.png";
 import newsCyprus from "../assets/home/news-cyprus.jpg";
 import newsDhondt from "../assets/home/news-dhondt.jpg";
 
+const newsItems = [
+  {
+    img: newsCyprus,
+    title: "Discover Cyprus Wine",
+    subtitle: "Where altitude meets rarity.",
+    copy: "Nestled high in the Troodos Mountains, Vouni Panayia is one of Cyprus' most remarkable estates. Its high-altitude vineyards, indigenous grape varieties and meticulous micro-vinifications produce wines of exceptional precision and character. Crafted in extremely limited quantities, each cuvée reflects a distinctive expression of Cyprus' mountainous terroir and a commitment to preserving the island's unique winemaking heritage.",
+  },
+  {
+    img: newsDhondt,
+    title: "Dhondt-Grellet",
+    subtitle: "Precision without excess. Purity without compromise.",
+    copy: "Among the most compelling names of Champagne's new generation, Dhondt-Grellet has earned a reputation for producing remarkably precise, terroir-driven wines. Working primarily with old Chardonnay vines on the Côte des Blancs, the estate embraces low-intervention winemaking, careful élevage and limited production to reveal the character of each individual parcel. Every bottle reflects balance, tension and quiet complexity — champagnes made for those who value authenticity over prestige alone.",
+  },
+  {
+    img: newsCyprus,
+    title: "Big Formats",
+    subtitle: "Placeholder — scale and presence.",
+    copy: "Placeholder copy for an upcoming news item. This block exists so the section is tall enough to scroll through the image reveal animation while the real editorial content is prepared.",
+  },
+  {
+    img: newsDhondt,
+    title: "Rare Vintages",
+    subtitle: "Placeholder — time in the bottle.",
+    copy: "Placeholder copy for an upcoming news item. This block exists so the section is tall enough to scroll through the image reveal animation while the real editorial content is prepared.",
+  },
+  {
+    img: newsCyprus,
+    title: "Terroir Stories",
+    subtitle: "Placeholder — a sense of place.",
+    copy: "Placeholder copy for an upcoming news item. This block exists so the section is tall enough to scroll through the image reveal animation while the real editorial content is prepared.",
+  },
+  {
+    img: newsDhondt,
+    title: "The Cellar",
+    subtitle: "Placeholder — quiet and cool.",
+    copy: "Placeholder copy for an upcoming news item. This block exists so the section is tall enough to scroll through the image reveal animation while the real editorial content is prepared.",
+  },
+];
+
 import "../styles/home.css";
 ---
 
@@ -142,126 +181,29 @@ import "../styles/home.css";
     </div>
   </div>
 
-  <!-- News -->
+  <!-- News — single sticky image stage; only one image shows at a time
+       and the next wipes in top-to-bottom over it as you scroll through
+       the text blocks (see news-animations.js). -->
   <div class="c-news">
     <h2 class="c-news__title">News</h2>
 
     <div class="c-news__grid">
-    <div class="c-news__row">
-      <div class="c-news__image">
-        <Image
-          src={newsCyprus}
-          alt="Discover Cyprus Wine"
-          class="c-news__media"
-        />
+      <div class="c-news__media" data-news-media>
+        {newsItems.map((item) => (
+          <Image src={item.img} alt={item.title} class="c-news__media-img" />
+        ))}
       </div>
-      <div class="c-news__body">
-        <h3 class="c-news__item-title">Discover Cyprus Wine</h3>
-        <p class="c-news__subtitle">Where altitude meets rarity.</p>
-        <p class="c-news__copy">
-          Nestled high in the Troodos Mountains, Vouni Panayia is one of
-          Cyprus' most remarkable estates. Its high-altitude vineyards,
-          indigenous grape varieties and meticulous micro-vinifications
-          produce wines of exceptional precision and character. Crafted in
-          extremely limited quantities, each cuvée reflects a distinctive
-          expression of Cyprus' mountainous terroir and a commitment to
-          preserving the island's unique winemaking heritage.
-        </p>
-        <a href="#" class="c-news__link">Discover →</a>
-      </div>
-    </div>
 
-    <div class="c-news__row">
-      <div class="c-news__image">
-        <Image
-          src={newsDhondt}
-          alt="Dhondt-Grellet"
-          class="c-news__media"
-        />
+      <div class="c-news__bodies">
+        {newsItems.map((item) => (
+          <div class="c-news__body" data-news-body>
+            <h3 class="c-news__item-title">{item.title}</h3>
+            <p class="c-news__subtitle">{item.subtitle}</p>
+            <p class="c-news__copy">{item.copy}</p>
+            <a href="#" class="c-news__link">Discover →</a>
+          </div>
+        ))}
       </div>
-      <div class="c-news__body">
-        <h3 class="c-news__item-title">Dhondt-Grellet</h3>
-        <p class="c-news__subtitle">
-          Precision without excess. Purity without compromise.
-        </p>
-        <p class="c-news__copy">
-          Among the most compelling names of Champagne's new generation,
-          Dhondt-Grellet has earned a reputation for producing remarkably
-          precise, terroir-driven wines. Working primarily with old
-          Chardonnay vines on the Côte des Blancs, the estate embraces
-          low-intervention winemaking, careful élevage and limited
-          production to reveal the character of each individual parcel.
-          Every bottle reflects balance, tension and quiet complexity —
-          champagnes made for those who value authenticity over prestige
-          alone.
-        </p>
-        <a href="#" class="c-news__link">Discover →</a>
-      </div>
-    </div>
-
-    <div class="c-news__row">
-      <div class="c-news__image">
-        <Image src={newsCyprus} alt="Big Formats" class="c-news__media" />
-      </div>
-      <div class="c-news__body">
-        <h3 class="c-news__item-title">Big Formats</h3>
-        <p class="c-news__subtitle">Placeholder — scale and presence.</p>
-        <p class="c-news__copy">
-          Placeholder copy for an upcoming news item. This row exists so
-          the section is tall enough to scroll through the image overlap
-          animation while the real editorial content is prepared.
-        </p>
-        <a href="#" class="c-news__link">Discover →</a>
-      </div>
-    </div>
-
-    <div class="c-news__row">
-      <div class="c-news__image">
-        <Image src={newsDhondt} alt="Rare Vintages" class="c-news__media" />
-      </div>
-      <div class="c-news__body">
-        <h3 class="c-news__item-title">Rare Vintages</h3>
-        <p class="c-news__subtitle">Placeholder — time in the bottle.</p>
-        <p class="c-news__copy">
-          Placeholder copy for an upcoming news item. This row exists so
-          the section is tall enough to scroll through the image overlap
-          animation while the real editorial content is prepared.
-        </p>
-        <a href="#" class="c-news__link">Discover →</a>
-      </div>
-    </div>
-
-    <div class="c-news__row">
-      <div class="c-news__image">
-        <Image src={newsCyprus} alt="Terroir Stories" class="c-news__media" />
-      </div>
-      <div class="c-news__body">
-        <h3 class="c-news__item-title">Terroir Stories</h3>
-        <p class="c-news__subtitle">Placeholder — a sense of place.</p>
-        <p class="c-news__copy">
-          Placeholder copy for an upcoming news item. This row exists so
-          the section is tall enough to scroll through the image overlap
-          animation while the real editorial content is prepared.
-        </p>
-        <a href="#" class="c-news__link">Discover →</a>
-      </div>
-    </div>
-
-    <div class="c-news__row">
-      <div class="c-news__image">
-        <Image src={newsDhondt} alt="The Cellar" class="c-news__media" />
-      </div>
-      <div class="c-news__body">
-        <h3 class="c-news__item-title">The Cellar</h3>
-        <p class="c-news__subtitle">Placeholder — quiet and cool.</p>
-        <p class="c-news__copy">
-          Placeholder copy for an upcoming news item. This row exists so
-          the section is tall enough to scroll through the image overlap
-          animation while the real editorial content is prepared.
-        </p>
-        <a href="#" class="c-news__link">Discover →</a>
-      </div>
-    </div>
     </div>
   </div>
 
@@ -275,4 +217,5 @@ import "../styles/home.css";
 <script>
   import "../scripts/collection-animations.js";
   import "../scripts/slider.js";
+  import "../scripts/news-animations.js";
 </script>

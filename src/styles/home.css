@@ -492,29 +492,28 @@
    stack across rows instead of being trapped per-row. As each image
    sticks and the next one scrolls up, the newer image (later in DOM, so
    on top) cuts/covers the held one — only one image reads at a time. */
+/* Two columns: a sticky image stage (left) and the scrolling text blocks
+   (right). The stage is a single flex item, so it pins for the whole
+   section instead of being trapped per-row. Only one image shows; the
+   next wipes in top-to-bottom over it (clip-path, driven by JS). */
 .c-news__grid {
-  display: grid;
-  grid-template-columns: 440px 1fr;
-  column-gap: 0;
-  row-gap: 3vh;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
 }
 
-/* Row box disappears; its image + body become direct grid items. */
-.c-news__row {
-  display: contents;
-}
-
-.c-news__image {
+.c-news__media {
   position: sticky;
   top: calc(50vh - 355px);
-  align-self: start;
+  flex: 0 0 440px;
   width: 440px;
   height: 310px;
   overflow: hidden;
 }
 
-/* Fills the frame exactly. */
-.c-news__media {
+/* Stacked images inside the stage. Later ones sit on top and start
+   clipped (hidden); JS reveals them top-to-bottom on scroll. */
+.c-news__media-img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -523,10 +522,18 @@
   object-position: center;
 }
 
+.c-news__bodies {
+  flex: 1;
+  min-width: 0;
+}
+
 .c-news__body {
   display: flex;
   flex-direction: column;
   padding: 0 40px;
+  /* Each block gets its own scroll length so its image reveal has room
+     to play and the pinned stage has something to hold through. */
+  min-height: 70vh;
 }
 
 .c-news__item-title {
@@ -658,13 +665,21 @@
     font-size: 32px !important;
   }
   .c-news__grid {
-    grid-template-columns: 1fr !important;
-    row-gap: 40px !important;
+    flex-direction: column;
   }
-  .c-news__image {
-    position: static !important;
+  .c-news__media {
+    position: sticky !important;
+    top: 80px !important;
+    flex: 0 0 auto !important;
     width: 100% !important;
-    height: 220px !important;
+    height: 240px !important;
+  }
+  .c-news__bodies {
+    width: 100% !important;
+  }
+  .c-news__body {
+    padding: 24px 0 !important;
+    min-height: 60vh !important;
   }
   .c-news__item-title {
     font-size: 24px !important;
