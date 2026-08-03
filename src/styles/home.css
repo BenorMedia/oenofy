@@ -468,29 +468,25 @@
   width: 100%;
   box-sizing: border-box;
   background: var(--color-bg-page);
-  padding: 120px 60px;
+  padding: 7.5rem 3.75rem;
   font-family: var(--font-montserrat);
 }
 
 .c-news__title {
-  margin: 0 0 64px;
+  margin: 0 0 4rem;
   font-family: var(--font-conso);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 56px;
+  font-size: 3.5rem;
   line-height: 1.15;
   color: var(--color-text-dark);
 }
 
-/* All rows share one grid so every image is a direct grid item with the
-   grid as its containing block — that's what lets the sticky images
-   stack across rows instead of being trapped per-row. As each image
-   sticks and the next one scrolls up, the newer image (later in DOM, so
-   on top) cuts/covers the held one — only one image reads at a time. */
 /* Two columns: a sticky image stage (left) and the scrolling text blocks
    (right). The stage is a single flex item, so it pins for the whole
-   section instead of being trapped per-row. Only one image shows; the
-   next wipes in top-to-bottom over it (clip-path, driven by JS). */
+   section. Only one image shows; the next wipes in bottom-to-top over it
+   (clip-path, driven by JS which reads the stage's computed px at
+   runtime — so this rem conversion doesn't affect the animation). */
 .c-news__grid {
   display: flex;
   align-items: flex-start;
@@ -499,11 +495,11 @@
 
 .c-news__media {
   position: sticky;
-  top: calc(50vh - 355px);
-  margin: 32px 0;
-  flex: 0 0 440px;
-  width: 440px;
-  height: 310px;
+  top: calc(50vh - 22.1875rem);
+  margin: 2.25rem 0;
+  flex: 0 0 33rem;
+  width: 33rem;
+  height: 22rem;
   overflow: hidden;
 }
 
@@ -526,14 +522,15 @@
 .c-news__body {
   display: flex;
   flex-direction: column;
-  padding: 40px;
-  min-height: 380px;
-  max-height: 380px;
+  padding: 0 2.25rem;
+  margin-top: 2.25rem;
+  min-height: 22rem;
+  max-height: 22rem;
 }
 
 .c-news__item-title {
   margin: 0;
-  font-size: 34px;
+  font-size: 2.125rem;
   font-weight: 800;
   text-transform: uppercase;
   line-height: 1.5;
@@ -541,16 +538,16 @@
 }
 
 .c-news__subtitle {
-  margin: 16px 0 0;
-  font-size: 16px;
+  margin: 1rem 0 0;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--color-text-dark);
 }
 
 .c-news__copy {
-  margin: 16px 0 0;
-  font-size: 16px;
+  margin: 1rem 0 0;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
   color: var(--color-text-dark);
@@ -559,8 +556,8 @@
 .c-news__link {
   display: inline-block;
   margin-top: auto;
-  padding-top: 35px;
-  font-size: 14px;
+  padding-top: 2.1875rem;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
   color: var(--color-text-dark);
@@ -664,8 +661,8 @@
   .c-news__media {
     flex: 0 0 130px !important;
     width: 130px !important;
-    height: 170px !important;
-    top: calc(50vh - 85px) !important;
+    height: 200px !important;
+    top: calc(50vh - 100px) !important;
   }
   .c-news__body {
     padding: 0 0 0 20px !important;
