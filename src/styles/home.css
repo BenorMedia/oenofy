@@ -496,7 +496,7 @@
 .c-news__media {
   position: sticky;
   top: calc(50vh - 22.1875rem);
-  margin: 2.25rem 0;
+  margin: 2.25rem 0 0;
   flex: 0 0 33rem;
   width: 33rem;
   height: 22rem;
