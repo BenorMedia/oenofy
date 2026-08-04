@@ -16,33 +16,6 @@
   color: #f4efea;
 }
 
-.oenofy-intro__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-
-  opacity: 0;
-  transform: scale(1.04);
-
-  background-image: url("https://cdn.prod.website-files.com/69fdd0067f429dab904ad307/69fdd4e52084e961fce65505_Frame%202.png");
-  background-size: cover;
-  background-position: center;
-
-  transition:
-    opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1800ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.oenofy-intro__bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background:
-    linear-gradient(to bottom, rgba(34,35,35,0.32), rgba(34,35,35,0.08) 45%, rgba(0,0,0,0.30)),
-    linear-gradient(to top, rgba(0,0,0,0.42), transparent 48%);
-}
-
 .oenofy-intro__logo-stage {
   --logo-width: clamp(260px, 33vw, 430px);
   --logo-height: calc(var(--logo-width) * 0.12796);
@@ -191,66 +164,6 @@
   transition: opacity 120ms linear 120ms;
 }
 
-.oenofy-intro__content {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 3;
-
-  width: min(92vw, 1060px);
-
-  text-align: center;
-
-  opacity: 0;
-
-  transform:
-    translateX(-50%)
-    translateY(-50%)
-    translateY(20px);
-
-  transition:
-    opacity 1300ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.oenofy-intro__content h1 {
-  margin: 0;
-
-  font-family: "Conso", sans-serif;
-  font-size: 8em;
-  font-weight: 100;
-  line-height: 0.94;
-  letter-spacing: 0;
-  text-transform: uppercase;
-
-  color: rgba(244,239,234,0.96);
-}
-
-.oenofy-intro__button {
-  display: flex;
-  padding: 1.25rem 1.875rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 2em;
-
-  width: fit-content;
-
-  margin: 1.25rem auto 0;
-
-  border: 0;
-  background: #FFF;
-  color: #222323;
-
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  font-size: 1em;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
 .oenofy-intro.is-dimmed .oenofy-glyph {
   opacity: 0.42;
 }
@@ -284,24 +197,6 @@
   transform: translate(-50%, -50%) scale(0.70);
 }
 
-.oenofy-intro.is-hero-visible .oenofy-intro__bg {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.oenofy-intro.is-content-visible .oenofy-intro__content {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-50%);
-}
-
-@media (max-width: 991px) {
-
-  .oenofy-intro__content h1 {
-    font-size: 6em;
-  }
-
-}
-
 @media (max-width: 767px) {
 
   .oenofy-intro {
@@ -323,19 +218,6 @@
 
   .oenofy-final-logo {
     width: calc(var(--logo-width) * 0.17);
-  }
-
-  .oenofy-intro__content h1 {
-    font-size: clamp(3em, 14vw, 5em);
-    line-height: 0.98;
-  }
-
-  .oenofy-intro__button {
-    max-width: 86%;
-    padding: 1rem 1.25rem;
-    font-size: 1em;
-    line-height: 1.35;
-    white-space: normal;
   }
 
   .oenofy-intro.is-icon-up .oenofy-intro__logo-stage {

@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "is-letters-hidden",
       "is-os-converging",
       "is-icon-up",
-      "is-hero-visible",
-      "is-content-visible",
       "is-final-logo-visible"
     );
 
@@ -40,13 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // WAIT until movement is fully finished,
     // then swap to PNG instantly
-    ["is-final-logo-visible", 3400],
-
-    // bg reveal
-    ["is-hero-visible", 3550],
-
-    // content reveal
-    ["is-content-visible", 4150]
+    ["is-final-logo-visible", 3400]
 
   ];
 
