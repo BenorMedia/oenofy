@@ -34,7 +34,7 @@
 }
 
 .c-nav__link {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: var(--color-text-light);
@@ -60,11 +60,12 @@
 @media (max-width: 768px) {
   .c-nav {
     padding: 16px 20px !important;
+    justify-content: center !important;
   }
   .c-nav__link {
     font-size: 11px !important;
   }
   .c-nav__group {
-    gap: 16px !important;
+    display: none !important;
   }
 }

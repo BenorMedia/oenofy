@@ -42,7 +42,7 @@
 }
 
 .is-icon-up .c-preloader__logo-stage {
-  top: 8.5%;
+  top: 3.21875rem;
   transform: translate(-50%, -50%) scale(0.7);
 }
 
@@ -149,7 +149,7 @@
   top: 50%;
   z-index: 5;
 
-  width: calc(var(--logo-width) * 0.17);
+  width: calc(3.4375rem / 0.7);
   opacity: 0;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -218,7 +218,7 @@
   }
 
   .is-icon-up .c-preloader__logo-stage {
-    top: 8%;
+    top: 2.71875rem;
     transform: translate(-50%, -50%) scale(0.7);
   }
 }

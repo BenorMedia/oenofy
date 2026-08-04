@@ -74,7 +74,7 @@
   font-family: var(--font-conso);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 3.5rem;
+  font-size: 4rem;
   line-height: 1.15;
   color: var(--color-text-light);
   letter-spacing: 0;
@@ -88,7 +88,7 @@
   /* Opaque — this is the first thing that covers the hero as the page
      scrolls up over it. */
   background: var(--color-bg-page);
-  padding: 10rem 7.5rem 3.75rem;
+  padding: 9rem 6rem 5.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -172,14 +172,14 @@
   font-family: var(--font-conso);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 3.5rem;
+  font-size: 4rem;
   line-height: 1.25;
   color: var(--color-text-light);
 }
 
 .c-conciergerie__copy {
   margin: 1.65rem 0 0;
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 400;
   line-height: 1.8;
   color: var(--color-text-light);
@@ -188,10 +188,11 @@
 .c-conciergerie__link {
   display: inline-block;
   margin-top: 2.2rem;
-  font-size: 0.875rem;
+  font-size: 1.15rem;
   font-weight: 500;
   line-height: 1.5;
   color: var(--color-text-light);
+  transition: all 0.2s ease;
 }
 
 /* Quote */
@@ -216,16 +217,16 @@
 
 .c-quote__box {
   position: absolute;
-  left: 7.5rem;
+  left: 6rem;
   top: 11rem;
-  max-width: 47.5rem;
+  max-width: 50rem;
   z-index: 1;
 }
 
 .c-quote__text {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.6rem;
+  font-weight: 600;
   line-height: 1.25;
   color: var(--color-text-dark);
 }
@@ -253,10 +254,10 @@
   inset: 0;
   z-index: 3;
   box-sizing: border-box;
-  padding: 2.5rem;
+  padding: 4.5rem 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.9375rem;
+  gap: 1rem;
   font-family: var(--font-montserrat);
 }
 
@@ -285,7 +286,7 @@
   font-family: var(--font-conso);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 3.5rem;
+  font-size: 4rem;
   line-height: 1.15;
   color: var(--color-text-dark);
 }
@@ -293,10 +294,15 @@
 .c-collection__link {
   display: inline-block;
   margin-top: 1.5rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   color: var(--color-text-dark);
+  transition: all 0.2s ease;
+}
+
+.c-collection__link:hover {
+  opacity: 0.6;
 }
 
 /* Slider — centered carousel */
@@ -315,7 +321,7 @@
   font-family: var(--font-conso);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 3.5rem;
+  font-size: 4rem;
   line-height: 1.15;
   color: var(--color-text-dark);
 }
@@ -448,7 +454,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding: 6rem 3.75rem;
+  padding: 7rem 3.75rem;
   overflow: hidden;
   font-family: var(--font-montserrat);
   color: var(--color-text-dark);
@@ -467,7 +473,7 @@
   text-align: center;
   font-family: var(--font-conso);
   font-weight: 400;
-  font-size: 3.5rem;
+  font-size: 3rem;
   line-height: 1.15;
 }
 
@@ -590,18 +596,7 @@
   border: none;
   border-radius: 999px;
   padding: 1.125rem 3.75rem;
-  background-color: var(--color-text-dark);
-  /* subtle quilted cross-hatch */
-  background-image: repeating-linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.05) 0 1px,
-      transparent 1px 14px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      rgba(255, 255, 255, 0.05) 0 1px,
-      transparent 1px 14px
-    );
+  background-color: #000000;
   color: #ffffff;
   font-family: inherit;
   font-size: 1.125rem;
@@ -638,7 +633,7 @@
   font-family: var(--font-conso);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 3.5rem;
+  font-size: 4rem;
   line-height: 1.15;
   color: var(--color-text-dark);
 }
@@ -692,7 +687,7 @@
 .c-news__item-title {
   margin: 0;
   font-size: 2.125rem;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   line-height: 1.5;
   color: var(--color-accent);
@@ -700,7 +695,7 @@
 
 .c-news__subtitle {
   margin: 1rem 0 0;
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--color-text-dark);
@@ -708,7 +703,7 @@
 
 .c-news__copy {
   margin: 1rem 0 0;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.25;
   color: var(--color-text-dark);
@@ -718,7 +713,7 @@
   display: inline-block;
   margin-top: auto;
   padding-top: 2.1875rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   color: var(--color-text-dark);
