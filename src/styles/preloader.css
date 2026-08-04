@@ -41,11 +41,8 @@
 }
 
 .is-icon-up .c-preloader__logo-stage {
-  --logo-width: 3.5rem;
-  --logo-height: 3.5rem;
-  left: 49.65%;
-  top: 1.5rem;
-  transform: none;
+  top: 3.21875rem;
+  transform: translate(-50%, -50%);
 }
 
 .c-preloader__split-logo,
@@ -147,23 +144,26 @@
 
 .c-preloader__final-logo {
   position: absolute;
-  left: auto;
-  top: auto;
-  right: auto;
-  bottom: auto;
-  margin: 0;
+  left: 50%;
+  top: 50%;
   z-index: 5;
 
   width: 3.5rem;
   opacity: 0;
-  transform: none;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 
-  transition: opacity 0ms linear;
+  transition: opacity 400ms ease;
 }
 
 .is-final-logo-visible .c-preloader__final-logo {
   opacity: 1;
+}
+
+/* Cross-fade: the morph rings fade out as the final logo fades in, so
+   there's no leftover ring/dot next to the final logo. */
+.is-final-logo-visible .c-preloader__transition-o {
+  opacity: 0;
 }
 
 /* QA hold mode: transparent overlay so the nav logo behind is visible
@@ -226,6 +226,11 @@
   .c-preloader__logo-stage {
     --logo-width: clamp(230px, 70vw, 330px);
     top: 49%;
+  }
+
+  .is-icon-up .c-preloader__logo-stage {
+    top: 2.71875rem;
+    transform: translate(-50%, -50%);
   }
 }
 
