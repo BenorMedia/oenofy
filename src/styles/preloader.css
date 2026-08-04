@@ -13,7 +13,6 @@
 
   background: var(--color-preloader-bg);
   color: var(--color-icon);
-
   transition: opacity 500ms ease;
 }
 
@@ -159,6 +158,12 @@
 
 .is-final-logo-visible .c-preloader__final-logo {
   opacity: 1;
+}
+
+/* QA hold mode: transparent overlay so the nav logo behind is visible
+   and can be compared with the preloader's final logo. */
+.c-preloader[data-preloader-hold] {
+  background: transparent;
 }
 
 /* State modifiers — is- classes applied on the root overlay (.c-preloader),

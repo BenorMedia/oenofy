@@ -1,8 +1,18 @@
 ---
 import "../styles/preloader.css";
+
+// When `hold` is true (QA only) the preloader plays its animation but
+// stops at the final-logo state instead of fading out/removing itself —
+// so the final logo position can be compared against the nav logo.
+const { hold = false } = Astro.props;
 ---
 
-<div class="c-preloader" data-preloader aria-hidden="true">
+<div
+  class="c-preloader"
+  data-preloader
+  data-preloader-hold={hold ? "" : undefined}
+  aria-hidden="true"
+>
   <div class="c-preloader__logo-stage">
     <div class="c-preloader__split-logo">
       <svg

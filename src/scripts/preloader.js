@@ -24,6 +24,9 @@ const FADE_OUT_DURATION = 500;
 const root = document.querySelector("[data-preloader]");
 
 if (root) {
+  // QA hold mode: play the morph but stop at the final-logo state (skip
+  // the fade-out + removal) so alignment vs the nav logo can be checked.
+  const hold = root.hasAttribute("data-preloader-hold");
   const timers = [];
 
   function finish() {
@@ -35,13 +38,13 @@ if (root) {
     ScrollTrigger.refresh();
   }
 
-  document.body.style.overflow = "hidden";
+  if (!hold) document.body.style.overflow = "hidden";
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion && !hold) {
     // Skip the choreographed morph, but still hold branding briefly
     // before fading out rather than yanking it away instantly.
     timers.push(
@@ -63,7 +66,11 @@ if (root) {
     );
     timers.push(setTimeout(finish, 400 + FADE_OUT_DURATION));
   } else {
-    STEPS.forEach(([className, delay]) => {
+    const steps = hold
+      ? STEPS.filter(([className]) => className !== "is-fading-out")
+      : STEPS;
+
+    steps.forEach(([className, delay]) => {
       timers.push(
         setTimeout(() => {
           root.classList.add(className);
@@ -71,7 +78,9 @@ if (root) {
       );
     });
 
-    const lastStepDelay = STEPS[STEPS.length - 1][1];
-    timers.push(setTimeout(finish, lastStepDelay + FADE_OUT_DURATION));
+    if (!hold) {
+      const lastStepDelay = STEPS[STEPS.length - 1][1];
+      timers.push(setTimeout(finish, lastStepDelay + FADE_OUT_DURATION));
+    }
   }
 }
