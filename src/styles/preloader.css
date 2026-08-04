@@ -158,6 +158,8 @@
 
 .is-final-logo-visible .c-preloader__final-logo {
   opacity: 1;
+  left: 54%;
+  top: 51%;
 }
 
 /* Cross-fade: the morph rings fade out as the final logo fades in, so
