@@ -1,27 +1,49 @@
-.c-preloader {
+.oenofy-intro {
   --icon-stroke-final: 3.4px;
+
   --final-horizontal-sx: 1.12;
   --final-horizontal-sy: 0.91;
+
   --final-vertical-sx: 0.84;
   --final-vertical-sy: 1.18;
 
-  position: fixed;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  background: #222323;
+  color: #f4efea;
+}
+
+.oenofy-intro__bg {
+  position: absolute;
   inset: 0;
-  /* Above .c-nav (z-index: 99999) so the preloader still covers the nav
-     during the intro animation. */
-  z-index: 100000;
+  z-index: 1;
 
-  background: var(--color-preloader-bg);
-  color: var(--color-icon);
-  transition: opacity 500ms ease;
-}
-
-.c-preloader.is-fading-out {
   opacity: 0;
-  pointer-events: none;
+  transform: scale(1.04);
+
+  background-image: url("https://cdn.prod.website-files.com/69fdd0067f429dab904ad307/69fdd4e52084e961fce65505_Frame%202.png");
+  background-size: cover;
+  background-position: center;
+
+  transition:
+    opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.c-preloader__logo-stage {
+.oenofy-intro__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(to bottom, rgba(34,35,35,0.32), rgba(34,35,35,0.08) 45%, rgba(0,0,0,0.30)),
+    linear-gradient(to top, rgba(0,0,0,0.42), transparent 48%);
+}
+
+.oenofy-intro__logo-stage {
   --logo-width: clamp(260px, 33vw, 430px);
   --logo-height: calc(var(--logo-width) * 0.12796);
 
@@ -40,18 +62,13 @@
     transform 1700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.is-icon-up .c-preloader__logo-stage {
-  top: 3.21875rem;
-  transform: translate(-50%, -50%);
-}
-
-.c-preloader__split-logo,
-.c-preloader__transition-os {
+.oenofy-intro__split-logo,
+.oenofy-transition-os {
   position: absolute;
   inset: 0;
 }
 
-.c-preloader__glyph {
+.oenofy-glyph {
   position: absolute;
   top: 50%;
   display: block;
@@ -59,7 +76,9 @@
   overflow: visible;
 
   transform-origin: center center;
+
   will-change: transform, opacity;
+
   backface-visibility: hidden;
   transform-style: preserve-3d;
 
@@ -68,54 +87,46 @@
     transform 1450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.c-preloader__glyph--letter {
+.oenofy-glyph--letter {
   transform: translate(-50%, -50%);
 }
 
-.c-preloader__glyph--o {
+.oenofy-glyph--o {
   width: 14.68%;
-  transform: translate(-50%, -50%) scaleX(0.92) scaleY(1.06);
+
+  transform:
+    translate(-50%, -50%)
+    scaleX(0.92)
+    scaleY(1.06);
+
   transition:
     opacity 260ms linear,
     transform 1450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.c-preloader__glyph--o1 {
-  left: 7.34%;
-}
-.c-preloader__glyph--e {
-  left: 25.23%;
-  width: 9.42%;
-}
-.c-preloader__glyph--n {
-  left: 41.45%;
-  width: 11.35%;
-}
-.c-preloader__glyph--o2 {
-  left: 60.3%;
-}
-.c-preloader__glyph--f {
-  left: 77.94%;
-  width: 8.91%;
-}
-.c-preloader__glyph--y {
-  left: 94.08%;
-  width: 11.7%;
-}
+.oenofy-glyph--o1 { left: 7.34%; }
+.oenofy-glyph--e  { left: 25.23%; width: 9.42%; }
+.oenofy-glyph--n  { left: 41.45%; width: 11.35%; }
+.oenofy-glyph--o2 { left: 60.30%; }
+.oenofy-glyph--f  { left: 77.94%; width: 8.91%; }
+.oenofy-glyph--y  { left: 94.08%; width: 11.70%; }
 
-.c-preloader__transition-o {
+.oenofy-transition-o {
   position: absolute;
   top: 50%;
 
   width: calc(var(--logo-width) * 0.1468);
   height: calc(var(--logo-width) * 0.1262);
 
-  border: var(--icon-stroke-final) solid var(--color-icon);
+  border: var(--icon-stroke-final) solid #F4EFEA;
   border-radius: 999px;
 
   opacity: 0;
+
   transform-origin: center center;
+
   will-change: transform, opacity;
+
   backface-visibility: hidden;
   transform-style: preserve-3d;
 
@@ -124,125 +135,212 @@
     transform 1450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.c-preloader__transition-o--1 {
+.oenofy-transition-o--1 {
   left: 7.34%;
+
   --tx: 0px;
   --sx: 0.92;
   --sy: 1.06;
-  transform: translate(-50%, -50%) translateX(var(--tx)) scaleX(var(--sx))
+
+  transform:
+    translate(-50%, -50%)
+    translateX(var(--tx))
+    scaleX(var(--sx))
     scaleY(var(--sy));
 }
 
-.c-preloader__transition-o--2 {
-  left: 60.3%;
+.oenofy-transition-o--2 {
+  left: 60.30%;
+
   --tx: 0px;
   --sx: 0.92;
   --sy: 1.06;
-  transform: translate(-50%, -50%) translateX(var(--tx)) scaleX(var(--sx))
+
+  transform:
+    translate(-50%, -50%)
+    translateX(var(--tx))
+    scaleX(var(--sx))
     scaleY(var(--sy));
 }
 
-.c-preloader__final-logo {
+/* FINAL PNG LOGO */
+
+.oenofy-final-logo {
   position: absolute;
   left: 50%;
   top: 50%;
   z-index: 5;
 
-  width: 3.5rem;
+  width: calc(var(--logo-width) * 0.17);
+
   opacity: 0;
+
   transform: translate(-50%, -50%);
+
   pointer-events: none;
 
-  transition: opacity 400ms ease;
+  transition: opacity 0ms linear;
 }
 
-.is-final-logo-visible .c-preloader__final-logo {
+.oenofy-intro.is-final-logo-visible .oenofy-final-logo {
   opacity: 1;
-  left: 54%;
-  top: 51%;
 }
 
-/* Cross-fade: the morph rings fade out as the final logo fades in, so
-   there's no leftover ring/dot next to the final logo. */
-.is-final-logo-visible .c-preloader__transition-o {
+.oenofy-intro.is-final-logo-visible .oenofy-transition-os {
   opacity: 0;
+  transition: opacity 120ms linear 120ms;
 }
 
-/* QA hold mode: transparent overlay so the nav logo behind is visible
-   and can be compared with the preloader's final logo. */
-.c-preloader[data-preloader-hold] {
-  background: transparent;
+.oenofy-intro__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+
+  width: min(92vw, 1060px);
+
+  text-align: center;
+
+  opacity: 0;
+
+  transform:
+    translateX(-50%)
+    translateY(-50%)
+    translateY(20px);
+
+  transition:
+    opacity 1300ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* State modifiers — is- classes applied on the root overlay (.c-preloader),
-   affecting descendants via these selectors */
+.oenofy-intro__content h1 {
+  margin: 0;
 
-.is-dimmed .c-preloader__glyph {
+  font-family: "Conso", sans-serif;
+  font-size: 8em;
+  font-weight: 100;
+  line-height: 0.94;
+  letter-spacing: 0;
+  text-transform: uppercase;
+
+  color: rgba(244,239,234,0.96);
+}
+
+.oenofy-intro__button {
+  display: flex;
+  padding: 1.25rem 1.875rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 2em;
+
+  width: fit-content;
+
+  margin: 1.25rem auto 0;
+
+  border: 0;
+  background: #FFF;
+  color: #222323;
+
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.oenofy-intro.is-dimmed .oenofy-glyph {
   opacity: 0.42;
 }
 
-.is-os-hidden .c-preloader__glyph--o {
+.oenofy-intro.is-os-hidden .oenofy-glyph--o {
   opacity: 0;
 }
 
-.is-letters-hidden .c-preloader__glyph--letter {
+.oenofy-intro.is-letters-hidden .oenofy-glyph--letter {
   opacity: 0;
 }
 
-.is-letters-hidden .c-preloader__transition-o {
+.oenofy-intro.is-letters-hidden .oenofy-transition-o {
   opacity: 1;
 }
 
-.is-os-converging .c-preloader__transition-o--1 {
+.oenofy-intro.is-os-converging .oenofy-transition-o--1 {
   --tx: calc(var(--logo-width) * 0.4266);
   --sx: var(--final-horizontal-sx);
   --sy: var(--final-horizontal-sy);
 }
 
-.is-os-converging .c-preloader__transition-o--2 {
-  --tx: calc(var(--logo-width) * -0.103);
+.oenofy-intro.is-os-converging .oenofy-transition-o--2 {
+  --tx: calc(var(--logo-width) * -0.1030);
   --sx: var(--final-vertical-sx);
   --sy: var(--final-vertical-sy);
 }
 
-.is-final-logo-visible .c-preloader__transition-os {
-  opacity: 0;
-  transition: opacity 120ms linear 120ms;
+.oenofy-intro.is-icon-up .oenofy-intro__logo-stage {
+  top: 8.5%;
+  transform: translate(-50%, -50%) scale(0.70);
+}
+
+.oenofy-intro.is-hero-visible .oenofy-intro__bg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.oenofy-intro.is-content-visible .oenofy-intro__content {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%);
 }
 
 @media (max-width: 991px) {
-  .c-preloader__logo-stage {
-    --logo-width: clamp(230px, 45vw, 360px);
+
+  .oenofy-intro__content h1 {
+    font-size: 6em;
   }
+
 }
 
 @media (max-width: 767px) {
-  .c-preloader {
+
+  .oenofy-intro {
     --icon-stroke-final: 2.55px;
-    --final-horizontal-sx: 1.1;
+
+    --final-horizontal-sx: 1.10;
     --final-horizontal-sy: 0.92;
+
     --final-vertical-sx: 0.86;
     --final-vertical-sy: 1.14;
+
+    min-height: 620px;
   }
 
-  .c-preloader__logo-stage {
+  .oenofy-intro__logo-stage {
     --logo-width: clamp(230px, 70vw, 330px);
     top: 49%;
   }
 
-  .is-icon-up .c-preloader__logo-stage {
-    top: 2.71875rem;
-    transform: translate(-50%, -50%);
+  .oenofy-final-logo {
+    width: calc(var(--logo-width) * 0.17);
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .c-preloader,
-  .c-preloader__logo-stage,
-  .c-preloader__glyph,
-  .c-preloader__transition-o,
-  .c-preloader__final-logo,
-  .c-preloader__transition-os {
-    transition-duration: 0.01ms !important;
+  .oenofy-intro__content h1 {
+    font-size: clamp(3em, 14vw, 5em);
+    line-height: 0.98;
   }
+
+  .oenofy-intro__button {
+    max-width: 86%;
+    padding: 1rem 1.25rem;
+    font-size: 1em;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .oenofy-intro.is-icon-up .oenofy-intro__logo-stage {
+    top: 8%;
+    transform: translate(-50%, -50%) scale(0.70);
+  }
+
 }
