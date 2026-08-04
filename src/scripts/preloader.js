@@ -3,10 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const intro = document.querySelector("[data-oenofy-intro]");
   if (!intro) return;
 
-  // QA page passes this so the preloader holds on the final logo
-  // instead of hiding, for lining it up against the real nav logo.
-  const hold = intro.hasAttribute("data-preloader-hold");
-
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (prefersReducedMotion) {
@@ -17,10 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
       "is-letters-hidden",
       "is-os-converging",
       "is-icon-up",
-      "is-final-logo-visible"
+      "is-final-logo-visible",
+      "is-preloader-hidden"
     );
-
-    if (!hold) intro.classList.add("is-preloader-hidden");
 
     return;
   }
@@ -44,14 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // WAIT until movement is fully finished,
     // then swap to PNG instantly
-    ["is-final-logo-visible", 3400]
+    ["is-final-logo-visible", 3400],
+
+    // brief hold on the final logo, then fade the preloader out
+    ["is-preloader-hidden", 3900]
 
   ];
-
-  if (!hold) {
-    // brief hold on the final logo, then fade the whole preloader out
-    steps.push(["is-preloader-hidden", 3900]);
-  }
 
   steps.forEach(function ([className, delay]) {
 

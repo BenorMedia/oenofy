@@ -1,12 +1,8 @@
 ---
 import "../styles/preloader.css";
-
-// QA-only: when true, the preloader holds on the final logo instead
-// of auto-hiding, so its position can be compared against the nav logo.
-const { hold = false } = Astro.props;
 ---
 
-<section class="oenofy-intro" data-oenofy-intro data-preloader-hold={hold ? "" : undefined}>
+<section class="oenofy-intro" data-oenofy-intro>
   <div class="oenofy-intro__logo-stage" aria-hidden="true">
 
     <div class="oenofy-intro__split-logo">

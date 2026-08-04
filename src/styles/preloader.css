@@ -14,7 +14,7 @@
      staying grouped with this element's own background. */
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 999999;
 
   width: 100%;
   height: 100vh;
