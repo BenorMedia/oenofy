@@ -270,10 +270,20 @@ if (viewport && track && slides.length && prevBtn && nextBtn) {
   const setActive = (el) =>
     slides.forEach((s) => s.classList.toggle("is-active", s === el));
 
+  // The flex gap between slides. Passed as paddingRight so the loop
+  // reserves the same gap AFTER the last slide (the wrap-around point) —
+  // otherwise the last slide sits flush against the first and the "prev"
+  // peek looks too close on load / when the loop wraps.
+  const slideGap =
+    parseFloat(getComputedStyle(track).columnGap) ||
+    parseFloat(getComputedStyle(track).gap) ||
+    0;
+
   const loop = horizontalLoop(slides, {
     paused: true, // manual control only, no autoplay
     center: viewport, // center the active slide within the viewport
     draggable: true, // mouse/touch drag with momentum + snap
+    paddingRight: slideGap, // even spacing across the wrap-around
     onChange: (el) => setActive(el),
   });
 

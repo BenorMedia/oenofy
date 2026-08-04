@@ -723,6 +723,12 @@
   .c-hero__title {
     font-size: 32px !important;
   }
+  .c-hero__video {
+    height: 101% !important;
+  }
+  .c-hero__content {
+    padding: 0 24px !important;
+  }
   .c-intro {
     padding: 100px 24px 40px !important;
   }
@@ -774,8 +780,14 @@
     padding: 48px 20px !important;
   }
   .c-collection__item {
-    height: 320px !important;
+    height: 420px !important;
     transform: none !important;
+  }
+  .c-collection__item--center {
+    padding-bottom: 24px !important;
+  }
+  .c-collection__title {
+    font-size: 40px !important;
   }
   .c-collection__title,
   .c-collection__link {
@@ -811,18 +823,19 @@
   }
   .c-news__title {
     font-size: 32px !important;
+    margin: 0 0 1rem !important;
   }
   /* Keep the desktop 2-column sticky layout on mobile, just scaled down:
      smaller image, smaller type, description hidden. */
   .c-news__media {
-    flex: 0 0 130px !important;
-    width: 130px !important;
-    height: 200px !important;
+    flex: 0 0 120px !important;
+    width: 120px !important;
+    height: 120px !important;
     top: calc(50vh - 100px) !important;
   }
   .c-news__body {
     padding: 0 0 0 20px !important;
-    min-height: 55vh !important;
+    min-height: 25vh !important;
   }
   .c-news__item-title {
     font-size: 20px !important;
