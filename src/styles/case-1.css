@@ -528,8 +528,11 @@
   .c-case-hero__title {
     font-size: 40px !important;
   }
+  .c-case-hero__img {
+    top: 68vh !important;
+  }
   .c-case-hero__img img {
-    width: 60vw !important;
+    width: 90vw !important;
   }
 
   .c-case-intro {
@@ -538,6 +541,10 @@
   .c-case-intro__top {
     flex-direction: column !important;
     gap: 32px !important;
+  }
+  .c-case-intro__signature {
+    top: -2rem !important;
+    font-size: 35px !important;
   }
   .c-case-intro__designer,
   .c-case-intro__copy {
@@ -573,6 +580,7 @@
   .c-case-product {
     flex-direction: column !important;
     min-height: 0 !important;
+    padding-top: 60px !important;
   }
   .c-case-product__media,
   .c-case-product__copy {
@@ -639,7 +647,7 @@
 
   /* Production — copy first, media below */
   .c-case-production {
-    flex-direction: column !important;
+    flex-direction: column-reverse !important;
     gap: 32px !important;
     padding: 60px 24px !important;
   }
