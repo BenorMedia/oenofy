@@ -140,6 +140,11 @@
   overflow: hidden;
 }
 
+.c-collection-intro__gallery-image img {
+  width: 100%;
+  height: 100%;
+}
+
 /* Part 3 — closing copy, right column only (left stays empty to keep
    the same 2-column rhythm as Part 1). Same layout pattern as Part 1. */
 .c-collection-intro__bottom {
@@ -227,10 +232,6 @@
   }
   .c-collection-intro__gallery-image {
     width: 100% !important;
-  }
-  .c-collection-intro__gallery-image img {
-    width: 100% !important;
-    height: 100% !important;
   }
 
   .c-collection-intro__bottom-spacer {
