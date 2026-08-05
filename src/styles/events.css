@@ -319,7 +319,7 @@
   .c-events-intro__grid {
     grid-template-columns: 1fr !important;
     gap: 16px !important;
-    padding: 0 24px 60px !important;
+    padding: 0 24px !important;
   }
 
   .c-events-intro__quote {
@@ -352,6 +352,7 @@
   .c-events-beyond__quote {
     font-size: 22px !important;
     max-width: 100% !important;
+    margin: 14px 0 0 !important;
   }
 
   /* Cases */
@@ -359,7 +360,7 @@
     padding: 48px 16px !important;
   }
   .c-events-cases__card {
-    height: 24rem !important;
+    height: 20vh !important;
   }
   .c-events-cases__content {
     left: 24px !important;
