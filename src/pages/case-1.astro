@@ -1,16 +1,85 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import heroCaseImg from "../assets/case-1/hero-case.png";
+import pageBgImg from "../assets/case-1/page-bg.png";
+import maximeLisImg from "../assets/case-1/maxime-lis.png";
 import "../styles/case-1.css";
+
+const pageBg = await getImage({ src: pageBgImg, format: "webp" });
 ---
 
 <BaseLayout
   title="Case 001 — OENOFY"
-  description="Explore Case 001, part of the Oenofy collection."
+  description="Case 001 — Oenofy's first collector edition, created with French designer Maxime Lis."
   navVariant="dark"
 >
-  <main class="c-case-1-page">
-    <!-- Sections added here as designs come in. -->
-  </main>
+  <!-- Fixed full-viewport backdrop. Stays put behind every section as
+       the page scrolls, so all sections read as sitting on one shared
+       background. -->
+  <div
+    class="c-case-page-bg"
+    style={`background-image: url(${pageBg.src})`}
+  >
+  </div>
+
+  <div class="c-case-main-wrapper">
+    <!-- Hero — title fades out and the case image scrubs upward as you
+         scroll through this section (see case-1-page.js). Image is
+         intentionally larger than the section and bleeds down into
+         Intro at rest. -->
+    <section class="c-case-hero" data-case-hero>
+      <h1 class="c-case-hero__title" data-case-hero-title>Case 001</h1>
+      <div class="c-case-hero__img" data-case-hero-img>
+        <Image src={heroCaseImg} alt="Case 001" />
+      </div>
+    </section>
+
+    <!-- Intro — freeform for now per instruction; QA notes to follow. -->
+    <section class="c-case-intro">
+      <div class="c-case-intro__top">
+        <div class="c-case-intro__designer">
+          <span class="c-case-intro__label">Case 001</span>
+          <p class="c-case-intro__signature">Maxime Lis</p>
+          <Image
+            src={maximeLisImg}
+            alt="Maxime Lis"
+            class="c-case-intro__portrait"
+          />
+        </div>
+        <div class="c-case-intro__copy">
+          <p class="c-case-intro__copy-bold">
+            For its first collector edition, Oenofy partnered with
+            French designer Maxime Lis to create an object that
+            extends beyond its original function.
+          </p>
+          <p class="c-case-intro__copy-body">
+            Known for his contemporary furniture inspired by historical
+            references, Maxime Lis develops objects that explore
+            materiality, proportion and permanence. His work reflects
+            a dialogue between heritage and contemporary design, where
+            every detail is considered with precision and purpose.
+          </p>
+          <p class="c-case-intro__copy-body">
+            Designed to protect valuable objects through hidden
+            compartments and ingenious mechanisms, these pieces
+            combined discretion, craftsmanship and prestige.
+          </p>
+          <p class="c-case-intro__copy-body">
+            Reinterpreted through a contemporary lens, this heritage
+            became the foundation for Oenofy's first collector object:
+            a piece conceived to house exceptional wines while
+            remaining, long after the bottles have been enjoyed, an
+            object worthy of being collected in its own right.
+          </p>
+          <blockquote class="c-case-intro__quote">
+            &ldquo;From royal travel chests to contemporary
+            collectors.&rdquo;
+          </blockquote>
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <script>
