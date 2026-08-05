@@ -175,6 +175,241 @@
   height: 100%;
 }
 
+/* Product 1 — image on one side, copy on the other. */
+.c-case-product {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+.c-case-product__media {
+  position: relative;
+  flex: 0 1 50%;
+  overflow: hidden;
+}
+
+.c-case-product__copy {
+  flex: 0 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem;
+  font-family: var(--font-montserrat);
+}
+
+.c-case-product__copy-bold {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+
+.c-case-product__copy-body {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-case-product__copy-body:last-child {
+  margin-bottom: 0;
+}
+
+/* Product 2 — image carousel, replicated from the homepage slider.
+   Centered active slide, prev/next peeks dimmed via overlay. */
+.c-case-slider {
+  position: relative;
+  width: 100%;
+  padding: 8rem 0;
+}
+
+.c-case-slider__configure {
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+  z-index: 4;
+  padding: 0.85rem 2rem;
+  border-radius: 15rem;
+  background: rgba(57, 56, 57, 0.85);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-family: var(--font-montserrat);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.c-case-slider__configure:hover {
+  color: var(--color-text-light);
+  background: rgba(57, 56, 57, 1);
+}
+
+.c-case-slider__viewport {
+  --slide-w: 66%;
+  --slide-gap: 1.5rem;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.c-case-slider__track {
+  position: relative;
+  display: flex;
+  gap: var(--slide-gap);
+  will-change: transform;
+}
+
+.c-case-slider__slide {
+  position: relative;
+  flex: 0 0 var(--slide-w);
+  box-sizing: border-box;
+}
+
+.c-case-slider__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* Frosted look for the non-active (peek) slides; active slide clears
+   the blur/tint. Same technique as the homepage slider. */
+.c-case-slider__slide-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.25);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease,
+    background-color 0.5s ease;
+  pointer-events: none;
+}
+
+.c-case-slider__slide.is-active .c-case-slider__slide-overlay {
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
+}
+
+.c-case-slider__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(57, 56, 57, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.c-case-slider__arrow:hover {
+  background: rgba(57, 56, 57, 0.5);
+}
+
+.c-case-slider__arrow--prev {
+  left: 1.5625rem;
+  transform: translateY(-50%);
+}
+
+.c-case-slider__arrow--next {
+  right: 1.5625rem;
+  transform: translateY(-50%);
+}
+
+/* Product 3 — full-bleed image bg, accent overlay, quote. */
+.c-case-quote {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+}
+
+.c-case-quote__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(206, 186, 154, 0.3); /* #ceba9a @ 30% */
+  pointer-events: none;
+}
+
+.c-case-quote__text {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0 6rem 6rem;
+  max-width: 40rem;
+  font-family: var(--font-montserrat);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+/* Product 4 — image left, title + closing copy right. */
+.c-case-final {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  padding: 8rem 6rem;
+}
+
+.c-case-final__media {
+  position: relative;
+  flex: 0 1 50%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.c-case-final__copy {
+  flex: 0 1 40%;
+  font-family: var(--font-montserrat);
+}
+
+.c-case-final__title {
+  margin: 0 0 4rem;
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 2.15rem;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-case-final__copy-bold {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+
+.c-case-final__copy-body {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-case-final__copy-body:last-child {
+  margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .c-case-hero__title {
     font-size: 40px !important;
@@ -216,5 +451,72 @@
   }
   .c-case-gallery__media {
     width: 100% !important;
+  }
+
+  /* Product 1 — media on top, copy below */
+  .c-case-product {
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+  .c-case-product__media,
+  .c-case-product__copy {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .c-case-product__media {
+    height: 60vh !important;
+  }
+  .c-case-product__copy {
+    padding: 48px 24px !important;
+  }
+  .c-case-product__copy-bold,
+  .c-case-product__copy-body {
+    font-size: 17px !important;
+  }
+
+  /* Slider */
+  .c-case-slider {
+    padding: 60px 0 !important;
+  }
+  .c-case-slider__configure {
+    top: 16px !important;
+    right: 16px !important;
+    font-size: 14px !important;
+    padding: 10px 20px !important;
+  }
+  .c-case-slider__viewport {
+    --slide-w: 82% !important;
+    --slide-gap: 12px !important;
+  }
+  .c-case-slider__arrow {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  /* Quote */
+  .c-case-quote__text {
+    padding: 0 24px 48px !important;
+    font-size: 22px !important;
+    max-width: 100% !important;
+  }
+
+  /* Product 4 — media on top, copy below */
+  .c-case-final {
+    flex-direction: column !important;
+    gap: 32px !important;
+    padding: 60px 24px !important;
+  }
+  .c-case-final__media,
+  .c-case-final__copy {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .c-case-final__title {
+    font-size: 28px !important;
+    margin-bottom: 24px !important;
+  }
+  .c-case-final__copy-bold,
+  .c-case-final__copy-body {
+    font-size: 17px !important;
   }
 }

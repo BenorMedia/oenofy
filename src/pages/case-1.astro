@@ -4,9 +4,14 @@ import { Image, getImage } from "astro:assets";
 import heroCaseImg from "../assets/case-1/hero-case.png";
 import pageBgImg from "../assets/case-1/page-bg.png";
 import maximeLisImg from "../assets/case-1/maxime-lis.png";
+import productImg1 from "../assets/case-1/product-img1.png";
+import productImg2 from "../assets/case-1/product-img2.png";
+import productImg3 from "../assets/case-1/product-img3.png";
+import productImg5 from "../assets/case-1/product-img5.png";
 import "../styles/case-1.css";
 
 const pageBg = await getImage({ src: pageBgImg, format: "webp" });
+const product2Bg = await getImage({ src: productImg2, format: "webp" });
 ---
 
 <BaseLayout
@@ -102,9 +107,125 @@ const pageBg = await getImage({ src: pageBgImg, format: "webp" });
         </div>
       </div>
     </div>
+
+    <!-- Product 1 — full-width image + copy about materials/editions. -->
+    <section class="c-case-product">
+      <div class="c-case-product__media">
+        <Image src={productImg5} alt="" class="cc-fill_cover" />
+      </div>
+      <div class="c-case-product__copy">
+        <p class="c-case-product__copy-bold">
+          Produced in France in a limited annual edition of up to fifty
+          pieces, each Malle is handcrafted from carefully selected
+          noble materials and requires specialist expertise in
+          precision metalwork.
+        </p>
+        <p class="c-case-product__copy-body">
+          Its exterior is available in stainless steel or brass, with
+          mirror, satin or black finishes. Each piece contains eight
+          exceptional bottles, chosen through either the Château
+          Selection, centred on the great wines of Bordeaux, or the
+          Domaine Selection, dedicated to distinguished Burgundy
+          estates. The final composition is individually curated and
+          confirmed in the personalised proposal, while maintaining the
+          intended balance between the object, the wines and the overall
+          value of the Collection.
+        </p>
+        <p class="c-case-product__copy-body">
+          Designed to remain long after the wines have been enjoyed, the
+          Malle des Secrets incorporates a concealed double-bottom
+          compartment for personal keepsakes. Removable feet allow it to
+          be transformed into a piece of furniture, while its
+          architectural form also enables it to be displayed within an
+          interior.
+        </p>
+        <p class="c-case-product__copy-body">
+          Each numbered piece is accompanied by a Certificate of
+          Authenticity signed by the designer.
+        </p>
+        <p class="c-case-product__copy-body">
+          Detailed care instructions are provided upon delivery.
+        </p>
+      </div>
+    </section>
+
+    <!-- Product 2 — image carousel, replicates the homepage slider
+         (centered, infinite, draggable) with a floating Configure
+         button top-right. See case-1-slider.js. -->
+    <div class="c-case-slider">
+      <a href="#" class="c-case-slider__configure">Configure</a>
+      <div class="c-case-slider__viewport" data-case-slider>
+        <div class="c-case-slider__track" data-case-slider-track>
+          {[productImg1, productImg2, productImg3, productImg1, productImg2, productImg3].map((img) => (
+            <div class="c-case-slider__slide" data-case-slider-slide>
+              <div class="c-case-slider__media">
+                <Image src={img} alt="" class="cc-fill_cover" />
+              </div>
+              <div class="c-case-slider__slide-overlay"></div>
+            </div>
+          ))}
+        </div>
+
+        <button
+          class="c-case-slider__arrow c-case-slider__arrow--prev"
+          data-case-slider-prev
+          aria-label="Previous slide"
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 6 9 12 15 18"></polyline>
+          </svg>
+        </button>
+        <button
+          class="c-case-slider__arrow c-case-slider__arrow--next"
+          data-case-slider-next
+          aria-label="Next slide"
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 6 15 12 9 18"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Product 3 — full-bleed image bg with accent overlay + quote. -->
+    <section
+      class="c-case-quote"
+      style={`background-image: url(${product2Bg.src})`}
+    >
+      <div class="c-case-quote__overlay"></div>
+      <blockquote class="c-case-quote__text">
+        &ldquo;Where wine becomes part of a collectible design
+        object&rdquo;
+      </blockquote>
+    </section>
+
+    <!-- Product 4 — image left, Case 001 title + closing copy right. -->
+    <section class="c-case-final">
+      <div class="c-case-final__media">
+        <Image src={productImg3} alt="Case 001" class="cc-fill_cover" />
+      </div>
+      <div class="c-case-final__copy">
+        <h2 class="c-case-final__title">Case 001</h2>
+        <p class="c-case-final__copy-bold">
+          The Case 001 was conceived as an object designed to remain
+          long after its original purpose has been fulfilled.
+        </p>
+        <p class="c-case-final__copy-body">
+          Oenofy and Maxime Lis imagined a collectible object whose
+          function evolves over time. A hidden compartment preserves
+          documents and personal keepsakes, while removable legs allow
+          the Collection to become a discreet piece of furniture or a
+          permanent object.
+        </p>
+        <p class="c-case-final__copy-body">
+          Wine marks the beginning of its story.
+        </p>
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
 <script>
   import "../scripts/case-1-page.js";
+  import "../scripts/case-1-slider.js";
 </script>
