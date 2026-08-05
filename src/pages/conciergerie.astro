@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import introImg from "../assets/conciergerie/intro.png";
 import cellarServiceImg from "../assets/conciergerie/cellar-service.png";
 import founder1Img from "../assets/conciergerie/founder1.png";
 import founder2Img from "../assets/conciergerie/founder2.png";
 import "../styles/conciergerie.css";
+
+const founder1Bg = await getImage({ src: founder1Img, format: "webp" });
+const founder2Bg = await getImage({ src: founder2Img, format: "webp" });
 ---
 
 <BaseLayout
@@ -139,11 +142,13 @@ import "../styles/conciergerie.css";
       </div>
     </section>
 
-    <!-- Founder (1/2) — media left with parallax + light overlay, copy
-         right. See conciergerie-page.js for the parallax. -->
+    <!-- Founder (1/2) — media left (CSS background-attachment: fixed
+         parallax) + light overlay, copy right. -->
     <section class="c-conciergerie-founder">
-      <div class="c-conciergerie-founder__media" data-parallax>
-        <Image src={founder1Img} alt="" data-parallax-img />
+      <div
+        class="c-conciergerie-founder__media"
+        style={`background-image: url(${founder1Bg.src})`}
+      >
         <div class="c-conciergerie-founder__overlay"></div>
       </div>
       <div class="c-conciergerie-founder__copy">
@@ -163,9 +168,8 @@ import "../styles/conciergerie.css";
       </div>
     </section>
 
-    <!-- Founder (2/2) — copy left (incl. quote), media right with
-         parallax + light overlay, mirroring the layout of the previous
-         section. -->
+    <!-- Founder (2/2) — copy left (incl. quote), media right (CSS
+         background-attachment: fixed parallax) + light overlay. -->
     <section class="c-conciergerie-founder c-conciergerie-founder--reverse">
       <div class="c-conciergerie-founder__copy">
         <p class="c-conciergerie-founder__body">
@@ -181,8 +185,10 @@ import "../styles/conciergerie.css";
           making of wine and the experience of collecting it.&rdquo;
         </blockquote>
       </div>
-      <div class="c-conciergerie-founder__media" data-parallax>
-        <Image src={founder2Img} alt="" data-parallax-img />
+      <div
+        class="c-conciergerie-founder__media"
+        style={`background-image: url(${founder2Bg.src})`}
+      >
         <div class="c-conciergerie-founder__overlay"></div>
       </div>
     </section>

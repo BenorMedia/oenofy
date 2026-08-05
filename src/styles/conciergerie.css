@@ -188,8 +188,8 @@
 /* Cellar Service — copy left, video/poster right, rounded corners. */
 .c-conciergerie-cellar {
   display: flex;
-  align-items: center;
-  gap: 4rem;
+  align-items: stretch;
+  gap: 22rem;
   padding: 8rem 6rem;
   background: var(--color-bg-page);
 }
@@ -200,7 +200,7 @@
 
 .c-conciergerie-cellar__title {
   /* same styles as .c-conciergerie-intro__heading */
-  margin: 0 0 2rem;
+  margin: 0 0 5rem;
   font-family: var(--font-montserrat);
   font-weight: 600;
   text-transform: uppercase;
@@ -211,6 +211,7 @@
 
 .c-conciergerie-cellar__body {
   /* same styles as .c-conciergerie-intro__copy-body */
+  max-width: 85%;
   margin: 0 0 1.5rem;
   font-size: 1.125rem;
   font-weight: 400;
@@ -219,45 +220,37 @@
 }
 
 .c-conciergerie-cellar__body--bold {
+  max-width: 85%;
   font-weight: 700;
 }
 
 .c-conciergerie-cellar__media {
   position: relative;
   flex: 0 1 45%;
-  aspect-ratio: 16 / 10;
+  width: 100%;
+  min-height: 50rem;
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
 }
 
 /* Founder (both halves) — 100vh, media + light overlay on one side
-   (parallax via conciergerie-page.js), copy on the other. The
-   --reverse modifier mirrors the layout for the second half. */
+   (native CSS parallax via background-attachment: fixed), copy on the
+   other. DOM order already puts media/copy on the correct side for
+   each half, so no row-reverse is needed on desktop. */
 .c-conciergerie-founder {
   position: relative;
   display: flex;
   height: 100vh;
-}
-
-.c-conciergerie-founder--reverse {
-  flex-direction: row-reverse;
+  background: #fff;
 }
 
 .c-conciergerie-founder__media {
   position: relative;
   flex: 0 1 50%;
-  overflow: hidden;
-}
-
-.c-conciergerie-founder__media img {
-  /* Oversized + centered so the parallax transform (JS) always has
-     room to move without ever exposing an edge. */
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 150%;
-  top: -25%;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .c-conciergerie-founder__overlay {
@@ -368,7 +361,8 @@
   /* Cellar Service — media on top, copy below */
   .c-conciergerie-cellar {
     flex-direction: column-reverse !important;
-    gap: 32px !important;
+    align-items: normal !important;
+    gap: 4rem !important;
     padding: 60px 24px !important;
   }
   .c-conciergerie-cellar__copy,
@@ -379,15 +373,19 @@
   .c-conciergerie-cellar__title {
     font-size: 28px !important;
   }
-  .c-conciergerie-cellar__body {
+  .c-conciergerie-cellar__body,
+  .c-conciergerie-cellar__body--bold {
+    max-width: 100% !important;
     font-size: 17px !important;
   }
   .c-conciergerie-cellar__media {
-    aspect-ratio: 4 / 3 !important;
+    min-height: 16rem !important;
+    height: 16rem !important;
   }
 
-  /* Founder — stack to a single column, media always first; skip the
-     parallax on mobile (see conciergerie-page.js matchMedia). */
+  /* Founder — stack to a single column, media always first. Native
+     background-attachment:fixed parallax looks broken on short mobile
+     blocks, so it's forced back to scroll here. */
   .c-conciergerie-founder {
     height: auto !important;
     flex-direction: column !important;
@@ -402,10 +400,7 @@
   }
   .c-conciergerie-founder__media {
     height: 60vh !important;
-  }
-  .c-conciergerie-founder__media img {
-    height: 100% !important;
-    top: 0 !important;
+    background-attachment: scroll !important;
   }
   .c-conciergerie-founder__copy {
     padding: 48px 24px !important;
