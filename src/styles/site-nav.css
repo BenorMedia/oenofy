@@ -15,11 +15,17 @@
     backdrop-filter 0.3s ease;
 }
 
-/* Scrolled down: dark blurred bar. */
+/* Scrolled down: blur only, no background fill. Text/logo switch from
+   light (default) to dark. */
 .c-nav.is-scrolled {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: transparent;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
+}
+
+.c-nav.is-scrolled .c-nav__link,
+.c-nav.is-scrolled .c-nav__mark {
+  color: var(--color-text-dark);
 }
 
 /* Scrolling down: slid up out of view. */
@@ -38,11 +44,13 @@
   font-weight: 400;
   line-height: 1.5;
   color: var(--color-text-light);
+  transition: color 0.3s ease;
 }
 
 .c-nav__mark {
   pointer-events: auto;
   color: var(--color-icon);
+  transition: color 0.3s ease;
 }
 
 /* Dark variant — dark text/logo, no bg color on scroll (blur only). */
@@ -52,10 +60,6 @@
 
 .c-nav--dark .c-nav__mark {
   color: var(--color-text-dark);
-}
-
-.c-nav--dark.is-scrolled {
-  background-color: transparent;
 }
 
 .c-nav__mark svg {
