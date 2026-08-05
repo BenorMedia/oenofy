@@ -7,7 +7,9 @@ import maximeLisImg from "../assets/case-1/maxime-lis.png";
 import productImg1 from "../assets/case-1/product-img1.png";
 import productImg2 from "../assets/case-1/product-img2.png";
 import productImg3 from "../assets/case-1/product-img3.png";
+import productImg4 from "../assets/case-1/product-img4.png";
 import productImg5 from "../assets/case-1/product-img5.png";
+import productImg6 from "../assets/case-1/product-img6.png";
 import "../styles/case-1.css";
 
 const pageBg = await getImage({ src: pageBgImg, format: "webp" });
@@ -220,6 +222,68 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
         <p class="c-case-final__copy-body">
           Wine marks the beginning of its story.
         </p>
+      </div>
+    </section>
+
+    <!-- Production — copy left (incl. accent quote), image right. -->
+    <section class="c-case-production">
+      <div class="c-case-production__copy">
+        <p class="c-case-production__copy-body">
+          Every object is produced in France by specialist artisan
+          workshops selected for their expertise in precision metalwork
+          and fine cabinetmaking.
+        </p>
+        <p class="c-case-production__copy-body">
+          Each Collection is assembled by hand, inspected throughout
+          production and individually finished before receiving its
+          serial number and Certificate of Authenticity.
+        </p>
+        <p class="c-case-production__copy-body">
+          Production is intentionally limited to a maximum of fifty
+          pieces per year, allowing every object to receive the
+          attention required by its complexity.
+        </p>
+        <blockquote class="c-case-production__quote">
+          &ldquo;Designed to remain.&rdquo;
+        </blockquote>
+      </div>
+      <div class="c-case-production__media">
+        <Image src={productImg4} alt="" class="cc-fill_cover" />
+      </div>
+    </section>
+
+    <!-- Wine Selection — image left, title + copy (incl. accent quote)
+         right. -->
+    <section class="c-case-wine">
+      <div class="c-case-wine__media">
+        <Image src={productImg6} alt="" class="cc-fill_cover" />
+      </div>
+      <div class="c-case-wine__copy">
+        <h2 class="c-case-wine__title">Wine Selection</h2>
+        <p class="c-case-wine__copy-body">
+          Every Collection contains eight exceptional bottles selected
+          specifically for the project. Clients may choose between two
+          distinct philosophies.
+        </p>
+        <p class="c-case-wine__copy-bold">
+          The Château Selection brings together the great classified
+          estates of Bordeaux.
+        </p>
+        <p class="c-case-wine__copy-bold">
+          The Domaine Selection focuses on some of Burgundy's most
+          respected domaines.
+        </p>
+        <p class="c-case-wine__copy-body">
+          Rather than reproducing a fixed list of wines, every
+          Collection is individually composed according to
+          availability, provenance, client preferences and long-term
+          coherence. The wines illustrated throughout this website
+          represent the intended level of each Collection and do not
+          necessarily constitute its final composition.
+        </p>
+        <blockquote class="c-case-wine__quote">
+          &ldquo;Crafted around wine.<br />Designed for a lifetime.&rdquo;
+        </blockquote>
       </div>
     </section>
   </div>

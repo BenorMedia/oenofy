@@ -410,6 +410,97 @@
   margin-bottom: 0;
 }
 
+/* Production — copy left (incl. accent quote), image right. */
+.c-case-production {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  padding: 8rem 6rem;
+}
+
+.c-case-production__copy {
+  flex: 0 1 42%;
+  font-family: var(--font-montserrat);
+}
+
+.c-case-production__copy-body {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-case-production__quote {
+  margin: 4rem 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-case-production__media {
+  position: relative;
+  flex: 0 1 50%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+/* Wine Selection — image left, title + copy (incl. accent quote)
+   right. */
+.c-case-wine {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  padding: 8rem 6rem;
+}
+
+.c-case-wine__media {
+  position: relative;
+  flex: 0 1 45%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.c-case-wine__copy {
+  flex: 0 1 45%;
+  font-family: var(--font-montserrat);
+}
+
+.c-case-wine__title {
+  margin: 0 0 2rem;
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 2.15rem;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-case-wine__copy-body {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-case-wine__copy-bold {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+
+.c-case-wine__quote {
+  margin: 3rem 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
 @media (max-width: 768px) {
   .c-case-hero__title {
     font-size: 40px !important;
@@ -518,5 +609,46 @@
   .c-case-final__copy-bold,
   .c-case-final__copy-body {
     font-size: 17px !important;
+  }
+
+  /* Production — copy first, media below */
+  .c-case-production {
+    flex-direction: column !important;
+    gap: 32px !important;
+    padding: 60px 24px !important;
+  }
+  .c-case-production__copy,
+  .c-case-production__media {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .c-case-production__copy-body {
+    font-size: 17px !important;
+  }
+  .c-case-production__quote {
+    font-size: 22px !important;
+    margin-top: 32px !important;
+  }
+
+  /* Wine Selection — media first, copy below */
+  .c-case-wine {
+    flex-direction: column !important;
+    gap: 32px !important;
+    padding: 60px 24px !important;
+  }
+  .c-case-wine__media,
+  .c-case-wine__copy {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .c-case-wine__title {
+    font-size: 28px !important;
+  }
+  .c-case-wine__copy-body,
+  .c-case-wine__copy-bold {
+    font-size: 17px !important;
+  }
+  .c-case-wine__quote {
+    font-size: 22px !important;
   }
 }
