@@ -1,11 +1,6 @@
 /* La Conciergerie page — section styles scoped here, following the
    same c- / cc- / is- convention as home.css. REM by default; PX only
-   where a mobile breakpoint needs it.
-
-   Hero + Intro duplicated from collection.css (same styles, media and
-   content per instruction) with the class suffix renamed to
-   conciergerie. Swap in real media/copy once the handoff for this
-   page arrives. */
+   where a mobile breakpoint needs it. */
 
 /* Hero */
 
