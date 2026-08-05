@@ -8,9 +8,23 @@ import "../styles/collection.css";
   description="Explore the Oenofy collection — curated pieces conceived around wine."
   navVariant="dark"
 >
-  <main class="c-collection-page">
-    <!-- Sections added here as designs come in. -->
-  </main>
+  <div class="c-collection-hero">
+    <div class="c-collection-hero__media">
+      <video autoplay muted loop playsinline class="c-collection-hero__video">
+        <source src="/assets/collection/collection-hero.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="c-collection-hero__content">
+      <h1 class="c-collection-hero__title">Collection</h1>
+    </div>
+  </div>
+
+  <div class="c-collection-flow">
+    <!-- Section 2 — blank scaffold; scrolls up and over the fixed hero,
+         same mechanism as Hero -> IntroSection on the homepage. Content
+         pending next handoff. -->
+    <section class="c-collection-intro"></section>
+  </div>
 </BaseLayout>
 
 <script>
