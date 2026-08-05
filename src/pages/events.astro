@@ -6,6 +6,10 @@ import eventGrid1 from "../assets/events/event-grid1.png";
 import eventGrid2 from "../assets/events/event-grid2.png";
 import eventGrid3 from "../assets/events/event-grid3.png";
 import eventImg1 from "../assets/events/event-img1.png";
+import eventCard1 from "../assets/events/event-card1.png";
+import eventCard2 from "../assets/events/event-card2.png";
+import eventCard3 from "../assets/events/event-card3.png";
+import eventCard4 from "../assets/events/event-card4.png";
 import "../styles/events.css";
 
 const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
@@ -131,6 +135,43 @@ const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
         style={`background-image: url(${eventImg1Bg.src})`}
       >
         <div class="c-events-beyond__overlay"></div>
+      </div>
+    </section>
+
+    <!-- Cases — 4 cards stacked one below another, no gap, no
+         animation. Duplicated from Collection's .c-collection-cases. -->
+    <section class="c-events-cases">
+      <div class="c-events-cases__card">
+        <Image src={eventCard1} alt="Monaco - YMC" class="cc-fill_cover" />
+        <div class="c-events-cases__content">
+          <h3 class="c-events-cases__title">Monaco - YMC</h3>
+          <a href="#" class="c-events-cases__link">More information →</a>
+        </div>
+      </div>
+      <div class="c-events-cases__card">
+        <Image
+          src={eventCard2}
+          alt="Tennis And Champagne"
+          class="cc-fill_cover"
+        />
+        <div class="c-events-cases__content c-events-cases__content--light">
+          <h3 class="c-events-cases__title">Tennis And Champagne</h3>
+          <a href="#" class="c-events-cases__link">More information →</a>
+        </div>
+      </div>
+      <div class="c-events-cases__card">
+        <Image src={eventCard3} alt="Corniche" class="cc-fill_cover" />
+        <div class="c-events-cases__content">
+          <h3 class="c-events-cases__title">Corniche</h3>
+          <a href="#" class="c-events-cases__link">More information →</a>
+        </div>
+      </div>
+      <div class="c-events-cases__card">
+        <Image src={eventCard4} alt="Bordeaux" class="cc-fill_cover" />
+        <div class="c-events-cases__content c-events-cases__content--light">
+          <h3 class="c-events-cases__title">Bordeaux</h3>
+          <a href="#" class="c-events-cases__link">More information →</a>
+        </div>
       </div>
     </section>
   </div>
