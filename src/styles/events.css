@@ -232,13 +232,13 @@
    Duplicated from Collection's .c-collection-cases. */
 .c-events-cases {
   width: 100%;
-  padding: 0 2rem;
+  padding: 8rem 2rem;
   background: #fff;
 }
 
 .c-events-cases__card {
   position: relative;
-  height: 40rem;
+  height: 30rem;
   overflow: hidden;
 }
 
@@ -266,6 +266,7 @@
   margin: 0 0 0.75rem;
   font-family: var(--font-montserrat);
   font-weight: 700;
+  text-transform: uppercase;
   font-size: 2.6rem;
   color: var(--color-text-dark);
 }
@@ -355,7 +356,7 @@
 
   /* Cases */
   .c-events-cases {
-    padding: 0 16px !important;
+    padding: 48px 16px !important;
   }
   .c-events-cases__card {
     height: 24rem !important;
