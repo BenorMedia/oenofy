@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+// Temporary: reusing Collection's media/copy until the real handoff for
+// this page arrives. Swap these for conciergerie-specific assets once
+// they're dropped into public/assets/conciergerie and
+// src/assets/conciergerie.
+import introImg from "../assets/collection/intro-img.png";
+import "../styles/conciergerie.css";
+---
+
+<BaseLayout
+  title="La Conciergerie — OENOFY"
+  description="Oenofy is a private wine concierge working with a limited number of clients on collections, private events and collector objects conceived around wine."
+  navVariant="dark"
+>
+  <div class="c-conciergerie-hero">
+    <div class="c-conciergerie-hero__media">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="c-conciergerie-hero__video"
+      >
+        <source
+          src="/assets/collection/collection-hero.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+    <div class="c-conciergerie-hero__content">
+      <h1 class="c-conciergerie-hero__title">Collection</h1>
+    </div>
+  </div>
+
+  <div class="c-conciergerie-flow">
+    <!-- Intro — scrolls up and over the fixed hero, same mechanism as
+         Hero -> IntroSection on the homepage. -->
+    <section class="c-conciergerie-intro">
+      <!-- Part 1: heading + copy, side by side -->
+      <div class="c-conciergerie-intro__top">
+        <div class="c-conciergerie-intro__top-wrap">
+          <h2 class="c-conciergerie-intro__heading">
+            Wine Gift Boxes And Collector Objects
+          </h2>
+          <div class="c-conciergerie-intro__copy">
+            <p class="c-conciergerie-intro__copy-bold">
+              Oenofy creates collector objects around wine. Conceived
+              from the beginning as singular pieces, each one is defined
+              by material selection, craftsmanship and enduring
+              presence.
+            </p>
+            <p class="c-conciergerie-intro__copy-body">
+              Developed in collaboration with selected designers and
+              artisans, the work is intentional and quietly timeless.
+              Editions remain limited. Attention is given to balance,
+              detail and the lasting quality of the object itself.
+              These are not presentation boxes, but carefully crafted
+              objects designed to endure.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: image grows from 70% -> 100% width as it scrolls
+           through the sticky stage; locks at 100% once reached. -->
+      <div class="c-conciergerie-intro__gallery" data-conciergerie-gallery>
+        <div class="c-conciergerie-intro__gallery-sticky">
+          <div
+            class="c-conciergerie-intro__gallery-image"
+            data-conciergerie-gallery-image
+          >
+            <Image src={introImg} alt="" class="cc-fill_cover" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 3: closing copy, right column only -->
+      <div class="c-conciergerie-intro__bottom">
+        <div class="c-conciergerie-intro__bottom-wrap">
+          <div class="c-conciergerie-intro__bottom-spacer"></div>
+          <div class="c-conciergerie-intro__bottom-copy">
+            <p>
+              Each collection is created to become part of its owner's
+              environment rather than a temporary presentation. Designed
+              with longevity in mind, every object is intended to age
+              gracefully, acquiring character through time while
+              preserving its purpose and presence.
+            </p>
+            <p>
+              Quiet by nature, each edition reflects an appreciation for
+              thoughtful design, fine materials and lasting
+              craftsmanship.
+            </p>
+            <blockquote class="c-conciergerie-intro__quote">
+              &ldquo;The wine is part of the object. The object is what
+              remains.&rdquo;
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  import "../scripts/conciergerie-page.js";
+</script>

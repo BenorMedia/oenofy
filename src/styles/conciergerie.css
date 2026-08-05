@@ -1,0 +1,248 @@
+/* La Conciergerie page — section styles scoped here, following the
+   same c- / cc- / is- convention as home.css. REM by default; PX only
+   where a mobile breakpoint needs it.
+
+   Hero + Intro duplicated from collection.css (same styles, media and
+   content per instruction) with the class suffix renamed to
+   conciergerie. Swap in real media/copy once the handoff for this
+   page arrives. */
+
+/* Hero */
+
+.c-conciergerie-hero {
+  /* Fixed, not sticky — same pattern as .c-hero on the homepage. Locked
+     to the viewport; .c-conciergerie-flow rides up and over it. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-montserrat);
+  z-index: 0;
+}
+
+.c-conciergerie-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.c-conciergerie-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c-conciergerie-hero__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.c-conciergerie-hero__title {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 4.5rem; /* 72px */
+  line-height: 1.15;
+  color: var(--color-text-dark);
+  letter-spacing: 0;
+}
+
+/* All content below the hero. Starts one viewport down so the hero
+   shows first, then this block scrolls up and over it — same mechanism
+   as .c-page-flow on the homepage. */
+.c-conciergerie-flow {
+  position: relative;
+  z-index: 1;
+  margin-top: 100vh;
+}
+
+/* Section 2: Intro — 3 parts (text pair / scroll-grow image / closing
+   copy). Opaque + full-height-plus so it covers the fixed hero as it
+   scrolls into view. */
+.c-conciergerie-intro {
+  width: 100%;
+  background: var(--color-bg-page);
+}
+
+/* Part 1 — heading + copy side by side */
+.c-conciergerie-intro__top {
+  padding: 12rem 4rem 9rem;
+}
+
+.c-conciergerie-intro__top-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4rem;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.c-conciergerie-intro__heading {
+  flex: 0 1 40%;
+  margin: 0;
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 2.6rem;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-conciergerie-intro__copy {
+  flex: 0 1 40%;
+  font-family: var(--font-montserrat);
+}
+
+.c-conciergerie-intro__copy-bold {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+
+.c-conciergerie-intro__copy-body {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+/* Part 2 — sticky stage; image grows 70% -> 100% width via JS scroll
+   scrub (conciergerie-page.js), then locks once fully expanded. */
+.c-conciergerie-intro__gallery {
+  position: relative;
+  height: 150vh;
+}
+
+.c-conciergerie-intro__gallery-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.c-conciergerie-intro__gallery-image {
+  position: relative;
+  width: 70%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.c-conciergerie-intro__gallery-image img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Part 3 — closing copy, right column only (left stays empty to keep
+   the same 2-column rhythm as Part 1). Same layout pattern as Part 1. */
+.c-conciergerie-intro__bottom {
+  padding: 10rem 4rem 7rem;
+}
+
+.c-conciergerie-intro__bottom-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4rem;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.c-conciergerie-intro__bottom-spacer {
+  flex: 0 1 40%;
+}
+
+.c-conciergerie-intro__bottom-copy {
+  flex: 0 1 45%;
+  font-family: var(--font-montserrat);
+}
+
+.c-conciergerie-intro__bottom-copy p {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-conciergerie-intro__quote {
+  margin: 4rem 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .c-conciergerie-hero__title {
+    font-size: 40px !important;
+  }
+  .c-conciergerie-hero__video {
+    height: 101% !important;
+  }
+  .c-conciergerie-hero__content {
+    padding: 0 24px !important;
+  }
+
+  /* Intro — stack to a single column, drop right-side padding rhythm */
+  .c-conciergerie-intro__top,
+  .c-conciergerie-intro__bottom {
+    padding: 60px 24px !important;
+  }
+  .c-conciergerie-intro__top-wrap,
+  .c-conciergerie-intro__bottom-wrap {
+    flex-direction: column !important;
+    gap: 32px !important;
+    max-width: 100% !important;
+  }
+  .c-conciergerie-intro__heading {
+    flex: none !important;
+    font-size: 28px !important;
+  }
+  .c-conciergerie-intro__copy,
+  .c-conciergerie-intro__bottom-copy {
+    flex: none !important;
+  }
+  .c-conciergerie-intro__copy-bold,
+  .c-conciergerie-intro__copy-body,
+  .c-conciergerie-intro__bottom-copy p {
+    font-size: 17px !important;
+  }
+
+  /* Gallery — skip the scroll-grow effect on mobile, static full-width */
+  .c-conciergerie-intro__gallery {
+    height: auto !important;
+  }
+  .c-conciergerie-intro__gallery-sticky {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+  }
+  .c-conciergerie-intro__gallery-image {
+    width: 100% !important;
+  }
+
+  .c-conciergerie-intro__bottom-spacer {
+    display: none !important;
+  }
+  .c-conciergerie-intro__quote {
+    font-size: 22px !important;
+  }
+}
