@@ -82,6 +82,26 @@ const pageBg = await getImage({ src: pageBgImg, format: "webp" });
         </div>
       </div>
     </section>
+
+    <!-- Video gallery — replicates Collection's sticky grow-on-scroll
+         stage, but with a video instead of an image. Video plays when
+         it enters the viewport (see case-1-page.js). -->
+    <div class="c-case-gallery" data-case-gallery>
+      <div class="c-case-gallery__sticky">
+        <div class="c-case-gallery__media" data-case-gallery-media>
+          <video
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            class="cc-fill_cover"
+            data-case-gallery-video
+          >
+            <source src="/assets/case-1/case-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
   </div>
 </BaseLayout>
 
