@@ -2,10 +2,12 @@ import { gsap, ScrollTrigger } from "./gsap-setup.js";
 
 // Case 1 page animations — added per section as designs come in.
 
-// Hero — as the user scrolls through the hero (its own 100vh height),
-// the title fades out (finishes by the halfway point) while the case
-// image scrubs upward, ending close to — but not exactly on — the
-// title's spot. Skipped under prefers-reduced-motion.
+// Hero — the outer section is 200vh (see case-1.css: sticky 100vh
+// stage inside it) so this scrub has room to breathe before Intro
+// appears. As the user scrolls through the full 200vh, the title
+// fades out (finishes by the halfway point) while the case image
+// scrubs upward the whole way, ending close to — but not exactly on —
+// the title's spot. Skipped under prefers-reduced-motion.
 const hero = document.querySelector("[data-case-hero]");
 const heroTitle = document.querySelector("[data-case-hero-title]");
 const heroImg = document.querySelector("[data-case-hero-img]");

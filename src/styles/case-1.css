@@ -23,8 +23,18 @@
 
 .c-case-hero {
   position: relative;
+  /* Extra scroll room (beyond the 100vh stage below) so the
+     title-fade + image-rise animation has space to breathe before
+     Intro appears. Bump this if it still feels rushed. */
+  height: 200vh;
+  overflow: visible;
+}
+
+.c-case-hero__stage {
+  position: sticky;
+  top: 0;
   height: 100vh;
-  overflow: visible; /* the case image intentionally bleeds below */
+  overflow: visible;
 }
 
 .c-case-hero__title {
@@ -58,8 +68,8 @@
 
 .c-case-hero__img img {
   display: block;
-  width: 34vw;
-  max-width: 38rem;
+  width: 55vw;
+  max-width: 55rem;
   height: auto;
 }
 

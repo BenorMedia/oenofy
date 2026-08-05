@@ -24,14 +24,17 @@ const pageBg = await getImage({ src: pageBgImg, format: "webp" });
   </div>
 
   <div class="c-case-main-wrapper">
-    <!-- Hero — title fades out and the case image scrubs upward as you
-         scroll through this section (see case-1-page.js). Image is
-         intentionally larger than the section and bleeds down into
-         Intro at rest. -->
+    <!-- Hero — taller than one viewport (200vh) so the animation gets
+         room to breathe: the inner stage stays pinned via sticky while
+         the extra height gives more scroll distance before Intro
+         appears. Title fades out and the case image scrubs upward as
+         you scroll through (see case-1-page.js). -->
     <section class="c-case-hero" data-case-hero>
-      <h1 class="c-case-hero__title" data-case-hero-title>Case 001</h1>
-      <div class="c-case-hero__img" data-case-hero-img>
-        <Image src={heroCaseImg} alt="Case 001" />
+      <div class="c-case-hero__stage">
+        <h1 class="c-case-hero__title" data-case-hero-title>Case 001</h1>
+        <div class="c-case-hero__img" data-case-hero-img>
+          <Image src={heroCaseImg} alt="Case 001" />
+        </div>
       </div>
     </section>
 
