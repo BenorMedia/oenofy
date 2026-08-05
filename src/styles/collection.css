@@ -185,35 +185,17 @@
   color: var(--color-accent);
 }
 
-/* Cases — each card genuinely stacked one below another in the
-   document, in its own wrap. Native sticky does the heavy lifting: a
-   card sticks at top:0 for its whole wrap; the wrap is 200vh so the
-   first 100vh is a plain hold and the second 100vh is scroll room for
-   the next card to rise up from below (pure document flow, no JS)
-   while collection-page.js scrubs the current card's scale down to
-   .7 during that same second half. Last wrap only needs the hold. */
+/* Cases — 3 cards stacked one below another, no gap, no animation. */
 .c-collection-cases {
-  position: relative;
   width: 100%;
+  padding: 0 2rem;
   background: #fff;
 }
 
-.c-collection-cases__card-wrap {
-  position: relative;
-  height: 200vh;
-}
-
-.c-collection-cases__card-wrap:last-child {
-  height: 100vh;
-}
-
 .c-collection-cases__card {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 40rem;
-  margin: calc(50vh - 20rem) 2rem 0; /* centers vertically in the 100vh sticky slot; 2rem side inset */
   overflow: hidden;
-  transform-origin: center center;
 }
 
 .c-collection-cases__card img {
@@ -250,20 +232,6 @@
   font-weight: 500;
   color: var(--color-text-dark);
   transition: opacity 0.2s ease;
-}
-
-/* Reduced motion: skip the long scroll-hold entirely — plain stacked
-   list, no sticky, no shrink. */
-@media (prefers-reduced-motion: reduce) {
-  .c-collection-cases__card-wrap {
-    height: auto;
-    margin-bottom: 2rem;
-  }
-  .c-collection-cases__card {
-    position: relative;
-    top: auto;
-    margin: 0 2rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -322,17 +290,11 @@
     font-size: 22px !important;
   }
 
-  /* Cases — drop the sticky/scale stack effect on mobile, cards sit in
-     normal flow instead (see collection-page.js — animation is
-     desktop-only via matchMedia). */
-  .c-collection-cases__card-wrap {
-    height: auto !important;
-    margin-bottom: 16px !important;
+  /* Cases */
+  .c-collection-cases {
+    padding: 0 16px !important;
   }
   .c-collection-cases__card {
-    position: relative !important;
-    top: auto !important;
-    margin: 0 16px !important;
     height: 24rem !important;
   }
   .c-collection-cases__content {

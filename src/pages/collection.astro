@@ -91,40 +91,27 @@ import "../styles/collection.css";
       </div>
     </section>
 
-    <!-- Cases — each card is genuinely stacked one below another in the
-         document (its own wrap, native sticky). By default (no JS) you
-         just scroll past each one in turn. On desktop, collection-page.js
-         adds the shrink: the first 50% of each wrap is a plain hold,
-         the second 50% scales the current card down to .7 while the
-         next one slides up over it via ordinary scroll — no JS needed
-         for that part, it's just normal document flow underneath a
-         sticky card. -->
+    <!-- Cases — 3 cards stacked one below another, no animation. -->
     <section class="c-collection-cases">
-      <div class="c-collection-cases__card-wrap">
-        <div class="c-collection-cases__card" data-case-card>
-          <Image src={case1} alt="Case 001" class="cc-fill_cover" />
-          <div class="c-collection-cases__content">
-            <h3 class="c-collection-cases__title">Case 001</h3>
-            <a href="#" class="c-collection-cases__link">Discover →</a>
-          </div>
+      <div class="c-collection-cases__card">
+        <Image src={case1} alt="Case 001" class="cc-fill_cover" />
+        <div class="c-collection-cases__content">
+          <h3 class="c-collection-cases__title">Case 001</h3>
+          <a href="#" class="c-collection-cases__link">Discover →</a>
         </div>
       </div>
-      <div class="c-collection-cases__card-wrap">
-        <div class="c-collection-cases__card" data-case-card>
-          <Image src={case2} alt="Case 002" class="cc-fill_cover" />
-          <div class="c-collection-cases__content">
-            <h3 class="c-collection-cases__title">Case 002</h3>
-            <a href="#" class="c-collection-cases__link">Discover →</a>
-          </div>
+      <div class="c-collection-cases__card">
+        <Image src={case2} alt="Case 002" class="cc-fill_cover" />
+        <div class="c-collection-cases__content">
+          <h3 class="c-collection-cases__title">Case 002</h3>
+          <a href="#" class="c-collection-cases__link">Discover →</a>
         </div>
       </div>
-      <div class="c-collection-cases__card-wrap">
-        <div class="c-collection-cases__card" data-case-card>
-          <Image src={case1} alt="Case 003" class="cc-fill_cover" />
-          <div class="c-collection-cases__content">
-            <h3 class="c-collection-cases__title">Case 003</h3>
-            <a href="#" class="c-collection-cases__link">Discover →</a>
-          </div>
+      <div class="c-collection-cases__card">
+        <Image src={case1} alt="Case 003" class="cc-fill_cover" />
+        <div class="c-collection-cases__content">
+          <h3 class="c-collection-cases__title">Case 003</h3>
+          <a href="#" class="c-collection-cases__link">Discover →</a>
         </div>
       </div>
     </section>
