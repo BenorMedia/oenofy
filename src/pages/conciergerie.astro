@@ -5,10 +5,12 @@ import introImg from "../assets/conciergerie/intro.png";
 import cellarServiceImg from "../assets/conciergerie/cellar-service.png";
 import founder1Img from "../assets/conciergerie/founder1.png";
 import founder2Img from "../assets/conciergerie/founder2.png";
+import contactImg from "../assets/conciergerie/Contact.png";
 import "../styles/conciergerie.css";
 
 const founder1Bg = await getImage({ src: founder1Img, format: "webp" });
 const founder2Bg = await getImage({ src: founder2Img, format: "webp" });
+const contactBg = await getImage({ src: contactImg, format: "webp" });
 ---
 
 <BaseLayout
@@ -142,8 +144,7 @@ const founder2Bg = await getImage({ src: founder2Img, format: "webp" });
       </div>
     </section>
 
-    <!-- Founder (1/2) — media left (CSS background-attachment: fixed
-         parallax) + light overlay, copy right. -->
+    <!-- Founder (1/2) — media left + light overlay, copy right. -->
     <section class="c-conciergerie-founder">
       <div
         class="c-conciergerie-founder__media"
@@ -168,8 +169,8 @@ const founder2Bg = await getImage({ src: founder2Img, format: "webp" });
       </div>
     </section>
 
-    <!-- Founder (2/2) — copy left (incl. quote), media right (CSS
-         background-attachment: fixed parallax) + light overlay. -->
+    <!-- Founder (2/2) — copy left (incl. quote), media right + light
+         overlay. -->
     <section class="c-conciergerie-founder c-conciergerie-founder--reverse">
       <div class="c-conciergerie-founder__copy">
         <p class="c-conciergerie-founder__body">
@@ -190,6 +191,22 @@ const founder2Bg = await getImage({ src: founder2Img, format: "webp" });
         style={`background-image: url(${founder2Bg.src})`}
       >
         <div class="c-conciergerie-founder__overlay"></div>
+      </div>
+    </section>
+
+    <!-- Contact — final section, full-bleed image bg, quote + title +
+         plain button centered. -->
+    <section
+      class="c-conciergerie-contact"
+      style={`background-image: url(${contactBg.src})`}
+    >
+      <blockquote class="c-conciergerie-contact__quote">
+        &ldquo;Oenofy creates collectible objects, unique cellar and
+        lifetime memories.&rdquo;
+      </blockquote>
+      <div class="c-conciergerie-contact__inner">
+        <h2 class="c-conciergerie-contact__title">Enquiries Are Welcome</h2>
+        <a href="#" class="c-conciergerie-contact__button">Contact Us</a>
       </div>
     </section>
   </div>
