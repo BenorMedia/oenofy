@@ -56,16 +56,37 @@ import "../styles/events.css";
       </div>
 
       <!-- Part 2: 3x1 image grid, replaces Collection's scroll-grow
-           gallery. -->
-      <div class="c-events-intro__grid">
-        <div class="c-events-intro__grid-item">
+           gallery. Items reveal in sequence on scroll — see
+           events-page.js. -->
+      <div class="c-events-intro__grid" data-events-grid>
+        <div class="c-events-intro__grid-item" data-events-grid-item>
           <Image src={eventGrid1} alt="" class="cc-fill_cover" />
         </div>
-        <div class="c-events-intro__grid-item">
+        <div class="c-events-intro__grid-item" data-events-grid-item>
           <Image src={eventGrid2} alt="" class="cc-fill_cover" />
         </div>
-        <div class="c-events-intro__grid-item">
+        <div class="c-events-intro__grid-item" data-events-grid-item>
           <Image src={eventGrid3} alt="" class="cc-fill_cover" />
+        </div>
+      </div>
+
+      <!-- Part 3: closing copy, right column only. Placeholder copy —
+           no text was provided for this part yet, swap once real copy
+           arrives. -->
+      <div class="c-events-intro__bottom">
+        <div class="c-events-intro__bottom-wrap">
+          <div class="c-events-intro__bottom-spacer"></div>
+          <div class="c-events-intro__bottom-copy">
+            <p>
+              Every occasion is considered individually. The wine, the
+              setting and the pace of the evening are shaped around
+              the people at the table, not around a fixed format.
+            </p>
+            <blockquote class="c-events-intro__quote">
+              &ldquo;An evening built around wine, not around
+              show.&rdquo;
+            </blockquote>
+          </div>
         </div>
       </div>
     </section>

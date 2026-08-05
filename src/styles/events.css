@@ -121,6 +121,7 @@
 .c-events-intro__grid-item {
   position: relative;
   aspect-ratio: 5 / 7;
+  border-radius: 1rem;
   overflow: hidden;
 }
 
