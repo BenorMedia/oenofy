@@ -2,19 +2,12 @@ import { gsap, ScrollTrigger } from "./gsap-setup.js";
 
 // Case 1 page animations — added per section as designs come in.
 
-// Hero — the outer section is 200vh, inner stage is a sticky 100vh
-// (see case-1.css). Sticky only stays active for the first 100vh of
-// that scroll (outerHeight - stageHeight); after that the stage
-// unsticks and scrolls away naturally. The ScrollTrigger below is
-// scoped to exactly that 100vh active window — using the full 200vh
-// would double up the motion once the stage unsticks (our own scrub
-// plus the stage's natural scroll-away), which is what caused the
-// speed to lurch near the end.
-//
-// The rise distance is measured from the image's actual rendered
-// size (not a guessed vh number) so its bottom edge always clears
-// the stage with a bit of margin, regardless of viewport/image size —
-// guaranteeing it never ends up overlapping Intro.
+// Hero — the outer section is 200vh (see case-1.css: sticky 100vh
+// stage inside it) so this scrub has room to breathe before Intro
+// appears. As the user scrolls through the full 200vh, the title
+// fades out (finishes by the halfway point) while the case image
+// scrubs upward the whole way, ending close to — but not exactly on —
+// the title's spot. Skipped under prefers-reduced-motion.
 const hero = document.querySelector("[data-case-hero]");
 const heroTitle = document.querySelector("[data-case-hero-title]");
 const heroImg = document.querySelector("[data-case-hero-img]");
@@ -26,32 +19,21 @@ if (hero && heroTitle && heroImg) {
     gsap.set(heroTitle, { opacity: 1 });
     gsap.set(heroImg, { y: 0 });
 
-    const MARGIN_PX = 48; // clearance kept above the stage's bottom edge
-    let riseDistance = 0;
-
-    function measure() {
-      gsap.set(heroImg, { y: 0 });
-      const rect = heroImg.getBoundingClientRect();
-      const targetBottom = window.innerHeight - MARGIN_PX;
-      riseDistance = Math.min(0, targetBottom - rect.bottom);
-    }
-
-    measure();
-
     const st = ScrollTrigger.create({
       trigger: hero,
       start: "top top",
-      end: "+=100vh", // exactly the sticky-active window, not the full 200vh
+      end: "bottom top",
       scrub: true,
-      onRefresh: measure,
       onUpdate: (self) => {
-        // Title: fades out over the first half of the active window.
+        // Title: fades out over the first half of the scroll.
         const titleOpacity = 1 - Math.min(self.progress / 0.5, 1);
         gsap.set(heroTitle, { opacity: titleOpacity });
 
-        // Image: rises the whole way through, ending with its bottom
-        // edge clear of the stage (see measure() above).
-        gsap.set(heroImg, { y: riseDistance * self.progress });
+        // Image: rises the whole way through, from its resting spot
+        // near the bottom (top: 62vh in CSS) up to roughly 40vh —
+        // close to the title's center (50vh) without overlapping it.
+        const y = gsap.utils.interpolate(0, -22, self.progress);
+        gsap.set(heroImg, { y: `${y}vh` });
       },
     });
 
