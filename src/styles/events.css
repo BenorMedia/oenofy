@@ -191,6 +191,7 @@
 }
 
 .c-events-beyond__body {
+  max-width: 35rem;
   margin: 0 0 1.5rem;
   font-size: 1.125rem;
   font-weight: 400;
@@ -203,6 +204,7 @@
 }
 
 .c-events-beyond__quote {
+  max-width: 35rem;
   margin: 4rem 0 0;
   font-size: 1.75rem;
   font-weight: 600;
@@ -289,8 +291,10 @@
   }
   .c-events-beyond__body {
     font-size: 17px !important;
+    max-width: 100% !important;
   }
   .c-events-beyond__quote {
     font-size: 22px !important;
+    max-width: 100% !important;
   }
 }
