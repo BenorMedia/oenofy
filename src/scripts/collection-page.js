@@ -38,61 +38,48 @@ if (galleryWrap && galleryImage) {
   });
 }
 
-// Cases — final section. Card images are always visible; only the
-// title/link content fades in, keyed off scroll progress through the
-// whole section (not each card individually): card 1 at ~15%, card 2
-// at ~50%. Reverses if the user scrolls back above the threshold.
-const casesSection = document.querySelector("[data-cases]");
-const case1Content = casesSection?.querySelector('[data-case-content="1"]');
-const case2Content = casesSection?.querySelector('[data-case-content="2"]');
+// Cases — final section. Each card animates independently as it enters
+// the viewport: image fades in first, then the title/link content.
+// Fires once (10% into the card entering) and never replays — scrolling
+// back up past the section won't re-trigger it.
+const caseCards = gsap.utils.toArray("[data-case-card]");
 
-if (casesSection && case1Content && case2Content) {
+if (caseCards.length) {
   const mm = gsap.matchMedia();
 
   mm.add("(prefers-reduced-motion: no-preference)", () => {
-    gsap.set([case1Content, case2Content], { autoAlpha: 0, y: 20 });
+    const triggers = caseCards.map((card) => {
+      const img = card.querySelector("img");
+      const content = card.querySelector("[data-case-content]");
 
-    const CARD1_AT = 0.15;
-    const CARD2_AT = 0.5;
-    let card1Shown = false;
-    let card2Shown = false;
+      gsap.set(img, { autoAlpha: 0 });
+      gsap.set(content, { autoAlpha: 0, y: 20 });
 
-    const st = ScrollTrigger.create({
-      trigger: casesSection,
-      start: "top bottom",
-      end: "bottom top",
-      onUpdate: (self) => {
-        if (self.progress >= CARD1_AT && !card1Shown) {
-          card1Shown = true;
-          gsap.to(case1Content, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          });
-        } else if (self.progress < CARD1_AT && card1Shown) {
-          card1Shown = false;
-          gsap.to(case1Content, { autoAlpha: 0, y: 20, duration: 0.4 });
-        }
-
-        if (self.progress >= CARD2_AT && !card2Shown) {
-          card2Shown = true;
-          gsap.to(case2Content, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          });
-        } else if (self.progress < CARD2_AT && card2Shown) {
-          card2Shown = false;
-          gsap.to(case2Content, { autoAlpha: 0, y: 20, duration: 0.4 });
-        }
-      },
+      return ScrollTrigger.create({
+        trigger: card,
+        start: "top 90%", // fires ~10% into the card entering view
+        once: true,
+        onEnter: () => {
+          gsap
+            .timeline()
+            .to(img, { autoAlpha: 1, duration: 0.6, ease: "power2.out" })
+            .to(
+              content,
+              { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
+              "-=0.2"
+            );
+        },
+      });
     });
 
     return () => {
-      st.kill();
-      gsap.set([case1Content, case2Content], { clearProps: "all" });
+      triggers.forEach((st) => st.kill());
+      caseCards.forEach((card) => {
+        gsap.set(card.querySelector("img"), { clearProps: "all" });
+        gsap.set(card.querySelector("[data-case-content]"), {
+          clearProps: "all",
+        });
+      });
     };
   });
 }

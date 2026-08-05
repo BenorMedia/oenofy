@@ -3,17 +3,8 @@
    (Conciergerie, Quote, Collection, Slider, News) added here too, converted
    from inline styles in the old page.tsx into real classes. */
 
-/* Utility — absolute-fill, object-fit: cover. Used for background/fill
-   images across Quote, Collection, and News sections (replaces next/image
-   `fill` prop, which astro:assets doesn't have an equivalent for). */
-.cc-fill_cover {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
+/* cc-fill_cover utility now lives in global.css (shared across every
+   page, not just home). */
 
 /* Hero */
 

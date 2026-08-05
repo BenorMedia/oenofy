@@ -91,20 +91,21 @@ import "../styles/collection.css";
       </div>
     </section>
 
-    <!-- Cases — final section, 2 full-bleed cards stacked 50/50. Text
-         fades in on scroll (collection-page.js): card 1 at ~15% of the
-         section's scroll pass-through, card 2 at ~50%. -->
-    <section class="c-collection-cases" data-cases>
-      <div class="c-collection-cases__card">
+    <!-- Cases — final section, 2 full-bleed cards stacked 50/50. Each
+         card fades in independently on scroll (collection-page.js):
+         image first, then text, once as it enters the viewport — no
+         replay on scroll-back. -->
+    <section class="c-collection-cases">
+      <div class="c-collection-cases__card" data-case-card>
         <Image src={case1} alt="Case 001" class="cc-fill_cover" />
-        <div class="c-collection-cases__content" data-case-content="1">
+        <div class="c-collection-cases__content" data-case-content>
           <h3 class="c-collection-cases__title">Case 001</h3>
           <a href="#" class="c-collection-cases__link">Discover →</a>
         </div>
       </div>
-      <div class="c-collection-cases__card">
+      <div class="c-collection-cases__card" data-case-card>
         <Image src={case2} alt="Case 002" class="cc-fill_cover" />
-        <div class="c-collection-cases__content" data-case-content="2">
+        <div class="c-collection-cases__content" data-case-content>
           <h3 class="c-collection-cases__title">Case 002</h3>
           <a href="#" class="c-collection-cases__link">Discover →</a>
         </div>

@@ -63,4 +63,15 @@ a:hover {
   color: var(--color-accent);
 }
 
+/* Utility — absolute-fill, object-fit: cover. Shared across every page
+   (not just home.css) since any background/fill image needs it. */
+.cc-fill_cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 
