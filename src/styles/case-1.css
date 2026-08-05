@@ -95,7 +95,7 @@
 
 .c-case-intro__label {
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 10rem;
   font-family: var(--font-montserrat);
   font-weight: 700;
   text-transform: uppercase;
@@ -110,14 +110,14 @@
 
 .c-case-intro__signature {
   position: absolute;
-  top: -1rem;
+  top: -3rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
   margin: 0;
   font-family: var(--font-conso);
   font-style: italic;
-  font-size: 2rem;
+  font-size: 3rem;
   color: var(--color-text-dark);
 }
 
