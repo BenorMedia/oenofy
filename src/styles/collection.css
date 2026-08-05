@@ -69,3 +69,15 @@
   min-height: 100vh;
   background: var(--color-bg-page);
 }
+
+@media (max-width: 768px) {
+  .c-collection-hero__title {
+    font-size: 40px !important;
+  }
+  .c-collection-hero__video {
+    height: 101% !important;
+  }
+  .c-collection-hero__content {
+    padding: 0 24px !important;
+  }
+}
