@@ -185,36 +185,33 @@
   color: var(--color-accent);
 }
 
-/* Cases — sticky stacked-cards effect. The stage stays pinned for the
-   whole section height while collection-page.js scrubs each card's
-   scale/position. Total height = 100vh (stage) + 100vh per card
-   transition; 3 cards -> 2 transitions -> 300vh. Adjust if the card
-   count changes. */
+/* Cases — each card genuinely stacked one below another in the
+   document, in its own wrap. Native sticky does the heavy lifting: a
+   card sticks at top:0 for its whole wrap; the wrap is 200vh so the
+   first 100vh is a plain hold and the second 100vh is scroll room for
+   the next card to rise up from below (pure document flow, no JS)
+   while collection-page.js scrubs the current card's scale down to
+   .7 during that same second half. Last wrap only needs the hold. */
 .c-collection-cases {
   position: relative;
   width: 100%;
-  padding: 0 2rem;
   background: #fff;
-  height: 300vh;
 }
 
-.c-collection-cases__stack {
-  position: sticky;
-  top: 0;
+.c-collection-cases__card-wrap {
+  position: relative;
+  height: 200vh;
+}
+
+.c-collection-cases__card-wrap:last-child {
   height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .c-collection-cases__card {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
+  position: sticky;
+  top: 0;
   height: 40rem;
-  margin-top: -20rem; /* half of height, vertically centers within the stage */
+  margin: calc(50vh - 20rem) 2rem 0; /* centers vertically in the 100vh sticky slot; 2rem side inset */
   overflow: hidden;
   transform-origin: center center;
 }
@@ -255,24 +252,17 @@
   transition: opacity 0.2s ease;
 }
 
-/* Reduced motion: skip the JS scrub entirely — fall back to a plain
-   stacked list so nothing overlaps unreadably. */
+/* Reduced motion: skip the long scroll-hold entirely — plain stacked
+   list, no sticky, no shrink. */
 @media (prefers-reduced-motion: reduce) {
-  .c-collection-cases {
+  .c-collection-cases__card-wrap {
     height: auto;
-  }
-  .c-collection-cases__stack {
-    position: relative;
-    top: auto;
-    height: auto;
-    display: block;
-    overflow: visible;
+    margin-bottom: 2rem;
   }
   .c-collection-cases__card {
     position: relative;
     top: auto;
-    margin-top: 0;
-    margin-bottom: 2rem;
+    margin: 0 2rem;
   }
 }
 
@@ -335,22 +325,14 @@
   /* Cases — drop the sticky/scale stack effect on mobile, cards sit in
      normal flow instead (see collection-page.js — animation is
      desktop-only via matchMedia). */
-  .c-collection-cases {
+  .c-collection-cases__card-wrap {
     height: auto !important;
-    padding: 0 16px !important;
-  }
-  .c-collection-cases__stack {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    display: block !important;
-    overflow: visible !important;
+    margin-bottom: 16px !important;
   }
   .c-collection-cases__card {
     position: relative !important;
     top: auto !important;
-    margin-top: 0 !important;
-    margin-bottom: 16px !important;
+    margin: 0 16px !important;
     height: 24rem !important;
   }
   .c-collection-cases__content {
