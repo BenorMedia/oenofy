@@ -62,7 +62,7 @@
 
 /* Part 1 — heading + copy side by side */
 .c-events-intro__top {
-  padding: 12rem 4rem 9rem;
+  padding: 12rem 4rem 8rem;
 }
 
 .c-events-intro__top-wrap {
@@ -115,7 +115,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  padding: 0 4rem 9rem;
+  padding: 0 4rem;
 }
 
 .c-events-intro__grid-item {
@@ -129,20 +129,16 @@
    the same 2-column rhythm as Part 1). Duplicated pattern, ready to
    use once copy for it is provided. */
 .c-events-intro__bottom {
-  padding: 10rem 4rem 7rem;
+  padding: 8rem 4rem 12rem;
 }
 
 .c-events-intro__bottom-wrap {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: center;
   gap: 4rem;
   max-width: 70%;
   margin: 0 auto;
-}
-
-.c-events-intro__bottom-spacer {
-  flex: 0 1 40%;
 }
 
 .c-events-intro__bottom-copy {
@@ -204,9 +200,6 @@
     padding: 0 24px 60px !important;
   }
 
-  .c-events-intro__bottom-spacer {
-    display: none !important;
-  }
   .c-events-intro__quote {
     font-size: 22px !important;
   }
