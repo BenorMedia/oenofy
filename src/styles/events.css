@@ -162,6 +162,70 @@
   color: var(--color-accent);
 }
 
+/* Beyond The Table — same layout as Conciergerie's Founder section:
+   copy left, media right + light overlay, 100vh. */
+.c-events-beyond {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  background: #fff;
+}
+
+.c-events-beyond__copy {
+  flex: 0 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 6rem;
+}
+
+.c-events-beyond__title {
+  /* same styles as .c-events-intro__heading */
+  margin: 0 0 2rem;
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 2.15rem;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-events-beyond__body {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-events-beyond__body--bold {
+  font-weight: 700;
+}
+
+.c-events-beyond__quote {
+  margin: 4rem 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-events-beyond__media {
+  position: relative;
+  flex: 0 1 50%;
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.c-events-beyond__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 246, 231, 0.15);
+  pointer-events: none;
+}
+
 @media (max-width: 768px) {
   .c-events-hero__title {
     font-size: 40px !important;
@@ -201,6 +265,32 @@
   }
 
   .c-events-intro__quote {
+    font-size: 22px !important;
+  }
+
+  /* Beyond The Table — stack to a single column, media on top */
+  .c-events-beyond {
+    height: auto !important;
+    flex-direction: column-reverse !important;
+  }
+  .c-events-beyond__media,
+  .c-events-beyond__copy {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .c-events-beyond__media {
+    height: 60vh !important;
+  }
+  .c-events-beyond__copy {
+    padding: 48px 24px !important;
+  }
+  .c-events-beyond__title {
+    font-size: 28px !important;
+  }
+  .c-events-beyond__body {
+    font-size: 17px !important;
+  }
+  .c-events-beyond__quote {
     font-size: 22px !important;
   }
 }

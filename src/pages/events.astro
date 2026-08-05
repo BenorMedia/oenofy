@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import heroImg from "../assets/events/hero-img.png";
 import eventGrid1 from "../assets/events/event-grid1.png";
 import eventGrid2 from "../assets/events/event-grid2.png";
 import eventGrid3 from "../assets/events/event-grid3.png";
+import eventImg1 from "../assets/events/event-img1.png";
 import "../styles/events.css";
+
+const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
 ---
 
 <BaseLayout
@@ -91,6 +94,43 @@ import "../styles/events.css";
             </blockquote>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Beyond The Table — same layout as Conciergerie's Founder
+         section (copy left incl. quote, media right + light overlay,
+         100vh), with a title added reusing the Intro heading style. -->
+    <section class="c-events-beyond">
+      <div class="c-events-beyond__copy">
+        <h2 class="c-events-beyond__title">Beyond The Table</h2>
+        <p class="c-events-beyond__body c-events-beyond__body--bold">
+          Some occasions take place ashore. Others begin at sea.
+        </p>
+        <p class="c-events-beyond__body">
+          For OENOFY's founders, Benjamin and Anastasiia, sailing is
+          more than a pastime; it reflects a way of experiencing time,
+          hospitality and shared moments. This personal passion
+          naturally extends to the way Oenofy approaches events aboard
+          private yachts and within selected sporting worlds.
+        </p>
+        <p class="c-events-beyond__body">
+          Whether accompanying a regatta, a golf tournament, an
+          equestrian gathering or an intimate tennis event, every
+          detail is designed with the same discretion, precision and
+          respect for the occasion. Wine is never treated as the
+          centrepiece, but as a natural part of an experience where
+          people, setting and atmosphere come first.
+        </p>
+        <blockquote class="c-events-beyond__quote">
+          &ldquo;Where exceptional occasions deserve wines chosen with
+          equal care.&rdquo;
+        </blockquote>
+      </div>
+      <div
+        class="c-events-beyond__media"
+        style={`background-image: url(${eventImg1Bg.src})`}
+      >
+        <div class="c-events-beyond__overlay"></div>
       </div>
     </section>
   </div>
