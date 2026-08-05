@@ -1,0 +1,182 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import heroImg from "../assets/events/hero-img.png";
+import eventGrid1 from "../assets/events/event-grid1.png";
+import eventGrid2 from "../assets/events/event-grid2.png";
+import eventGrid3 from "../assets/events/event-grid3.png";
+import eventImg1 from "../assets/events/event-img1.png";
+import eventCard1 from "../assets/events/event-card1.png";
+import eventCard2 from "../assets/events/event-card2.png";
+import eventCard3 from "../assets/events/event-card3.png";
+import eventCard4 from "../assets/events/event-card4.png";
+import "../styles/events.css";
+
+const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
+---
+
+<BaseLayout
+  title="Private Events — OENOFY"
+  description="Private wine tastings and events curated by Oenofy."
+  navVariant="light"
+>
+  <div class="c-events-hero">
+    <div class="c-events-hero__media">
+      <Image src={heroImg} alt="Private Events" class="cc-fill_cover" />
+    </div>
+    <div class="c-events-hero__content">
+      <h1 class="c-events-hero__title">Private Events</h1>
+    </div>
+  </div>
+
+  <div class="c-events-flow">
+    <!-- Intro — scrolls up and over the fixed hero, same mechanism as
+         Hero -> IntroSection on the homepage. Duplicated from
+         Collection's __top pattern; __bottom pattern exists in CSS,
+         ready to use once copy for it is provided. -->
+    <section class="c-events-intro">
+      <!-- Part 1: heading + copy, side by side -->
+      <div class="c-events-intro__top">
+        <div class="c-events-intro__top-wrap">
+          <h2 class="c-events-intro__heading">
+            Private Wine Tasting And Events
+          </h2>
+          <div class="c-events-intro__copy">
+            <p class="c-events-intro__copy-bold">
+              For private dinners, tastings and intimate occasions,
+              Oenofy approaches the wine with the same attention to
+              atmosphere, setting and the occasion.
+            </p>
+            <p class="c-events-intro__copy-body">
+              Some moments are simple: a private wine tasting at home,
+              a small dinner, the right bottles opened at the right
+              time. Others unfold over a longer evening, shaped around
+              a particular menu, setting or moment. The scale changes.
+              The approach does not.
+            </p>
+            <p class="c-events-intro__copy-body">
+              Wine is chosen for what it adds to the occasion, not for
+              what it signals.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: 3x1 image grid, replaces Collection's scroll-grow
+           gallery. Items reveal in sequence on scroll — see
+           events-page.js. -->
+      <div class="c-events-intro__grid" data-events-grid>
+        <div class="c-events-intro__grid-item" data-events-grid-item>
+          <Image src={eventGrid1} alt="" class="cc-fill_cover" />
+        </div>
+        <div class="c-events-intro__grid-item" data-events-grid-item>
+          <Image src={eventGrid2} alt="" class="cc-fill_cover" />
+        </div>
+        <div class="c-events-intro__grid-item" data-events-grid-item>
+          <Image src={eventGrid3} alt="" class="cc-fill_cover" />
+        </div>
+      </div>
+
+      <!-- Part 3: closing copy, right column only. Placeholder copy —
+           no text was provided for this part yet, swap once real copy
+           arrives. -->
+      <div class="c-events-intro__bottom">
+        <div class="c-events-intro__bottom-wrap">
+          <div class="c-events-intro__bottom-copy">
+            <p>
+              Whether hosting a private celebration, an exclusive
+              dinner or a larger reception, Oenofy oversees every
+              aspect of the wine experience with quiet precision.
+              Bottle selection, serving temperatures, glassware, timing
+              and coordination are carefully adapted to the setting,
+              allowing the wines to integrate seamlessly into the
+              atmosphere rather than compete with it.
+            </p>
+            <blockquote class="c-events-intro__quote">
+              &ldquo;Private occasions are arranged on
+              enquiry.&rdquo;
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beyond The Table — same layout as Conciergerie's Founder
+         section (copy left incl. quote, media right + light overlay,
+         100vh), with a title added reusing the Intro heading style. -->
+    <section class="c-events-beyond">
+      <div class="c-events-beyond__copy">
+        <h2 class="c-events-beyond__title">Beyond The Table</h2>
+        <p class="c-events-beyond__body c-events-beyond__body--bold">
+          Some occasions take place ashore. Others begin at sea.
+        </p>
+        <p class="c-events-beyond__body">
+          For OENOFY's founders, Benjamin and Anastasiia, sailing is
+          more than a pastime; it reflects a way of experiencing time,
+          hospitality and shared moments. This personal passion
+          naturally extends to the way Oenofy approaches events aboard
+          private yachts and within selected sporting worlds.
+        </p>
+        <p class="c-events-beyond__body">
+          Whether accompanying a regatta, a golf tournament, an
+          equestrian gathering or an intimate tennis event, every
+          detail is designed with the same discretion, precision and
+          respect for the occasion. Wine is never treated as the
+          centrepiece, but as a natural part of an experience where
+          people, setting and atmosphere come first.
+        </p>
+        <blockquote class="c-events-beyond__quote">
+          &ldquo;Where exceptional occasions deserve wines chosen with
+          equal care.&rdquo;
+        </blockquote>
+      </div>
+      <div
+        class="c-events-beyond__media"
+        style={`background-image: url(${eventImg1Bg.src})`}
+      >
+        <div class="c-events-beyond__overlay"></div>
+      </div>
+    </section>
+
+    <!-- Cases — 4 cards stacked one below another, no gap, no
+         animation. Duplicated from Collection's .c-collection-cases. -->
+    <section class="c-events-cases">
+      <div class="c-events-cases__card">
+        <Image src={eventCard1} alt="Monaco - YMC" class="cc-fill_cover" />
+        <div class="c-events-cases__content">
+          <h3 class="c-events-cases__title">Monaco - YMC</h3>
+          <a href="#" class="c-events-cases__link">More information →</a>
+        </div>
+      </div>
+      <div class="c-events-cases__card">
+        <Image
+          src={eventCard2}
+          alt="Tennis And Champagne"
+          class="cc-fill_cover"
+        />
+        <div class="c-events-cases__content c-events-cases__content--light">
+          <h3 class="c-events-cases__title">Tennis And Champagne</h3>
+          <a href="#" class="c-events-cases__link">More information →</a>
+        </div>
+      </div>
+      <div class="c-events-cases__card">
+        <Image src={eventCard3} alt="Corniche" class="cc-fill_cover" />
+        <div class="c-events-cases__content">
+          <h3 class="c-events-cases__title">Corniche</h3>
+          <a href="#" class="c-events-cases__link">More information →</a>
+        </div>
+      </div>
+      <div class="c-events-cases__card">
+        <Image src={eventCard4} alt="Bordeaux" class="cc-fill_cover" />
+        <div class="c-events-cases__content c-events-cases__content--light">
+          <h3 class="c-events-cases__title">Bordeaux</h3>
+          <a href="#" class="c-events-cases__link">More information →</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  import "../scripts/events-page.js";
+</script>

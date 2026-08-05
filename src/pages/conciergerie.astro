@@ -1,0 +1,217 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import introImg from "../assets/conciergerie/intro.png";
+import cellarServiceImg from "../assets/conciergerie/cellar-service.png";
+import founder1Img from "../assets/conciergerie/founder1.png";
+import founder2Img from "../assets/conciergerie/founder2.png";
+import contactImg from "../assets/conciergerie/Contact.png";
+import "../styles/conciergerie.css";
+
+const founder1Bg = await getImage({ src: founder1Img, format: "webp" });
+const founder2Bg = await getImage({ src: founder2Img, format: "webp" });
+const contactBg = await getImage({ src: contactImg, format: "webp" });
+---
+
+<BaseLayout
+  title="La Conciergerie — OENOFY"
+  description="Oenofy is a private wine concierge working with a limited number of clients on collections, private events and collector objects conceived around wine."
+  navVariant="dark"
+>
+  <div class="c-conciergerie-hero">
+    <div class="c-conciergerie-hero__media">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="c-conciergerie-hero__video"
+      >
+        <source
+          src="/assets/conciergerie/hero-video.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+    <div class="c-conciergerie-hero__content">
+      <h1 class="c-conciergerie-hero__title">La Conciergerie</h1>
+    </div>
+  </div>
+
+  <div class="c-conciergerie-flow">
+    <!-- Intro — scrolls up and over the fixed hero, same mechanism as
+         Hero -> IntroSection on the homepage. -->
+    <section class="c-conciergerie-intro">
+      <!-- Part 1: heading + copy, side by side -->
+      <div class="c-conciergerie-intro__top">
+        <div class="c-conciergerie-intro__top-wrap">
+          <h2 class="c-conciergerie-intro__heading">Wine concierge</h2>
+          <div class="c-conciergerie-intro__copy">
+            <p class="c-conciergerie-intro__copy-bold">
+              Every engagement begins with dialogue. Before any
+              recommendation is made, Oenofy takes time to understand
+              how a client lives with wine and what role it plays over
+              time.
+            </p>
+            <p class="c-conciergerie-intro__copy-body">
+              No two cellars are approached in the same way. Some wine
+              collections develop around longstanding preferences or
+              particular interests. Others are shaped more intuitively,
+              informed by habits, guests, routines and changing tastes.
+              Each collection is built with attention to rhythm,
+              balance and long-term coherence rather than short-term
+              enthusiasm.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: image grows from 70% -> 100% width as it scrolls
+           through the sticky stage; locks at 100% once reached. -->
+      <div class="c-conciergerie-intro__gallery" data-conciergerie-gallery>
+        <div class="c-conciergerie-intro__gallery-sticky">
+          <div
+            class="c-conciergerie-intro__gallery-image"
+            data-conciergerie-gallery-image
+          >
+            <Image src={introImg} alt="" class="cc-fill_cover" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 3: closing copy, right column only -->
+      <div class="c-conciergerie-intro__bottom">
+        <div class="c-conciergerie-intro__bottom-wrap">
+          <div class="c-conciergerie-intro__bottom-spacer"></div>
+          <div class="c-conciergerie-intro__bottom-copy">
+            <p>
+              As a private wine concierge, Oenofy remains involved as
+              collections evolve, offering the continuity of a personal
+              cellar service. Recommendations are made carefully,
+              guided by what belongs within the collection and what
+              will continue to bring pleasure in the years ahead.
+              Behind the scenes, services such as wine shipping, cellar
+              organisation and ongoing wine storage service are
+              arranged with the utmost discretion.
+            </p>
+            <blockquote class="c-conciergerie-intro__quote">
+              &ldquo;The level of involvement always remains with the
+              client.&rdquo;
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cellar Service — copy left, media right. No real video yet, so
+         the video tag just shows its poster frame until one arrives. -->
+    <section class="c-conciergerie-cellar">
+      <div class="c-conciergerie-cellar__copy">
+        <h2 class="c-conciergerie-cellar__title">Cellar Service</h2>
+        <p class="c-conciergerie-cellar__body">
+          A bespoke wine cellar is more than a place to store bottles.
+          It is a space designed to be experienced, remembered and
+          shared. One where people naturally want to spend time,
+          surrounded by some of the world's finest wines.
+        </p>
+        <p class="c-conciergerie-cellar__body">
+          Working alongside selected designers, architects and
+          technical specialists, Oenofy creates cellars that combine
+          timeless design, technical precision and modern technology.
+          Every project is conceived as a unique environment, carefully
+          adapted to its owner and the way the collection will evolve
+          over time.
+        </p>
+        <p class="c-conciergerie-cellar__body">
+          The collection itself is assembled with the same level of
+          care. Through our expertise and access to rare and highly
+          sought-after wines, every bottle is selected for the role it
+          plays within the cellar, creating a collection defined by
+          coherence, rarity and lasting significance.
+        </p>
+        <p class="c-conciergerie-cellar__body c-conciergerie-cellar__body--bold">
+          The result is a cellar that is not only technically
+          exceptional, but deeply personal.
+        </p>
+      </div>
+      <div class="c-conciergerie-cellar__media">
+        <video
+          poster={cellarServiceImg.src}
+          muted
+          playsinline
+          class="cc-fill_cover"
+        ></video>
+      </div>
+    </section>
+
+    <!-- Founder (1/2) — media left + light overlay, copy right. -->
+    <section class="c-conciergerie-founder">
+      <div
+        class="c-conciergerie-founder__media"
+        style={`background-image: url(${founder1Bg.src})`}
+      >
+        <div class="c-conciergerie-founder__overlay"></div>
+      </div>
+      <div class="c-conciergerie-founder__copy">
+        <h2 class="c-conciergerie-founder__title">Founder</h2>
+        <p class="c-conciergerie-founder__body c-conciergerie-founder__body--bold">
+          The People behind. Oenofy is led by Anastasiia and Benjamin.
+        </p>
+        <p class="c-conciergerie-founder__body">
+          Anastasiia has spent several years advising private clients
+          on wine collections and long-term cellar development.
+        </p>
+        <p class="c-conciergerie-founder__body">
+          Every recommendation is guided by expertise, discretion and a
+          commitment to creating collections that remain coherent,
+          personal and enduring.
+        </p>
+      </div>
+    </section>
+
+    <!-- Founder (2/2) — copy left (incl. quote), media right + light
+         overlay. -->
+    <section class="c-conciergerie-founder c-conciergerie-founder--reverse">
+      <div class="c-conciergerie-founder__copy">
+        <p class="c-conciergerie-founder__body">
+          Benjamin's background is in wine production, with direct
+          experience in vineyards and winery operations.
+        </p>
+        <p class="c-conciergerie-founder__body">
+          They combine practical knowledge, careful sourcing and a
+          long-term approach to building exceptional wine collections.
+        </p>
+        <blockquote class="c-conciergerie-founder__quote">
+          &ldquo;Together, they bring perspectives informed by both the
+          making of wine and the experience of collecting it.&rdquo;
+        </blockquote>
+      </div>
+      <div
+        class="c-conciergerie-founder__media"
+        style={`background-image: url(${founder2Bg.src})`}
+      >
+        <div class="c-conciergerie-founder__overlay"></div>
+      </div>
+    </section>
+
+    <!-- Contact — final section, full-bleed image bg, quote + title +
+         plain button centered. -->
+    <section
+      class="c-conciergerie-contact"
+      style={`background-image: url(${contactBg.src})`}
+    >
+      <blockquote class="c-conciergerie-contact__quote">
+        &ldquo;Oenofy creates collectible objects, unique cellar and
+        lifetime memories.&rdquo;
+      </blockquote>
+      <div class="c-conciergerie-contact__inner">
+        <h2 class="c-conciergerie-contact__title">Enquiries Are Welcome</h2>
+        <a href="#" class="c-conciergerie-contact__button">Contact Us</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  import "../scripts/conciergerie-page.js";
+</script>

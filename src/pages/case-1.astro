@@ -1,0 +1,297 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import heroCaseImg from "../assets/case-1/hero-case.png";
+import pageBgImg from "../assets/case-1/page-bg.png";
+import maximeLisImg from "../assets/case-1/maxime-lis.png";
+import productImg1 from "../assets/case-1/product-img1.png";
+import productImg2 from "../assets/case-1/product-img2.png";
+import productImg3 from "../assets/case-1/product-img3.png";
+import productImg4 from "../assets/case-1/product-img4.png";
+import productImg5 from "../assets/case-1/product-img5.png";
+import productImg6 from "../assets/case-1/product-img6.png";
+import "../styles/case-1.css";
+
+const pageBg = await getImage({ src: pageBgImg, format: "webp" });
+const product2Bg = await getImage({ src: productImg2, format: "webp" });
+---
+
+<BaseLayout
+  title="Case 001 — OENOFY"
+  description="Case 001 — Oenofy's first collector edition, created with French designer Maxime Lis."
+  navVariant="dark"
+>
+  <!-- Fixed full-viewport backdrop. Stays put behind every section as
+       the page scrolls, so all sections read as sitting on one shared
+       background. -->
+  <div
+    class="c-case-page-bg"
+    style={`background-image: url(${pageBg.src})`}
+  >
+  </div>
+
+  <div class="c-case-main-wrapper">
+    <!-- Hero — taller than one viewport (200vh) so the animation gets
+         room to breathe: the inner stage stays pinned via sticky while
+         the extra height gives more scroll distance before Intro
+         appears. Title fades out and the case image scrubs upward as
+         you scroll through (see case-1-page.js). -->
+    <section class="c-case-hero" data-case-hero>
+      <div class="c-case-hero__stage">
+        <h1 class="c-case-hero__title" data-case-hero-title>Case 001</h1>
+        <div class="c-case-hero__img" data-case-hero-img>
+          <Image src={heroCaseImg} alt="Case 001" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Intro — freeform for now per instruction; QA notes to follow. -->
+    <section class="c-case-intro">
+      <div class="c-case-intro__top">
+        <div class="c-case-intro__designer">
+          <span class="c-case-intro__label">Case 001</span>
+          <div class="c-case-intro__portrait-wrap">
+            <p class="c-case-intro__signature">Maxime Lis</p>
+            <Image
+              src={maximeLisImg}
+              alt="Maxime Lis"
+              class="c-case-intro__portrait"
+            />
+          </div>
+        </div>
+        <div class="c-case-intro__copy">
+          <p class="c-case-intro__copy-bold">
+            For its first collector edition, Oenofy partnered with
+            French designer Maxime Lis to create an object that
+            extends beyond its original function.
+          </p>
+          <p class="c-case-intro__copy-body">
+            Known for his contemporary furniture inspired by historical
+            references, Maxime Lis develops objects that explore
+            materiality, proportion and permanence. His work reflects
+            a dialogue between heritage and contemporary design, where
+            every detail is considered with precision and purpose.
+          </p>
+          <p class="c-case-intro__copy-body">
+            Designed to protect valuable objects through hidden
+            compartments and ingenious mechanisms, these pieces
+            combined discretion, craftsmanship and prestige.
+          </p>
+          <p class="c-case-intro__copy-body">
+            Reinterpreted through a contemporary lens, this heritage
+            became the foundation for Oenofy's first collector object:
+            a piece conceived to house exceptional wines while
+            remaining, long after the bottles have been enjoyed, an
+            object worthy of being collected in its own right.
+          </p>
+          <blockquote class="c-case-intro__quote">
+            &ldquo;From royal travel chests to contemporary
+            collectors.&rdquo;
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video gallery — replicates Collection's sticky grow-on-scroll
+         stage, but with a video instead of an image. Video plays when
+         it enters the viewport (see case-1-page.js). -->
+    <div class="c-case-gallery" data-case-gallery>
+      <div class="c-case-gallery__sticky">
+        <div class="c-case-gallery__media" data-case-gallery-media>
+          <video
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            class="cc-fill_cover"
+            data-case-gallery-video
+          >
+            <source src="/assets/case-1/case-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 1 — full-width image + copy about materials/editions. -->
+    <section class="c-case-product">
+      <div class="c-case-product__media">
+        <Image src={productImg5} alt="" class="cc-fill_cover" />
+      </div>
+      <div class="c-case-product__copy">
+        <p class="c-case-product__copy-bold">
+          Produced in France in a limited annual edition of up to fifty
+          pieces, each Malle is handcrafted from carefully selected
+          noble materials and requires specialist expertise in
+          precision metalwork.
+        </p>
+        <p class="c-case-product__copy-body">
+          Its exterior is available in stainless steel or brass, with
+          mirror, satin or black finishes. Each piece contains eight
+          exceptional bottles, chosen through either the Château
+          Selection, centred on the great wines of Bordeaux, or the
+          Domaine Selection, dedicated to distinguished Burgundy
+          estates. The final composition is individually curated and
+          confirmed in the personalised proposal, while maintaining the
+          intended balance between the object, the wines and the overall
+          value of the Collection.
+        </p>
+        <p class="c-case-product__copy-body">
+          Designed to remain long after the wines have been enjoyed, the
+          Malle des Secrets incorporates a concealed double-bottom
+          compartment for personal keepsakes. Removable feet allow it to
+          be transformed into a piece of furniture, while its
+          architectural form also enables it to be displayed within an
+          interior.
+        </p>
+        <p class="c-case-product__copy-body">
+          Each numbered piece is accompanied by a Certificate of
+          Authenticity signed by the designer.
+        </p>
+        <p class="c-case-product__copy-body">
+          Detailed care instructions are provided upon delivery.
+        </p>
+      </div>
+    </section>
+
+    <!-- Product 2 — image carousel, replicates the homepage slider
+         (centered, infinite, draggable) with a floating Configure
+         button top-right. See case-1-slider.js. -->
+    <div class="c-case-slider">
+      <a href="#" class="c-configure-button">Configure</a>
+      <div class="c-case-slider__viewport" data-case-slider>
+        <div class="c-case-slider__track" data-case-slider-track>
+          {[productImg1, productImg2, productImg3, productImg1, productImg2, productImg3].map((img) => (
+            <div class="c-case-slider__slide" data-case-slider-slide>
+              <div class="c-case-slider__media">
+                <Image src={img} alt="" class="cc-fill_cover" />
+              </div>
+              <div class="c-case-slider__slide-overlay"></div>
+            </div>
+          ))}
+        </div>
+
+        <button
+          class="c-case-slider__arrow c-case-slider__arrow--prev"
+          data-case-slider-prev
+          aria-label="Previous slide"
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 6 9 12 15 18"></polyline>
+          </svg>
+        </button>
+        <button
+          class="c-case-slider__arrow c-case-slider__arrow--next"
+          data-case-slider-next
+          aria-label="Next slide"
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 6 15 12 9 18"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Product 3 — full-bleed image bg with accent overlay + quote. -->
+    <section
+      class="c-case-quote"
+      style={`background-image: url(${product2Bg.src})`}
+    >
+      <div class="c-case-quote__overlay"></div>
+      <blockquote class="c-case-quote__text">
+        &ldquo;Where wine becomes part of a collectible design
+        object&rdquo;
+      </blockquote>
+    </section>
+
+    <!-- Product 4 — image left, Case 001 title + closing copy right. -->
+    <section class="c-case-final">
+      <div class="c-case-final__media">
+        <Image src={productImg3} alt="Case 001" class="cc-fill_cover" />
+      </div>
+      <div class="c-case-final__copy">
+        <h2 class="c-case-final__title">Case 001</h2>
+        <p class="c-case-final__copy-bold">
+          The Case 001 was conceived as an object designed to remain
+          long after its original purpose has been fulfilled.
+        </p>
+        <p class="c-case-final__copy-body">
+          Oenofy and Maxime Lis imagined a collectible object whose
+          function evolves over time. A hidden compartment preserves
+          documents and personal keepsakes, while removable legs allow
+          the Collection to become a discreet piece of furniture or a
+          permanent object.
+        </p>
+        <p class="c-case-final__copy-body">
+          Wine marks the beginning of its story.
+        </p>
+      </div>
+    </section>
+
+    <!-- Production — copy left (incl. accent quote), image right. -->
+    <section class="c-case-production">
+      <div class="c-case-production__copy">
+        <p class="c-case-production__copy-body">
+          Every object is produced in France by specialist artisan
+          workshops selected for their expertise in precision metalwork
+          and fine cabinetmaking.
+        </p>
+        <p class="c-case-production__copy-body">
+          Each Collection is assembled by hand, inspected throughout
+          production and individually finished before receiving its
+          serial number and Certificate of Authenticity.
+        </p>
+        <p class="c-case-production__copy-body">
+          Production is intentionally limited to a maximum of fifty
+          pieces per year, allowing every object to receive the
+          attention required by its complexity.
+        </p>
+        <blockquote class="c-case-production__quote">
+          &ldquo;Designed to remain.&rdquo;
+        </blockquote>
+      </div>
+      <div class="c-case-production__media">
+        <Image src={productImg4} alt="" class="cc-fill_cover" />
+      </div>
+    </section>
+
+    <!-- Wine Selection — image left, title + copy (incl. accent quote)
+         right. -->
+    <section class="c-case-wine">
+      <div class="c-case-wine__media">
+        <Image src={productImg6} alt="" class="cc-fill_cover" />
+      </div>
+      <div class="c-case-wine__copy">
+        <h2 class="c-case-wine__title">Wine Selection</h2>
+        <p class="c-case-wine__copy-body">
+          Every Collection contains eight exceptional bottles selected
+          specifically for the project. Clients may choose between two
+          distinct philosophies.
+        </p>
+        <p class="c-case-wine__copy-bold">
+          The Château Selection brings together the great classified
+          estates of Bordeaux.
+        </p>
+        <p class="c-case-wine__copy-bold">
+          The Domaine Selection focuses on some of Burgundy's most
+          respected domaines.
+        </p>
+        <p class="c-case-wine__copy-body">
+          Rather than reproducing a fixed list of wines, every
+          Collection is individually composed according to
+          availability, provenance, client preferences and long-term
+          coherence. The wines illustrated throughout this website
+          represent the intended level of each Collection and do not
+          necessarily constitute its final composition.
+        </p>
+        <blockquote class="c-case-wine__quote">
+          &ldquo;Crafted around wine.<br />Designed for a lifetime.&rdquo;
+        </blockquote>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  import "../scripts/case-1-page.js";
+  import "../scripts/case-1-slider.js";
+</script>

@@ -1,0 +1,375 @@
+/* Events page — section styles scoped here, following the same
+   c- / cc- / is- convention as home.css. REM by default; PX only where
+   a mobile breakpoint needs it. */
+
+/* Hero */
+
+.c-events-hero {
+  /* Fixed, not sticky — same pattern as .c-hero on the homepage. Locked
+     to the viewport; .c-events-flow rides up and over it. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-montserrat);
+  z-index: 0;
+}
+
+.c-events-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.c-events-hero__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.c-events-hero__title {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 4.5rem; /* 72px */
+  line-height: 1.15;
+  color: var(--color-text-light);
+  letter-spacing: 0;
+}
+
+/* All content below the hero. Starts one viewport down so the hero
+   shows first, then this block scrolls up and over it — same mechanism
+   as .c-page-flow on the homepage. */
+.c-events-flow {
+  position: relative;
+  z-index: 1;
+  margin-top: 100vh;
+}
+
+/* Intro — duplicated from Collection's __top / __bottom pattern. */
+.c-events-intro {
+  width: 100%;
+  background: var(--color-bg-page);
+}
+
+/* Part 1 — heading + copy side by side */
+.c-events-intro__top {
+  padding: 12rem 4rem 8rem;
+}
+
+.c-events-intro__top-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4rem;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.c-events-intro__heading {
+  flex: 0 1 40%;
+  margin: 0;
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 2.15rem;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-events-intro__copy {
+  flex: 0 1 40%;
+  font-family: var(--font-montserrat);
+}
+
+.c-events-intro__copy-bold {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+
+.c-events-intro__copy-body {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-events-intro__copy-body:last-child {
+  margin-bottom: 0;
+}
+
+/* Part 2 — 3x1 image grid (replaces Collection's scroll-grow gallery) */
+.c-events-intro__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 0 4rem;
+}
+
+.c-events-intro__grid-item {
+  position: relative;
+  aspect-ratio: 5 / 7;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Part 3 — closing copy, right column only (left stays empty to keep
+   the same 2-column rhythm as Part 1). Duplicated pattern, ready to
+   use once copy for it is provided. */
+.c-events-intro__bottom {
+  padding: 8rem 4rem 12rem;
+}
+
+.c-events-intro__bottom-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4rem;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.c-events-intro__bottom-copy {
+  flex: 0 1 45%;
+  font-family: var(--font-montserrat);
+}
+
+.c-events-intro__bottom-copy p {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-events-intro__quote {
+  margin: 4rem 0 0;
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+/* Beyond The Table — same layout as Conciergerie's Founder section:
+   copy left, media right + light overlay, 100vh. */
+.c-events-beyond {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  background: #fff;
+}
+
+.c-events-beyond__copy {
+  flex: 0 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 8rem 6rem 0 8rem;
+}
+
+.c-events-beyond__title {
+  /* same styles as .c-events-intro__heading */
+  margin: 0 0 2rem;
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 2.15rem;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-events-beyond__body {
+  max-width: 35rem;
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.c-events-beyond__body--bold {
+  font-weight: 700;
+}
+
+.c-events-beyond__quote {
+  max-width: 35rem;
+  margin: 4rem 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-accent);
+}
+
+.c-events-beyond__media {
+  position: relative;
+  flex: 0 1 50%;
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.c-events-beyond__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 246, 231, 0.15);
+  pointer-events: none;
+}
+
+/* Cases — 4 cards stacked one below another, no gap, no animation.
+   Duplicated from Collection's .c-collection-cases. */
+.c-events-cases {
+  width: 100%;
+  padding: 8rem 2rem;
+  background: #fff;
+}
+
+.c-events-cases__card {
+  position: relative;
+  height: 30rem;
+  overflow: hidden;
+}
+
+.c-events-cases__card img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c-events-cases__content {
+  position: absolute;
+  left: 3rem;
+  top: 0;
+  bottom: 0;
+  height: 80%;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.c-events-cases__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 2.6rem;
+  color: var(--color-text-dark);
+}
+
+.c-events-cases__link {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  transition: opacity 0.2s ease;
+}
+
+.c-events-cases__content--light .c-events-cases__title,
+.c-events-cases__content--light .c-events-cases__link {
+  color: var(--color-text-light);
+}
+
+@media (max-width: 768px) {
+  .c-events-hero__title {
+    font-size: 40px !important;
+  }
+  .c-events-hero__content {
+    padding: 0 24px !important;
+  }
+
+  .c-events-intro__top,
+  .c-events-intro__bottom {
+    padding: 60px 24px !important;
+  }
+  .c-events-intro__top-wrap,
+  .c-events-intro__bottom-wrap {
+    flex-direction: column !important;
+    gap: 32px !important;
+    max-width: 100% !important;
+  }
+  .c-events-intro__heading {
+    flex: none !important;
+    font-size: 28px !important;
+  }
+  .c-events-intro__copy,
+  .c-events-intro__bottom-copy {
+    flex: none !important;
+  }
+  .c-events-intro__copy-bold,
+  .c-events-intro__copy-body,
+  .c-events-intro__bottom-copy p {
+    font-size: 17px !important;
+  }
+
+  .c-events-intro__grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 0 24px !important;
+  }
+
+  .c-events-intro__quote {
+    font-size: 22px !important;
+  }
+
+  /* Beyond The Table — stack to a single column, media on top */
+  .c-events-beyond {
+    height: auto !important;
+    flex-direction: column-reverse !important;
+  }
+  .c-events-beyond__media,
+  .c-events-beyond__copy {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .c-events-beyond__media {
+    height: 60vh !important;
+  }
+  .c-events-beyond__copy {
+    padding: 48px 24px !important;
+  }
+  .c-events-beyond__title {
+    font-size: 28px !important;
+  }
+  .c-events-beyond__body {
+    font-size: 17px !important;
+    max-width: 100% !important;
+  }
+  .c-events-beyond__quote {
+    font-size: 22px !important;
+    max-width: 100% !important;
+    margin: 14px 0 0 !important;
+  }
+
+  /* Cases */
+  .c-events-cases {
+    padding: 48px 16px !important;
+  }
+  .c-events-cases__card {
+    height: 20vh !important;
+  }
+  .c-events-cases__content {
+    left: 24px !important;
+    height: 85% !important;
+  }
+  .c-events-cases__title {
+    font-size: 32px !important;
+  }
+  .c-events-cases__link {
+    font-size: 15px !important;
+  }
+}
