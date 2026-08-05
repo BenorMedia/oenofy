@@ -23,10 +23,11 @@
 
 .c-case-hero {
   position: relative;
-  /* Extra scroll room (beyond the 100vh stage below) so the
-     title-fade + image-rise animation has space to breathe before
-     Intro appears. Bump this if it still feels rushed. */
-  height: 200vh;
+  /* Outer is taller than the 100vh sticky stage below; the difference
+     (here 50vh) is the scroll distance the animation plays over. Less
+     extra height = animation keeps pace with the scroll (feels 1:1);
+     more = slower/more room. Tune this single value if the pace is off. */
+  height: 150vh;
   overflow: visible;
 }
 
