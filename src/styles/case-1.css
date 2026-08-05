@@ -679,3 +679,42 @@
     font-size: 22px !important;
   }
 }
+
+/* Tablet / small-laptop — relax the oversized desktop paddings, gaps
+   and max-widths that overreach between 769px and 1280px. */
+@media (min-width: 769px) and (max-width: 1280px) {
+  .c-case-intro__top {
+    gap: 4rem;
+  }
+  .c-case-intro__quote {
+    margin: 4rem 0 0;
+    max-width: 90%;
+  }
+  .c-case-product__copy {
+    padding: 2rem 3.5rem;
+  }
+  .c-case-final__copy {
+    flex: 0 1 42%;
+    max-width: 100%;
+  }
+  .c-case-final__title {
+    margin: 0 0 4rem;
+  }
+  .c-case-final__media {
+    flex: 0 1 60%;
+  }
+  .c-case-production {
+    gap: 5rem;
+    padding: 8rem 6rem 8rem 8rem;
+  }
+  .c-case-wine {
+    padding: 8rem 8rem 8rem 8rem;
+    gap: 6rem;
+  }
+  .c-case-wine__copy {
+    padding-right: 0;
+  }
+  .c-case-wine__media {
+    margin-bottom: auto;
+  }
+}
