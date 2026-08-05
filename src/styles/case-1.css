@@ -79,31 +79,42 @@
 .c-case-intro {
   position: relative;
   width: 100%;
-  padding: 20rem 6rem 10rem;
+  padding: 5rem 12rem 10rem;
 }
 
 .c-case-intro__top {
   display: flex;
   align-items: flex-start;
-  gap: 6rem;
+  justify-content: center;
+  gap: 9rem;
 }
 
 .c-case-intro__designer {
-  flex: 0 1 30%;
+  flex: 1 1 55%;
 }
 
 .c-case-intro__label {
   display: block;
   margin-bottom: 1rem;
   font-family: var(--font-montserrat);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: 1.75rem;
+  font-size: 2.45rem;
   color: var(--color-accent);
 }
 
+/* Signature sits absolutely over the top-center of the portrait. */
+.c-case-intro__portrait-wrap {
+  position: relative;
+}
+
 .c-case-intro__signature {
-  margin: 0 0 1.5rem;
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  margin: 0;
   font-family: var(--font-conso);
   font-style: italic;
   font-size: 2rem;
@@ -117,7 +128,7 @@
 }
 
 .c-case-intro__copy {
-  flex: 0 1 55%;
+  flex: 0 1 45%;
   font-family: var(--font-montserrat);
 }
 
@@ -138,9 +149,10 @@
 }
 
 .c-case-intro__quote {
-  margin: 3rem 0 0;
+  margin: 10rem 0 0;
+  max-width: 70%;
   font-size: 1.75rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.5;
   color: var(--color-accent);
 }
@@ -180,6 +192,7 @@
   display: flex;
   align-items: stretch;
   min-height: 100vh;
+  padding-top: 8rem;
 }
 
 .c-case-product__media {
@@ -193,7 +206,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6rem;
+  padding: 2rem 9rem;
   font-family: var(--font-montserrat);
 }
 
@@ -225,14 +238,14 @@
   padding: 8rem 0;
 }
 
-.c-case-slider__configure {
+.c-configure-button {
   position: absolute;
-  top: 4rem;
+  top: 7rem;
   right: 4rem;
   z-index: 4;
   padding: 0.85rem 2rem;
   border-radius: 15rem;
-  background: rgba(57, 56, 57, 0.85);
+  background: rgba(57, 56, 57, 1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   font-family: var(--font-montserrat);
@@ -241,9 +254,9 @@
   color: var(--color-text-light);
 }
 
-.c-case-slider__configure:hover {
+.c-configure-button:hover {
   color: var(--color-text-light);
-  background: rgba(57, 56, 57, 1);
+  background: rgba(57, 56, 57, 0.85);
 }
 
 .c-case-slider__viewport {
@@ -354,7 +367,7 @@
   padding: 0 6rem 6rem;
   max-width: 40rem;
   font-family: var(--font-montserrat);
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1.5;
   color: var(--color-text-dark);
@@ -364,24 +377,27 @@
 .c-case-final {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5rem;
   padding: 8rem 6rem;
 }
 
 .c-case-final__media {
   position: relative;
-  flex: 0 1 50%;
+  flex: 0 1 55%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
 }
 
 .c-case-final__copy {
   flex: 0 1 40%;
+  max-width: 33%;
+  margin-bottom: auto;
   font-family: var(--font-montserrat);
 }
 
 .c-case-final__title {
-  margin: 0 0 4rem;
+  margin: 0 0 10rem;
   font-family: var(--font-montserrat);
   font-weight: 600;
   text-transform: uppercase;
@@ -391,16 +407,18 @@
 }
 
 .c-case-final__copy-bold {
+  max-width: 90%;
   margin: 0 0 1.5rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.6;
   color: var(--color-text-dark);
 }
 
 .c-case-final__copy-body {
+  max-width: 90%;
   margin: 0 0 1.5rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.7;
   color: var(--color-text-dark);
@@ -414,8 +432,9 @@
 .c-case-production {
   display: flex;
   align-items: center;
-  gap: 5rem;
-  padding: 8rem 6rem;
+  justify-content: center;
+  gap: 10rem;
+  padding: 8rem 6rem 8rem 13rem;
 }
 
 .c-case-production__copy {
@@ -451,19 +470,21 @@
 .c-case-wine {
   display: flex;
   align-items: center;
-  gap: 5rem;
-  padding: 8rem 6rem;
+  justify-content: center;
+  gap: 10rem;
+  padding: 8rem 13rem 8rem 8rem;
 }
 
 .c-case-wine__media {
   position: relative;
-  flex: 0 1 45%;
+  flex: 0 1 60%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
 }
 
 .c-case-wine__copy {
   flex: 0 1 45%;
+  padding-right: 6rem;
   font-family: var(--font-montserrat);
 }
 
@@ -479,7 +500,7 @@
 
 .c-case-wine__copy-body {
   margin: 0 0 1.5rem;
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   font-weight: 400;
   line-height: 1.7;
   color: var(--color-text-dark);
@@ -487,7 +508,7 @@
 
 .c-case-wine__copy-bold {
   margin: 0 0 1.5rem;
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.6;
   color: var(--color-text-dark);
@@ -529,6 +550,8 @@
   }
   .c-case-intro__quote {
     font-size: 22px !important;
+    max-width: 100% !important;
+    margin-top: 48px !important;
   }
 
   /* Video gallery — skip the scroll-grow on mobile, static full-width */
@@ -569,7 +592,7 @@
   .c-case-slider {
     padding: 60px 0 !important;
   }
-  .c-case-slider__configure {
+  .c-configure-button {
     top: 16px !important;
     right: 16px !important;
     font-size: 14px !important;
@@ -601,6 +624,7 @@
   .c-case-final__copy {
     flex: none !important;
     width: 100% !important;
+    max-width: 100% !important;
   }
   .c-case-final__title {
     font-size: 28px !important;
@@ -640,6 +664,9 @@
   .c-case-wine__copy {
     flex: none !important;
     width: 100% !important;
+  }
+  .c-case-wine__copy {
+    padding-right: 0 !important;
   }
   .c-case-wine__title {
     font-size: 28px !important;

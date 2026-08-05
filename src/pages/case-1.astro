@@ -50,12 +50,14 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
       <div class="c-case-intro__top">
         <div class="c-case-intro__designer">
           <span class="c-case-intro__label">Case 001</span>
-          <p class="c-case-intro__signature">Maxime Lis</p>
-          <Image
-            src={maximeLisImg}
-            alt="Maxime Lis"
-            class="c-case-intro__portrait"
-          />
+          <div class="c-case-intro__portrait-wrap">
+            <p class="c-case-intro__signature">Maxime Lis</p>
+            <Image
+              src={maximeLisImg}
+              alt="Maxime Lis"
+              class="c-case-intro__portrait"
+            />
+          </div>
         </div>
         <div class="c-case-intro__copy">
           <p class="c-case-intro__copy-bold">
@@ -155,7 +157,7 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
          (centered, infinite, draggable) with a floating Configure
          button top-right. See case-1-slider.js. -->
     <div class="c-case-slider">
-      <a href="#" class="c-case-slider__configure">Configure</a>
+      <a href="#" class="c-configure-button">Configure</a>
       <div class="c-case-slider__viewport" data-case-slider>
         <div class="c-case-slider__track" data-case-slider-track>
           {[productImg1, productImg2, productImg3, productImg1, productImg2, productImg3].map((img) => (
