@@ -49,7 +49,7 @@
   text-transform: uppercase;
   font-size: 4.5rem; /* 72px */
   line-height: 1.15;
-  color: var(--color-text-dark);
+  color: var(--color-text-light);
   letter-spacing: 0;
 }
 
