@@ -38,48 +38,74 @@ if (galleryWrap && galleryImage) {
   });
 }
 
-// Cases — final section. Each card animates independently as it enters
-// the viewport: image fades in first, then the title/link content.
-// Fires once (10% into the card entering) and never replays — scrolling
-// back up past the section won't re-trigger it.
+// Cases — sticky stacked-cards effect. Card 1 holds centered; as the
+// user scrolls, it scales down toward center while the next card
+// slides up from below into its place, then that card becomes the one
+// that recedes, and so on. Fully scroll-scrubbed (not one-shot), so it
+// reverses cleanly on scroll-up. Desktop-only — mobile drops the
+// effect for cards in normal flow (see collection.css); also skipped
+// under prefers-reduced-motion.
+const casesSection = document.querySelector(".c-collection-cases");
 const caseCards = gsap.utils.toArray("[data-case-card]");
 
-if (caseCards.length) {
+if (casesSection && caseCards.length > 1) {
   const mm = gsap.matchMedia();
 
-  mm.add("(prefers-reduced-motion: no-preference)", () => {
-    const triggers = caseCards.map((card) => {
-      const img = card.querySelector("img");
-      const content = card.querySelector("[data-case-content]");
+  mm.add(
+    "(min-width: 769px) and (prefers-reduced-motion: no-preference)",
+    () => {
+      const total = caseCards.length;
+      const segment = 1 / (total - 1); // scroll progress "slice" per transition
 
-      gsap.set(img, { autoAlpha: 0 });
-      gsap.set(content, { autoAlpha: 0, y: 20 });
+      // Initial state before any scroll: card 0 centered, everything
+      // else parked just below the viewport, waiting its turn.
+      gsap.set(caseCards[0], { scale: 1, y: 0 });
+      gsap.set(caseCards.slice(1), { scale: 1, y: "100vh" });
 
-      return ScrollTrigger.create({
-        trigger: card,
-        start: "top 90%", // fires ~10% into the card entering view
-        once: true,
-        onEnter: () => {
-          gsap
-            .timeline()
-            .to(img, { autoAlpha: 1, duration: 0.6, ease: "power2.out" })
-            .to(
-              content,
-              { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
-              "-=0.2"
-            );
+      const st = ScrollTrigger.create({
+        trigger: casesSection,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: (self) => {
+          // Which transition we're currently in, and how far through it.
+          const active = Math.min(
+            Math.floor(self.progress / segment),
+            total - 2
+          );
+          const t = Math.min(
+            (self.progress - active * segment) / segment,
+            1
+          );
+
+          caseCards.forEach((card, i) => {
+            if (i < active) {
+              // Already receded from an earlier transition — settled.
+              gsap.set(card, { scale: 0.7, y: 0 });
+            } else if (i === active) {
+              // Outgoing card for this transition: shrinks to center.
+              gsap.set(card, {
+                scale: gsap.utils.interpolate(1, 0.7, t),
+                y: 0,
+              });
+            } else if (i === active + 1) {
+              // Incoming card: slides up from below into place.
+              gsap.set(card, {
+                scale: 1,
+                y: `${gsap.utils.interpolate(100, 0, t)}vh`,
+              });
+            } else {
+              // Not its turn yet — parked just below the viewport.
+              gsap.set(card, { scale: 1, y: "100vh" });
+            }
+          });
         },
       });
-    });
 
-    return () => {
-      triggers.forEach((st) => st.kill());
-      caseCards.forEach((card) => {
-        gsap.set(card.querySelector("img"), { clearProps: "all" });
-        gsap.set(card.querySelector("[data-case-content]"), {
-          clearProps: "all",
-        });
-      });
-    };
-  });
+      return () => {
+        st.kill();
+        gsap.set(caseCards, { clearProps: "all" });
+      };
+    }
+  );
 }
