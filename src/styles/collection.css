@@ -143,7 +143,7 @@
 /* Part 3 — closing copy, right column only (left stays empty to keep
    the same 2-column rhythm as Part 1). Same layout pattern as Part 1. */
 .c-collection-intro__bottom {
-  padding: 12rem 4rem 9rem;
+  padding: 10rem 4rem 7rem;
 }
 
 .c-collection-intro__bottom-wrap {
@@ -160,7 +160,7 @@
 }
 
 .c-collection-intro__bottom-copy {
-  flex: 0 1 31%;
+  flex: 0 1 45%;
   font-family: var(--font-montserrat);
 }
 
