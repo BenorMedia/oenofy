@@ -1,16 +1,75 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import heroImg from "../assets/events/hero-img.png";
+import eventGrid1 from "../assets/events/event-grid1.png";
+import eventGrid2 from "../assets/events/event-grid2.png";
+import eventGrid3 from "../assets/events/event-grid3.png";
 import "../styles/events.css";
 ---
 
 <BaseLayout
-  title="Events — OENOFY"
-  description="Private wine events curated by Oenofy."
-  navVariant="dark"
+  title="Private Events — OENOFY"
+  description="Private wine tastings and events curated by Oenofy."
+  navVariant="light"
 >
-  <main class="c-events-page">
-    <!-- Sections added here as designs come in. -->
-  </main>
+  <div class="c-events-hero">
+    <div class="c-events-hero__media">
+      <Image src={heroImg} alt="Private Events" class="cc-fill_cover" />
+    </div>
+    <div class="c-events-hero__content">
+      <h1 class="c-events-hero__title">Private Events</h1>
+    </div>
+  </div>
+
+  <div class="c-events-flow">
+    <!-- Intro — scrolls up and over the fixed hero, same mechanism as
+         Hero -> IntroSection on the homepage. Duplicated from
+         Collection's __top pattern; __bottom pattern exists in CSS,
+         ready to use once copy for it is provided. -->
+    <section class="c-events-intro">
+      <!-- Part 1: heading + copy, side by side -->
+      <div class="c-events-intro__top">
+        <div class="c-events-intro__top-wrap">
+          <h2 class="c-events-intro__heading">
+            Private Wine Tasting And Events
+          </h2>
+          <div class="c-events-intro__copy">
+            <p class="c-events-intro__copy-bold">
+              For private dinners, tastings and intimate occasions,
+              Oenofy approaches the wine with the same attention to
+              atmosphere, setting and the occasion.
+            </p>
+            <p class="c-events-intro__copy-body">
+              Some moments are simple: a private wine tasting at home,
+              a small dinner, the right bottles opened at the right
+              time. Others unfold over a longer evening, shaped around
+              a particular menu, setting or moment. The scale changes.
+              The approach does not.
+            </p>
+            <p class="c-events-intro__copy-body">
+              Wine is chosen for what it adds to the occasion, not for
+              what it signals.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: 3x1 image grid, replaces Collection's scroll-grow
+           gallery. -->
+      <div class="c-events-intro__grid">
+        <div class="c-events-intro__grid-item">
+          <Image src={eventGrid1} alt="" class="cc-fill_cover" />
+        </div>
+        <div class="c-events-intro__grid-item">
+          <Image src={eventGrid2} alt="" class="cc-fill_cover" />
+        </div>
+        <div class="c-events-intro__grid-item">
+          <Image src={eventGrid3} alt="" class="cc-fill_cover" />
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <script>
