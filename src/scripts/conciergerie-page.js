@@ -39,3 +39,46 @@ if (galleryWrap && galleryImage) {
     };
   });
 }
+
+// Founder (1/2 and 2/2) — media parallax. Image is oversized in CSS
+// (150% height) so this transform always has room to move without
+// exposing an edge. Desktop-only; skipped under prefers-reduced-motion.
+const parallaxSections = gsap.utils.toArray("[data-parallax]");
+
+if (parallaxSections.length) {
+  const mm = gsap.matchMedia();
+
+  mm.add(
+    "(min-width: 769px) and (prefers-reduced-motion: no-preference)",
+    () => {
+      const tweens = parallaxSections.map((section) => {
+        const img = section.querySelector("[data-parallax-img]");
+        if (!img) return null;
+
+        return gsap.fromTo(
+          img,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
+
+      return () => {
+        tweens.forEach((tween) => tween && tween.kill());
+        parallaxSections.forEach((section) => {
+          gsap.set(section.querySelector("[data-parallax-img]"), {
+            clearProps: "all",
+          });
+        });
+      };
+    }
+  );
+}
