@@ -1,0 +1,7 @@
+/* Collection page — section styles scoped here, following the same
+   c- / cc- / is- convention as home.css. REM by default; PX only where
+   a mobile breakpoint needs it. */
+
+.c-collection-page {
+  background-color: var(--color-bg-page);
+}

@@ -1,16 +1,19 @@
 ---
 import SiteNav from "../components/SiteNav.astro";
+import SiteNavDark from "../components/SiteNavDark.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
+  navVariant?: "light" | "dark";
 }
 
 const {
   title = "OENOFY — From Quiet Cellar To Private Hands",
   description = "OENOFY is a private wine concierge working with a limited number of clients on collections, private events and collector objects conceived around wine.",
+  navVariant = "light",
 } = Astro.props;
 ---
 
@@ -32,7 +35,7 @@ const {
     />
   </head>
   <body>
-    <SiteNav />
+    {navVariant === "dark" ? <SiteNavDark /> : <SiteNav />}
     <slot />
     <SiteFooter />
 

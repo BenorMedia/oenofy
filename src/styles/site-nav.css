@@ -42,6 +42,20 @@
 
 .c-nav__mark {
   pointer-events: auto;
+  color: var(--color-icon);
+}
+
+/* Dark variant — dark text/logo, no bg color on scroll (blur only). */
+.c-nav--dark .c-nav__link {
+  color: var(--color-text-dark);
+}
+
+.c-nav--dark .c-nav__mark {
+  color: var(--color-text-dark);
+}
+
+.c-nav--dark.is-scrolled {
+  background-color: transparent;
 }
 
 .c-nav__mark svg {
