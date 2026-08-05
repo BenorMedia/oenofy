@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import introImg from "../assets/collection/intro-img.png";
+import case1 from "../assets/collection/case1.png";
+import case2 from "../assets/collection/case2.png";
 import "../styles/collection.css";
 ---
 
@@ -85,6 +87,26 @@ import "../styles/collection.css";
               remains.&rdquo;
             </blockquote>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cases — final section, 2 full-bleed cards stacked 50/50. Text
+         fades in on scroll (collection-page.js): card 1 at ~15% of the
+         section's scroll pass-through, card 2 at ~50%. -->
+    <section class="c-collection-cases" data-cases>
+      <div class="c-collection-cases__card">
+        <Image src={case1} alt="Case 001" class="cc-fill_cover" />
+        <div class="c-collection-cases__content" data-case-content="1">
+          <h3 class="c-collection-cases__title">Case 001</h3>
+          <a href="#" class="c-collection-cases__link">Discover →</a>
+        </div>
+      </div>
+      <div class="c-collection-cases__card">
+        <Image src={case2} alt="Case 002" class="cc-fill_cover" />
+        <div class="c-collection-cases__content" data-case-content="2">
+          <h3 class="c-collection-cases__title">Case 002</h3>
+          <a href="#" class="c-collection-cases__link">Discover →</a>
         </div>
       </div>
     </section>
