@@ -30,9 +30,9 @@ if (hero && heroTitle && heroImg) {
         gsap.set(heroTitle, { opacity: titleOpacity });
 
         // Image: rises the whole way through, from its resting spot
-        // near the bottom (top: 62vh in CSS) up to roughly 40vh —
-        // close to the title's center (50vh) without overlapping it.
-        const y = gsap.utils.interpolate(0, -22, self.progress);
+        // near the bottom (top: 62vh in CSS) up closer to the title's
+        // center (50vh).
+        const y = gsap.utils.interpolate(0, -47, self.progress);
         gsap.set(heroImg, { y: `${y}vh` });
       },
     });
