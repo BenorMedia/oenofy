@@ -37,3 +37,56 @@ if (galleryWrap && galleryImage) {
     };
   });
 }
+
+// Cases — 3 sticky-stacked cards (see collection.css: position sticky,
+// same top offset). As the next card scrolls up and covers a card, that
+// covered card scales down to 0.7, scrubbed exactly across the scroll
+// distance it takes the next card to travel from just touching this
+// card's bottom edge to reaching its own sticky resting spot (i.e. the
+// full cover transition, no more/less). The last card is never covered,
+// so it never scales.
+const caseCards = gsap.utils.toArray(".c-collection-cases__card");
+
+if (caseCards.length > 1) {
+  const mm2 = gsap.matchMedia();
+
+  mm2.add("(prefers-reduced-motion: no-preference)", () => {
+    const triggers = caseCards.slice(0, -1).map((card, i) => {
+      const next = caseCards[i + 1];
+
+      // Sticky "top" offset read live from computed style so this stays
+      // correct across breakpoints (desktop 6rem vs any future mobile
+      // override) without hardcoding a px value.
+      const nextStickyTop = () => parseFloat(getComputedStyle(next).top) || 0;
+
+      const tween = gsap.fromTo(
+        card,
+        { scale: 1 },
+        {
+          scale: 0.7,
+          ease: "none",
+          scrollTrigger: {
+            trigger: next,
+            // Next card's top touching this card's bottom edge (0% covered).
+            start: () => `top ${nextStickyTop() + card.offsetHeight}px`,
+            // Next card's top reaching its own sticky spot (100% covered).
+            end: () => `top ${nextStickyTop()}px`,
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        }
+      );
+
+      return tween.scrollTrigger;
+    });
+
+    return () => {
+      triggers.forEach((st) => st.kill());
+      gsap.set(caseCards, { clearProps: "scale" });
+    };
+  });
+
+  mm2.add("(prefers-reduced-motion: reduce)", () => {
+    gsap.set(caseCards, { scale: 1 });
+  });
+}
