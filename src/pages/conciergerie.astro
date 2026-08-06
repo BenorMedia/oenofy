@@ -44,7 +44,7 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
     <section class="c-conciergerie-intro">
       <!-- Part 1: heading + copy, side by side -->
       <div class="c-conciergerie-intro__top">
-        <div class="c-conciergerie-intro__top-wrap">
+        <div class="c-conciergerie-intro__top-wrap cc-fade-up">
           <h2 class="c-conciergerie-intro__heading">Wine concierge</h2>
           <div class="c-conciergerie-intro__copy">
             <p class="c-conciergerie-intro__copy-bold">
@@ -80,7 +80,7 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
       </div>
 
       <!-- Part 3: closing copy, right column only -->
-      <div class="c-conciergerie-intro__bottom">
+      <div class="c-conciergerie-intro__bottom cc-fade-up">
         <div class="c-conciergerie-intro__bottom-wrap">
           <div class="c-conciergerie-intro__bottom-spacer"></div>
           <div class="c-conciergerie-intro__bottom-copy">
@@ -106,7 +106,7 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
     <!-- Cellar Service — copy left, media right. No real video yet, so
          the video tag just shows its poster frame until one arrives. -->
     <section class="c-conciergerie-cellar">
-      <div class="c-conciergerie-cellar__copy">
+      <div class="c-conciergerie-cellar__copy cc-fade-up">
         <h2 class="c-conciergerie-cellar__title">Cellar Service</h2>
         <p class="c-conciergerie-cellar__body">
           A bespoke wine cellar is more than a place to store bottles.
@@ -152,7 +152,7 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
       >
         <div class="c-conciergerie-founder__overlay"></div>
       </div>
-      <div class="c-conciergerie-founder__copy">
+      <div class="c-conciergerie-founder__copy cc-fade-up">
         <h2 class="c-conciergerie-founder__title">Founder</h2>
         <p class="c-conciergerie-founder__body c-conciergerie-founder__body--bold">
           The People behind. Oenofy is led by Anastasiia and Benjamin.
@@ -172,7 +172,7 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
     <!-- Founder (2/2) — copy left (incl. quote), media right + light
          overlay. -->
     <section class="c-conciergerie-founder c-conciergerie-founder--reverse">
-      <div class="c-conciergerie-founder__copy">
+      <div class="c-conciergerie-founder__copy cc-fade-up">
         <p class="c-conciergerie-founder__body">
           Benjamin's background is in wine production, with direct
           experience in vineyards and winery operations.
@@ -200,7 +200,7 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
       class="c-conciergerie-contact"
       style={`background-image: url(${contactBg.src})`}
     >
-      <blockquote class="c-conciergerie-contact__quote">
+      <blockquote class="c-conciergerie-contact__quote cc-fade-up">
         &ldquo;Oenofy creates collectible objects, unique cellar and
         lifetime memories.&rdquo;
       </blockquote>
