@@ -74,4 +74,18 @@ a:hover {
   object-position: center;
 }
 
+/* Utility — reusable scroll fade-in-from-bottom hook. Add this class to
+   any element on any page; src/scripts/fade-up.js (loaded globally via
+   BaseLayout) handles the animation. Opacity starts at 0 here so there's
+   no flash of visible content before GSAP takes over on load. */
+.cc-fade-up {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-fade-up {
+    opacity: 1;
+  }
+}
+
 
