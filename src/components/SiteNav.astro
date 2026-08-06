@@ -1,8 +1,18 @@
 ---
 import "../styles/site-nav.css";
+
+interface Props {
+  variant?: "light" | "dark";
+}
+
+const { variant = "light" } = Astro.props;
 ---
 
-<nav id="site-nav" class="c-nav" data-nav>
+<nav
+  id="site-nav"
+  class:list={["c-nav", { "c-nav--dark": variant === "dark" }]}
+  data-nav
+>
   <div class="c-nav__group">
     <a href="/conciergerie" class="c-nav__link">Conciergerie</a>
     <a href="/collection" class="c-nav__link">Collection</a>

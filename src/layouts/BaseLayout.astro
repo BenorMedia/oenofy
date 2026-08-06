@@ -1,6 +1,5 @@
 ---
 import SiteNav from "../components/SiteNav.astro";
-import SiteNavDark from "../components/SiteNavDark.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import "../styles/global.css";
 
@@ -35,7 +34,7 @@ const {
     />
   </head>
   <body>
-    {navVariant === "dark" ? <SiteNavDark /> : <SiteNav />}
+    <SiteNav variant={navVariant} />
     <slot />
     <SiteFooter />
 
