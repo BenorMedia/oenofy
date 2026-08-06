@@ -188,12 +188,13 @@
 /* Cases — 3 cards stacked one below another, no gap, no animation. */
 .c-collection-cases {
   width: 100%;
-  padding: 0 2rem;
+  padding: 0 2rem 8rem 2rem;
   background: #fff;
 }
 
 .c-collection-cases__card {
-  position: relative;
+  position: sticky;
+  top: 6rem;
   height: 40rem;
   overflow: hidden;
 }
