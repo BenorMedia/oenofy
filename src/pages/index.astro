@@ -163,9 +163,9 @@ import "../styles/home.css";
   <!-- Slider — centered carousel: active slide centered, prev/next peek
        at the edges (dimmed via overlay, not filter-blur). 4 identical
        placeholder slides until the client sends real content. -->
-  <div class="c-slider cc-fade-up">
-    <h2 class="c-slider__title">Where Wine Becomes Experience</h2>
-    <div class="c-slider__viewport" data-slider>
+  <div class="c-slider">
+    <h2 class="c-slider__title cc-fade-up">Where Wine Becomes Experience</h2>
+    <div class="c-slider__viewport cc-fade-up" data-slider>
       <div class="c-slider__track" data-slider-track>
         {Array.from({ length: 4 }).map(() => (
           <div class="c-slider__slide" data-slider-slide>
@@ -210,8 +210,8 @@ import "../styles/home.css";
   <!-- News — single sticky image stage; only one image shows at a time
        and the next wipes in top-to-bottom over it as you scroll through
        the text blocks (see news-animations.js). -->
-  <div class="c-news cc-fade-up">
-    <h2 class="c-news__title">News</h2>
+  <div class="c-news">
+    <h2 class="c-news__title cc-fade-up">News</h2>
 
     <div class="c-news__grid">
       <div class="c-news__media" data-news-media>
@@ -222,7 +222,7 @@ import "../styles/home.css";
 
       <div class="c-news__bodies">
         {newsItems.map((item) => (
-          <div class="c-news__body" data-news-body>
+          <div class="c-news__body cc-fade-up" data-news-body>
             <h3 class="c-news__item-title">{item.title}</h3>
             <p class="c-news__subtitle">{item.subtitle}</p>
             <p class="c-news__copy">{item.copy}</p>
