@@ -8,10 +8,20 @@ import { gsap, ScrollTrigger } from "./gsap-setup.js";
 // has crossed 85% down the viewport, i.e. roughly 15% of the element is
 // already in view. Plays once (toggleActions "play none none none") —
 // it doesn't reverse on scroll-up.
+//
+// IMPORTANT: setup is deferred to DOMContentLoaded. This script loads
+// from BaseLayout, which executes before a page's own trailing <script>
+// block (e.g. collection-animations.js's pinned sections). Pins insert a
+// spacer that shifts everything below them further down the page — if we
+// measured trigger positions before that spacer exists, elements below a
+// pin would fire way too early. DOMContentLoaded only fires once every
+// module script (regardless of its position in the document) has already
+// run, so waiting for it guarantees pins are already in place first.
+function setupFadeUp() {
+  const elements = document.querySelectorAll(".cc-fade-up");
 
-const elements = document.querySelectorAll(".cc-fade-up");
+  if (!elements.length) return;
 
-if (elements.length) {
   const mm = gsap.matchMedia();
 
   mm.add("(prefers-reduced-motion: no-preference)", () => {
@@ -43,3 +53,5 @@ if (elements.length) {
     });
   });
 }
+
+document.addEventListener("DOMContentLoaded", setupFadeUp);
