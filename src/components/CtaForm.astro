@@ -1,0 +1,119 @@
+---
+import { Image } from "astro:assets";
+import "../styles/cta-form.css";
+import formBg from "../assets/home/form.png";
+
+// Reusable "Request a Quote" CTA. Drop <CtaForm /> at the bottom of any
+// page — markup, data and styles all travel with the component, so no
+// per-page CSS wiring is needed.
+
+interface Props {
+  title?: string;
+  intro?: string;
+}
+
+const {
+  title = "Request A Quote Or Customization",
+  intro = "Every Oenofy collection begins with a conversation.<br />Share your project with us and we will prepare a personalised proposal based on your objectives, destination and collection profile.",
+} = Astro.props;
+
+// Delivery destinations — main EU countries + USA (placeholder list).
+const countries = [
+  "United States",
+  "United Kingdom",
+  "France",
+  "Germany",
+  "Italy",
+  "Spain",
+  "Portugal",
+  "Netherlands",
+  "Belgium",
+  "Luxembourg",
+  "Ireland",
+  "Austria",
+  "Switzerland",
+  "Sweden",
+  "Denmark",
+  "Finland",
+  "Poland",
+  "Greece",
+  "Czechia",
+  "Hungary",
+  "Romania",
+];
+---
+
+<section class="c-form">
+  <Image src={formBg} alt="" class="cc-fill_cover" />
+  <div class="c-form__inner">
+    <h2 class="c-form__title">{title}</h2>
+    <p class="c-form__intro" set:html={intro}></p>
+
+    <form class="c-form__form" novalidate>
+      <div class="c-form__row c-form__row--triple">
+        <div class="c-form__field">
+          <label class="c-form__label" for="firstName">First Name *</label>
+          <input class="c-form__input" id="firstName" name="firstName" type="text" />
+        </div>
+        <div class="c-form__field">
+          <label class="c-form__label" for="lastName">Last Name *</label>
+          <input class="c-form__input" id="lastName" name="lastName" type="text" />
+        </div>
+        <div class="c-form__field">
+          <label class="c-form__label" for="email">Email address *</label>
+          <input class="c-form__input" id="email" name="email" type="email" />
+        </div>
+      </div>
+
+      <div class="c-form__row c-form__row--triple">
+        <div class="c-form__field">
+          <label class="c-form__label" for="phone">Contact number</label>
+          <input class="c-form__input" id="phone" name="phone" type="tel" />
+        </div>
+        <div class="c-form__field">
+          <label class="c-form__label" for="delivery">Delivery to</label>
+          <select class="c-form__input c-form__select" id="delivery" name="delivery">
+            <option value="" selected hidden></option>
+            {countries.map((c) => <option value={c}>{c}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <div class="c-form__field c-form__field--wide">
+        <label class="c-form__label" for="message">
+          Anything to add to your request ?
+        </label>
+        <input
+          class="c-form__input c-form__input--message"
+          id="message"
+          name="message"
+          type="text"
+          placeholder="Please specify any spacial request , any wish, special occasion or finish if non standard we will find a solution."
+        />
+      </div>
+
+      <div class="c-form__submit-row">
+        <div class="c-form__checks">
+          <label class="c-form__check">
+            <input type="checkbox" name="age" />
+            <span>I confirm that I am of legal drinking age in my country of residence</span>
+          </label>
+          <label class="c-form__check">
+            <input type="checkbox" name="newsletter" checked />
+            <span>Yes, I'd love to receive news and personnalized invitations from Oenofy</span>
+          </label>
+        </div>
+        <button type="button" class="c-form__send">Send</button>
+      </div>
+    </form>
+
+    <p class="c-form__legal">
+      By submitting this request, you acknowledge that you have read our
+      Privacy Policy<br />
+      Submitting a request does not constitute an order or create any payment
+      obligation<br />
+      OENOFY will use the information provided to review and respond to your
+      request. Further information is available in our Privacy Policy.
+    </p>
+  </div>
+</section>

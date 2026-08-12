@@ -10,6 +10,7 @@ import eventCard1 from "../assets/events/event-card1.png";
 import eventCard2 from "../assets/events/event-card2.png";
 import eventCard3 from "../assets/events/event-card3.png";
 import eventCard4 from "../assets/events/event-card4.png";
+import CtaForm from "../components/CtaForm.astro";
 import "../styles/events.css";
 
 const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
@@ -174,6 +175,9 @@ const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
         </div>
       </div>
     </section>
+
+  <!-- Form CTA -->
+  <CtaForm />
   </div>
 </BaseLayout>
 
