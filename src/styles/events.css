@@ -228,16 +228,17 @@
   pointer-events: none;
 }
 
-/* Cases — 4 cards stacked one below another, no gap, no animation.
-   Duplicated from Collection's .c-collection-cases. */
+/* Cases — 4 cards sticky-stacked, same effect as Collection's
+   .c-collection-cases (see collection.css / collection-page.js). */
 .c-events-cases {
   width: 100%;
-  padding: 8rem 2rem;
+  padding: 0 2rem 8rem 2rem;
   background: #fff;
 }
 
 .c-events-cases__card {
-  position: relative;
+  position: sticky;
+  top: 6rem;
   height: 30rem;
   overflow: hidden;
 }
