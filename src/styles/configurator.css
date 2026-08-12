@@ -1,0 +1,23 @@
+/* Configurator page — section styles scoped here, following the same
+   c- / cc- / is- convention as the rest of the site. REM by default;
+   PX only where a mobile breakpoint needs it.
+
+   DRAFT: client hasn't finalized direction yet. Structure below is a
+   placeholder scaffold — sections/classes will be replaced once the
+   design handoff lands. */
+
+/* Hero (placeholder) */
+
+.c-configurator-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-montserrat);
+}
+
+.c-configurator-hero__title {
+  margin: 0;
+  font-family: var(--font-conso);
+  font-weight: 400;
+}

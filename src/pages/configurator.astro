@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/configurator.css";
+
+// DRAFT PAGE — client direction not finalized. Scaffold only, replace
+// once the design handoff lands (assets go in src/assets/configurator
+// and public/assets/configurator).
+---
+
+<BaseLayout
+  title="Configurator — OENOFY"
+  description="Build your Oenofy collection."
+  navVariant="light"
+>
+  <section class="c-configurator-hero">
+    <h1 class="c-configurator-hero__title">Configurator</h1>
+  </section>
+</BaseLayout>
+
+<script>
+  import "../scripts/configurator-page.js";
+</script>
