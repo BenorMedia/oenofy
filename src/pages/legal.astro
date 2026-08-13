@@ -1,0 +1,202 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaForm from "../components/CtaForm.astro";
+import "../styles/legal.css";
+
+// Lorem ipsum placeholder copy throughout — swap once real legal copy
+// is provided. Structure (H1 intro -> sticky TOC -> H2/H3 sections
+// with checklist + quote -> CTA form) follows the supplied design
+// reference.
+
+const checklistItems = ["List item 1", "List item 2", "List item 3", "List item 4"];
+
+const tocItems = [
+  { id: "section-1", label: "Pretium nunc et aliquam" },
+  { id: "section-1-sub", label: "Volutpat pulvinar aliquam" },
+  { id: "section-2", label: "Pretium nunc et aliquam" },
+  { id: "section-2-sub", label: "Volutpat pulvinar aliquam" },
+];
+---
+
+<BaseLayout
+  title="Terms &amp; Conditions — OENOFY"
+  description="Terms and Conditions governing the use of OENOFY's concierge and collection services."
+  navVariant="dark"
+>
+  <header class="c-legal-header">
+    <h1 class="c-legal-header__title">This Is An H1 Lorem<br />Ipsum Dolot</h1>
+    <p class="c-legal-header__intro">
+      These Terms and Conditions (the &ldquo;Terms&rdquo;) set out the terms
+      and conditions on which OENOFY (the &ldquo;Company&rdquo;, the
+      &ldquo;Provider&rdquo;) provides its concierge and collection services
+      (collectively, the &ldquo;Services&rdquo;) to its clients. By entering
+      into a service agreement or using the Services, the client (the
+      &ldquo;Client&rdquo;) acknowledges and agrees to be bound by these
+      Terms.
+    </p>
+  </header>
+
+  <div class="c-legal-body">
+    <aside class="c-legal-toc cc-fade-up">
+      <p class="c-legal-toc__label">Table of Contents</p>
+      <nav class="c-legal-toc__list">
+        {tocItems.map((item, i) => (
+          <a
+            href={`#${item.id}`}
+            class:list={["c-legal-toc__link", { "is-active": i === 0 }]}
+            data-toc-link
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <div class="c-legal-content">
+      <section id="section-1" class="c-legal-section cc-fade-up" data-legal-section>
+        <h2 class="c-legal-section__title--h2">This is an H2</h2>
+        <p>
+          Mi tincidunt elit, id this is a link, amet. Vel etiam suspendisse
+          morbi eleifend faucibus eget vestibulum felis. Dictum quis montes,
+          sit sit. Tellus aliquam enim urna, etiam. Mauris posuere vulputate
+          arcu amet, vitae nisi, tellus tincidunt. At feugiat sapien varius
+          id.
+        </p>
+        <p>
+          Eget quis mi enim, leo lacinia pharetra, semper. Eget in
+          volutpat mollis at volutpat lectus velit, sed auctor. Porttitor
+          fames arcu quis fusce augue enim. Quis at habitant diam at.
+          Suscipit tristique risus, at donec. In turpis vel et quam
+          imperdiet. Ipsum molestie aliquet sodales id est ac volutpat.
+        </p>
+        <p>
+          Dolor enim eu tortor urna sed duis nulla. Aliquam vestibulum,
+          nulla odio nisl vitae. In aliquet pellentesque aenean hac
+          vestibulum turpis mi bibendum diam. Tempor integer aliquam in
+          vitae malesuada fringilla.
+        </p>
+        <ul class="c-legal-list">
+          {checklistItems.map((item) => (
+            <li class="c-legal-list__item">
+              <svg
+                class="c-legal-list__icon"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.4" />
+                <path
+                  d="M6.5 10.2l2.2 2.2 4.8-4.8"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p>
+          Collaboratively deploy intuitive partnerships whereas customized
+          e-markets. Energistically maintain performance based strategic
+          theme areas whereas just in time methodologies. Phosfluorescently
+          drive functionalized intellectual capital and.
+        </p>
+      </section>
+
+      <section id="section-1-sub" class="c-legal-section cc-fade-up" data-legal-section>
+        <h3 class="c-legal-section__title--h3">This is an H3</h3>
+        <p>
+          Tristique odio senectus nam posuere ornare leo metus, ultricies.
+          Blandit duis ultricies vulputate morbi feugiat cras placerat elit.
+          Aliquam tellus lorem sed ac. Montes, sed mattis pellentesque
+          suscipit accumsan. Cursus viverra aenean magna risus elementum
+          faucibus mollis pellentesque. Arcu ultricies sed mauris
+          vestibulum.
+        </p>
+        <blockquote class="c-legal-quote">
+          &ldquo;Ipsum sit mattis nulla quam nulla. Gravida id gravida ac
+          enim mauris id. Non pellentesque congue eget consectetur turpis.
+          Sapien, dictum molestie sem tempor. Diam elit, orci, tincidunt
+          aenean tempus.&rdquo;
+        </blockquote>
+        <p>
+          Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus
+          id scelerisque est ultricies ultricies. Duis est sit leo nisl,
+          blandit elit sagittis. Quisque tristique consequat quam sed. Nisl
+          at scelerisque amet nulla purus habitasse.
+        </p>
+      </section>
+
+      <section id="section-2" class="c-legal-section cc-fade-up" data-legal-section>
+        <h2 class="c-legal-section__title--h2">This is an H2</h2>
+        <p>
+          Praesent sapien massa, convallis a pellentesque nec, egestas non
+          nisi. Vivamus magna justo lacinia eget consectetur sed, convallis
+          at tellus. Curabitur non nulla sit amet nisl tempus convallis
+          quis ac lectus.
+        </p>
+        <p>
+          Nulla porttitor accumsan tincidunt. Pellentesque in ipsum id
+          orci porta dapibus. Donec rutrum congue leo eget malesuada.
+          Proin eget tortor risus. Curabitur aliquet quam id dui posuere
+          blandit.
+        </p>
+        <ul class="c-legal-list">
+          {checklistItems.map((item) => (
+            <li class="c-legal-list__item">
+              <svg
+                class="c-legal-list__icon"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.4" />
+                <path
+                  d="M6.5 10.2l2.2 2.2 4.8-4.8"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p>
+          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+          posuere cubilia curae. Donec velit neque, auctor sit amet
+          aliquam vel, ullamcorper sit amet ligula.
+        </p>
+      </section>
+
+      <section id="section-2-sub" class="c-legal-section cc-fade-up" data-legal-section>
+        <h3 class="c-legal-section__title--h3">This is an H3</h3>
+        <p>
+          Cras ultricies mi eu turpis hendrerit fringilla vel, ipsum id
+          orci porta dapibus. Sed odio morbi quis commodo odio aenean sed
+          adipiscing diam donec adipiscing tristique. Risus nec feugiat in
+          fermentum posuere urna nec.
+        </p>
+        <blockquote class="c-legal-quote">
+          &ldquo;Volutpat pulvinar aliquam et nunc pretium sit amet
+          pretium et. Purus in mollis nunc sed id semper risus in
+          hendrerit.&rdquo;
+        </blockquote>
+        <p>
+          Diam sit amet nisl suscipit adipiscing bibendum est ultricies
+          integer quis auctor elit sed vulputate mi sit amet mauris
+          commodo quis imperdiet a at in tellus integer feugiat.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <CtaForm />
+</BaseLayout>
+
+<script>
+  import "../scripts/legal-page.js";
+</script>
