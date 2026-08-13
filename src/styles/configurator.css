@@ -2,22 +2,264 @@
    c- / cc- / is- convention as the rest of the site. REM by default;
    PX only where a mobile breakpoint needs it.
 
-   DRAFT: client hasn't finalized direction yet. Structure below is a
-   placeholder scaffold — sections/classes will be replaced once the
-   design handoff lands. */
+   DRAFT: client hasn't finalized direction yet. This first pass
+   replicates the "Case 001" reference screen (product view + material
+   switch + Finish CTA) at 100vh; sections after it will grow once real
+   content/flows are confirmed. */
 
-/* Hero (placeholder) */
+/* Hero / product stage */
 
 .c-configurator-hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
   font-family: var(--font-montserrat);
+  /* Soft studio-light gradient + diagonal warm beam, per reference. */
+  background: linear-gradient(160deg, #e7ebee 0%, #f2f0ec 45%, #fbf9f6 100%);
+}
+
+.c-configurator-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.6) 42%,
+    rgba(255, 246, 231, 0.35) 54%,
+    transparent 72%
+  );
+  pointer-events: none;
 }
 
 .c-configurator-hero__title {
+  position: absolute;
+  top: 14%;
+  left: 6%;
+  z-index: 2;
   margin: 0;
   font-family: var(--font-conso);
   font-weight: 400;
+  text-transform: uppercase;
+  font-size: 4.5rem;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  color: var(--color-text-dark);
+}
+
+.c-configurator-hero__product {
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  z-index: 1;
+  width: 34rem;
+  transform: translate(-50%, -50%);
+}
+
+.c-configurator-hero__product img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Thumbnails — vertical stack, right edge */
+
+.c-configurator-hero__thumbs {
+  position: absolute;
+  top: 50%;
+  right: 4.5rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transform: translateY(-50%);
+}
+
+.c-configurator-hero__thumb {
+  width: 4.5rem;
+  height: 4.5rem;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.c-configurator-hero__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c-configurator-hero__thumb:hover {
+  transform: scale(1.08);
+}
+
+.c-configurator-hero__thumb.is-active {
+  border-color: var(--color-accent);
+}
+
+/* Material controls — bottom-left */
+
+.c-configurator-hero__controls {
+  position: absolute;
+  bottom: 13%;
+  left: 6%;
+  z-index: 2;
+}
+
+.c-configurator-hero__label {
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+}
+
+.c-configurator-hero__materials {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.c-configurator-hero__material {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-montserrat);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgba(57, 57, 57, 0.4);
+  transition: color 0.25s ease;
+}
+
+.c-configurator-hero__material.is-active {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* Finish CTA — bottom-center */
+
+.c-configurator-hero__finish {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  padding: 0.85rem 2.5rem;
+  border: none;
+  border-radius: 15rem;
+  background: var(--color-text-dark);
+  font-family: var(--font-montserrat);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.c-configurator-hero__finish:hover {
+  background: rgba(57, 56, 57, 0.85);
+}
+
+/* Summary bar — sits directly below the 100vh hero */
+
+.c-configurator-summary {
+  padding: 3rem 6%;
+  background: var(--color-bg-page);
+}
+
+.c-configurator-summary__name {
+  margin: 0 0 0.4rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.c-configurator-summary__material {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(57, 57, 57, 0.6);
+}
+
+.c-configurator-summary__price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 400;
+  color: var(--color-text-dark);
+}
+
+.c-configurator-summary__info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid rgba(57, 57, 57, 0.5);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: rgba(57, 57, 57, 0.7);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .c-configurator-hero__title {
+    top: 8% !important;
+    font-size: 40px !important;
+  }
+
+  .c-configurator-hero__product {
+    top: 42% !important;
+    left: 50% !important;
+    width: 80vw !important;
+  }
+
+  .c-configurator-hero__thumbs {
+    top: auto !important;
+    bottom: 26% !important;
+    right: 50% !important;
+    flex-direction: row !important;
+    gap: 12px !important;
+    transform: translateX(50%) !important;
+  }
+
+  .c-configurator-hero__thumb {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .c-configurator-hero__controls {
+    left: 50% !important;
+    bottom: 15% !important;
+    text-align: center !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .c-configurator-hero__label {
+    font-size: 14px !important;
+  }
+
+  .c-configurator-hero__materials {
+    justify-content: center !important;
+  }
+
+  .c-configurator-hero__finish {
+    bottom: 6% !important;
+  }
+
+  .c-configurator-summary {
+    padding: 32px 24px !important;
+  }
 }
