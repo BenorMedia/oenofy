@@ -4,6 +4,11 @@
    nav is used with the "dark" variant since the page opens straight
    into a white background. */
 
+/* Smooth scroll for TOC anchor links, scoped to this page only. */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Header — title + intro copy, centered, sits below the fixed nav. */
 .c-legal-header {
   padding: 11rem 4rem 5rem;
@@ -16,7 +21,7 @@
   font-family: var(--font-conso);
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 3rem; /* 48px */
+  font-size: 4.5em;
   line-height: 1.2;
   color: var(--color-text-dark);
 }
@@ -96,6 +101,10 @@
 
 .c-legal-section {
   margin-bottom: 4rem;
+  /* Offsets the anchor jump so the heading isn't flush against the
+     fixed nav when a TOC link is clicked. Matches .c-legal-toc's
+     sticky top so the section lines up with the TOC item too. */
+  scroll-margin-top: 8rem;
 }
 
 .c-legal-section:last-child {
@@ -221,6 +230,7 @@
 
   .c-legal-section {
     margin-bottom: 40px !important;
+    scroll-margin-top: 90px !important;
   }
 
   .c-legal-section__title--h2 {
