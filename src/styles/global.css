@@ -88,4 +88,22 @@ a:hover {
   }
 }
 
+/* Utility — the same fade-in-from-bottom, but fired ONCE on page load
+   instead of on scroll. For above-the-fold titles (page h1s): they are
+   already on screen when the page opens, so a scroll trigger would either
+   fire instantly and look accidental, or never fire at all.
+   
+   Deliberately has no scroll behaviour of any kind — it does not replay
+   when scrolled back to, unlike .cc-fade-up. The two are mutually
+   exclusive; fade-up.js skips any element carrying both. */
+.cc-fade-up-load {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-fade-up-load {
+    opacity: 1;
+  }
+}
+
 
