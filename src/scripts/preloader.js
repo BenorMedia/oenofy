@@ -20,15 +20,6 @@
 // The steps stay a class-driven state machine: every transition lives in
 // preloader.css, this file only decides *when*.
 
-// Every load of the homepage starts at the top, with the intro playing over
-// it. Browsers otherwise restore the previous scroll position on reload,
-// which would drop the reader mid-page behind the overlay. Set at module
-// scope (before DOMContentLoaded) so it lands ahead of that restore.
-if (document.querySelector("[data-oenofy-intro]")) {
-  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  window.scrollTo(0, 0);
-}
-
 document.addEventListener("DOMContentLoaded", function () {
 
   const intro = document.querySelector("[data-oenofy-intro]");
@@ -111,6 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // and snap back on release. scrollbar-gutter: stable doesn't reserve the
   // gutter for an overflow:hidden root in Chrome, so that reflow can't be
   // compensated away.
+  //
+  // (Starting at the top is handled globally in BaseLayout, for every page.)
   //
   // Blocking the input instead leaves every box exactly where it is. The
   // scroll clamp is the backstop for what can't be preventDefault'd

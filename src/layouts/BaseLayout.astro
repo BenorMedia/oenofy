@@ -24,6 +24,20 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" />
 
+    <!-- Every page opens at the top. Browsers restore the previous scroll
+         position on reload, which lands the reader mid-page with the intro
+         animations already behind them.
+
+         Inline and in <head> on purpose: this has to run before the browser
+         performs that restore, which no deferred module script can do.
+
+         A hash is left alone so the Legal page's table-of-contents deep
+         links keep working. -->
+    <script is:inline>
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      if (!location.hash) window.scrollTo(0, 0);
+    </script>
+
     <!-- Montserrat via Google Fonts (per request — kept as a direct link,
          not Fontsource) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
