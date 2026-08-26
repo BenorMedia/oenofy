@@ -38,6 +38,56 @@ if (eventsGrid && eventsGridItems.length) {
   });
 }
 
+// Beyond The Table — background parallax. The image layer drifts downward
+// within its panel as the section scrolls up, so it travels slower than the
+// page: the read that background-attachment: fixed would give, without that
+// property's viewport-sized background (see the note in events.css).
+//
+// The layer overhangs the panel by --parallax-overscan top and bottom, and the
+// shift is derived from that same value, expressed as a share of the LAYER's
+// height (which is what yPercent is relative to). So the movement always
+// consumes exactly the available slack — never less, never enough to expose an
+// edge — whatever the overscan is set to.
+const beyondMedia = document.querySelector("[data-events-beyond-media]");
+const beyondBg = document.querySelector("[data-events-beyond-bg]");
+
+if (beyondMedia && beyondBg) {
+  const mm = gsap.matchMedia();
+
+  mm.add("(prefers-reduced-motion: no-preference)", () => {
+    const overscan =
+      parseFloat(
+        getComputedStyle(beyondMedia).getPropertyValue("--parallax-overscan")
+      ) || 0;
+
+    if (!overscan) return;
+
+    const shift = (overscan / (100 + 2 * overscan)) * 100;
+
+    const tween = gsap.fromTo(
+      beyondBg,
+      { yPercent: -shift },
+      {
+        yPercent: shift,
+        ease: "none",
+        scrollTrigger: {
+          trigger: beyondMedia,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      }
+    );
+
+    return () => {
+      if (tween.scrollTrigger) tween.scrollTrigger.kill();
+      tween.kill();
+      gsap.set(beyondBg, { clearProps: "transform" });
+    };
+  });
+}
+
 // Cases — sticky-stacked cards (see events.css: position sticky, same
 // top offset). Same behavior as Collection's .c-collection-cases (see
 // collection-page.js): as the next card scrolls up and covers a card,

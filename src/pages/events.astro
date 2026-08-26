@@ -26,7 +26,7 @@ const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
       <Image src={heroImg} alt="Private Events" class="cc-fill_cover" />
     </div>
     <div class="c-events-hero__content">
-      <h1 class="c-events-hero__title">Private Events</h1>
+      <h1 class="c-events-hero__title cc-fade-up-load">Private Events</h1>
     </div>
   </div>
 
@@ -39,10 +39,10 @@ const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
       <!-- Part 1: heading + copy, side by side -->
       <div class="c-events-intro__top">
         <div class="c-events-intro__top-wrap">
-          <h2 class="c-events-intro__heading">
+          <h2 class="c-events-intro__heading cc-fade-up">
             Private Wine Tasting And Events
           </h2>
-          <div class="c-events-intro__copy">
+          <div class="c-events-intro__copy cc-fade-up" data-fade-delay="0.2">
             <p class="c-events-intro__copy-bold">
               For private dinners, tastings and intimate occasions,
               Oenofy approaches the wine with the same attention to
@@ -83,7 +83,7 @@ const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
            arrives. -->
       <div class="c-events-intro__bottom">
         <div class="c-events-intro__bottom-wrap">
-          <div class="c-events-intro__bottom-copy">
+          <div class="c-events-intro__bottom-copy cc-fade-up">
             <p>
               Whether hosting a private celebration, an exclusive
               dinner or a larger reception, Oenofy oversees every
@@ -106,7 +106,7 @@ const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
          section (copy left incl. quote, media right + light overlay,
          100vh), with a title added reusing the Intro heading style. -->
     <section class="c-events-beyond">
-      <div class="c-events-beyond__copy">
+      <div class="c-events-beyond__copy cc-fade-up">
         <h2 class="c-events-beyond__title">Beyond The Table</h2>
         <p class="c-events-beyond__body c-events-beyond__body--bold">
           Some occasions take place ashore. Others begin at sea.
@@ -131,10 +131,13 @@ const eventImg1Bg = await getImage({ src: eventImg1, format: "webp" });
           equal care.&rdquo;
         </blockquote>
       </div>
-      <div
-        class="c-events-beyond__media"
-        style={`background-image: url(${eventImg1Bg.src})`}
-      >
+      <div class="c-events-beyond__media" data-events-beyond-media>
+        <div
+          class="c-events-beyond__media-bg"
+          data-events-beyond-bg
+          style={`background-image: url(${eventImg1Bg.src})`}
+        >
+        </div>
         <div class="c-events-beyond__overlay"></div>
       </div>
     </section>
