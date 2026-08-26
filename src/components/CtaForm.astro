@@ -46,10 +46,10 @@ const countries = [
 <section class="c-form">
   <Image src={formBg} alt="" class="cc-fill_cover" />
   <div class="c-form__inner">
-    <h2 class="c-form__title">{title}</h2>
-    <p class="c-form__intro" set:html={intro}></p>
+    <h2 class="c-form__title cc-fade-up">{title}</h2>
+    <p class="c-form__intro cc-fade-up" set:html={intro}></p>
 
-    <form class="c-form__form" novalidate>
+    <form class="c-form__form cc-fade-up" novalidate>
       <div class="c-form__row c-form__row--triple">
         <div class="c-form__field">
           <label class="c-form__label" for="firstName">First Name *</label>
@@ -107,7 +107,7 @@ const countries = [
       </div>
     </form>
 
-    <p class="c-form__legal">
+    <p class="c-form__legal cc-fade-up">
       By submitting this request, you acknowledge that you have read our
       Privacy Policy<br />
       Submitting a request does not constitute an order or create any payment
