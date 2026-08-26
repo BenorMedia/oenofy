@@ -147,8 +147,26 @@
 
 /* Part 3 — closing copy, right column only (left stays empty to keep
    the same 2-column rhythm as Part 1). Same layout pattern as Part 1. */
+/* Closing copy — now lives inside .c-conciergerie-intro__gallery-image and
+   sits over it. Positioned (z-index 1) because the image fills the same box
+   via .cc-fill_cover, which is absolutely positioned and would otherwise
+   paint over in-flow text. */
 .c-conciergerie-intro__bottom {
-  padding: 10rem 4rem 7rem;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+}
+
+/* Hidden until the grow finishes; conciergerie-page.js fades it up. Scoped to
+   the case that actually animates, so mobile and reduced-motion — which
+   never run that reveal — are never left with invisible copy. */
+@media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+  .c-conciergerie-intro__bottom {
+    opacity: 0;
+  }
 }
 
 .c-conciergerie-intro__bottom-wrap {
@@ -157,6 +175,7 @@
   justify-content: space-between;
   gap: 4rem;
   max-width: 70%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -169,12 +188,13 @@
   font-family: var(--font-montserrat);
 }
 
+/* Light now that it sits over the image, not on the white section. */
 .c-conciergerie-intro__bottom-copy p {
   margin: 0 0 1.5rem;
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.7;
-  color: var(--color-text-dark);
+  color: var(--color-text-light);
 }
 
 .c-conciergerie-intro__quote {
@@ -182,7 +202,7 @@
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1.5;
-  color: var(--color-accent);
+  color: var(--color-text-light);
 }
 
 /* Cellar Service — copy left, video/poster right, rounded corners. */
@@ -327,7 +347,9 @@
 }
 
 .c-conciergerie-contact__inner {
-  margin: auto 0 0;
+  /* auto top AND bottom — centres the block in the space the quote leaves,
+     rather than pinning it to the bottom of the section. */
+  margin: auto 0;
   padding-bottom: 6rem;
   display: flex;
   flex-direction: column;
@@ -340,7 +362,7 @@
   font-family: var(--font-montserrat);
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 2.15rem;
+  font-size: 2.6875rem; /* 2.15rem +25% */
   line-height: 1.5;
   color: #fff6e7;
 }
@@ -374,9 +396,6 @@
 
   /* Intro — stack to a single column, drop right-side padding rhythm */
   .c-conciergerie-intro__top,
-  .c-conciergerie-intro__bottom {
-    padding: 60px 24px !important;
-  }
   .c-conciergerie-intro__top-wrap,
   .c-conciergerie-intro__bottom-wrap {
     flex-direction: column !important;
@@ -406,8 +425,19 @@
     top: auto !important;
     height: auto !important;
   }
+  /* The copy is a child of the image now, and a 16/9 box on a phone is far
+     too short to hold it — aspect-ratio plus overflow:hidden would crop it.
+     Let the box take its height from the copy instead and have the image
+     cover that, so it reads as a full-bleed background. */
   .c-conciergerie-intro__gallery-image {
     width: 100% !important;
+    aspect-ratio: auto !important;
+    overflow: visible !important;
+  }
+  .c-conciergerie-intro__bottom {
+    position: relative !important;
+    inset: auto !important;
+    padding: 60px 24px !important;
   }
 
   .c-conciergerie-intro__bottom-spacer {
@@ -482,7 +512,7 @@
     padding-bottom: 48px !important;
   }
   .c-conciergerie-contact__title {
-    font-size: 28px !important;
+    font-size: 35px !important; /* 28px +25% */
     text-align: center !important;
     padding: 0 24px !important;
   }

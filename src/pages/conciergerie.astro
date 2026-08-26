@@ -34,7 +34,7 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
       </video>
     </div>
     <div class="c-conciergerie-hero__content">
-      <h1 class="c-conciergerie-hero__title">La Conciergerie</h1>
+      <h1 class="c-conciergerie-hero__title cc-fade-up-load">La Conciergerie</h1>
     </div>
   </div>
 
@@ -44,9 +44,9 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
     <section class="c-conciergerie-intro">
       <!-- Part 1: heading + copy, side by side -->
       <div class="c-conciergerie-intro__top">
-        <div class="c-conciergerie-intro__top-wrap cc-fade-up">
-          <h2 class="c-conciergerie-intro__heading">Wine concierge</h2>
-          <div class="c-conciergerie-intro__copy">
+        <div class="c-conciergerie-intro__top-wrap">
+          <h2 class="c-conciergerie-intro__heading cc-fade-up">Wine concierge</h2>
+          <div class="c-conciergerie-intro__copy cc-fade-up" data-fade-delay="0.2">
             <p class="c-conciergerie-intro__copy-bold">
               Every engagement begins with dialogue. Before any
               recommendation is made, Oenofy takes time to understand
@@ -66,8 +66,9 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
         </div>
       </div>
 
-      <!-- Part 2: image grows from 70% -> 100% width as it scrolls
-           through the sticky stage; locks at 100% once reached. -->
+      <!-- Part 2: image grows from 70% -> 100% width as it scrolls through
+           the sticky stage and locks at 100% once reached, then the closing
+           copy it now carries fades up over it. -->
       <div class="c-conciergerie-intro__gallery" data-conciergerie-gallery>
         <div class="c-conciergerie-intro__gallery-sticky">
           <div
@@ -75,32 +76,40 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
             data-conciergerie-gallery-image
           >
             <Image src={introImg} alt="" class="cc-fill_cover" />
+
+            <!-- Part 3: closing copy, overlaid on the image. Revealed by
+                 conciergerie-page.js once the grow above completes, rather
+                 than by a viewport threshold — the copy rides inside the
+                 sticky stage, so its layout position bears no relation to
+                 where it actually sits on screen. -->
+            <div
+              class="c-conciergerie-intro__bottom"
+              data-conciergerie-intro-bottom
+            >
+              <div class="c-conciergerie-intro__bottom-wrap">
+                <div class="c-conciergerie-intro__bottom-spacer"></div>
+                <div class="c-conciergerie-intro__bottom-copy">
+                  <p>
+                    As a private wine concierge, Oenofy remains involved as
+                    collections evolve, offering the continuity of a personal
+                    cellar service. Recommendations are made carefully,
+                    guided by what belongs within the collection and what
+                    will continue to bring pleasure in the years ahead.
+                    Behind the scenes, services such as wine shipping, cellar
+                    organisation and ongoing wine storage service are
+                    arranged with the utmost discretion.
+                  </p>
+                  <blockquote class="c-conciergerie-intro__quote">
+                    &ldquo;The level of involvement always remains with the
+                    client.&rdquo;
+                  </blockquote>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Part 3: closing copy, right column only -->
-      <div class="c-conciergerie-intro__bottom cc-fade-up">
-        <div class="c-conciergerie-intro__bottom-wrap">
-          <div class="c-conciergerie-intro__bottom-spacer"></div>
-          <div class="c-conciergerie-intro__bottom-copy">
-            <p>
-              As a private wine concierge, Oenofy remains involved as
-              collections evolve, offering the continuity of a personal
-              cellar service. Recommendations are made carefully,
-              guided by what belongs within the collection and what
-              will continue to bring pleasure in the years ahead.
-              Behind the scenes, services such as wine shipping, cellar
-              organisation and ongoing wine storage service are
-              arranged with the utmost discretion.
-            </p>
-            <blockquote class="c-conciergerie-intro__quote">
-              &ldquo;The level of involvement always remains with the
-              client.&rdquo;
-            </blockquote>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Cellar Service — copy left, media right. No real video yet, so
@@ -204,7 +213,7 @@ const contactBg = await getImage({ src: contactImg, format: "webp" });
         &ldquo;Oenofy creates collectible objects, unique cellar and
         lifetime memories.&rdquo;
       </blockquote>
-      <div class="c-conciergerie-contact__inner">
+      <div class="c-conciergerie-contact__inner cc-fade-up">
         <h2 class="c-conciergerie-contact__title">Enquiries Are Welcome</h2>
         <a href="#" class="c-conciergerie-contact__button">Contact Us</a>
       </div>
