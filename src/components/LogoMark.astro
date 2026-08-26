@@ -1,0 +1,35 @@
+---
+// The Oenofy ring mark — two overlapping ellipses, drawn in `currentColor`
+// so the parent decides the colour (nav: light/dark variant; preloader:
+// the intro's own foreground).
+//
+// Single source of truth on purpose: the preloader's final logo and the
+// navbar logo MUST be byte-identical artwork, because the preloader hands
+// off to the nav by landing this mark exactly on the nav mark's measured
+// rect and swapping in one frame. Two separate assets (or a raster PNG)
+// would show a seam no amount of positioning can hide.
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  data-logo-mark
+  xmlns="http://www.w3.org/2000/svg"
+  width="53"
+  height="53"
+  viewBox="0 0 53 53"
+  fill="none"
+  aria-hidden="true"
+>
+  <path
+    d="M26.4598 0C14.6367 0 5.01855 11.8637 5.01855 26.46C5.01855 41.0563 14.6367 52.92 26.4598 52.92C38.2829 52.92 47.901 41.0428 47.901 26.46C47.901 11.8772 38.2829 0 26.4598 0ZM45.7502 26.4465C45.7502 39.8523 37.0925 50.7556 26.4598 50.7556C15.8271 50.7556 7.16944 39.8523 7.16944 26.4465C7.16944 13.0406 15.8271 2.13736 26.4598 2.13736C37.0925 2.13736 45.7502 13.0406 45.7502 26.4465Z"
+    fill="currentColor"></path>
+  <path
+    d="M26.46 5.01855C11.8637 5.01855 0 14.6367 0 26.4598C0 38.2829 11.8773 47.9011 26.46 47.9011C41.0428 47.9011 52.92 38.2829 52.92 26.4598C52.92 14.6367 41.0563 5.01855 26.46 5.01855ZM50.7691 26.4463C50.7691 37.079 39.8659 45.7366 26.46 45.7366C13.0542 45.7366 2.15093 37.079 2.15093 26.4463C2.15093 15.8136 13.0542 7.15592 26.46 7.15592C39.8659 7.15592 50.7691 15.8136 50.7691 26.4463Z"
+    fill="currentColor"></path>
+</svg>

@@ -1,11 +1,47 @@
 .oenofy-intro {
-  --icon-stroke-final: 3.4px;
+  /* Every token lives on this one element, deliberately. A custom
+     property's own var() references are substituted against the element
+     that *declares* it, not the one that uses it — so --icon-stroke
+     declared here while --logo-width lived on the child stage resolved to
+     nothing, and the rings silently lost their border. One block, one
+     scope, no way to reintroduce that. */
+  --logo-width: clamp(260px, 33vw, 430px);
+  --logo-height: calc(var(--logo-width) * 0.12796);
 
-  --final-horizontal-sx: 1.12;
-  --final-horizontal-sy: 0.91;
+  /* Ring stroke. Proportional to the logo instead of the old fixed 3.4px,
+     so it keeps its weight across viewports (and needs no mobile
+     override). 0.0079 reproduces exactly the previous 3.4px at a 430px
+     logo, and once the convergence scale is applied it renders within
+     ~0.4px of the mark's own 2.151-unit stroke — closer than a
+     mark-matched value would get, because the engine quantises
+     border-width to whole pixels. */
+  --icon-stroke: calc(var(--logo-width) * 0.0079);
 
-  --final-vertical-sx: 0.84;
-  --final-vertical-sy: 1.18;
+  /* How long the mark takes to fly from centre-screen to the navbar.
+     preloader.js reads the same number, so keep them in sync via this
+     token rather than duplicating a magic ms value. */
+  --icon-up-duration: 900ms;
+
+  /* Where the two rings land. NOT eyeballed — derived from the mark
+     artwork in LogoMark.astro so the converged rings and the mark that
+     replaces them share a bounding box.
+
+     In its 53-unit viewBox the mark's wide ellipse measures
+     52.92 x 42.88 and its tall one 42.88 x 52.92. Against the ring's own
+     base box (0.1468 x 0.1262 of --logo-width) and the mark's box
+     (0.17 of --logo-width), that gives:
+       wide: 52.92/53 * 0.17/0.1468 = 1.1563 , 42.88/53 * 0.17/0.1262 = 1.0899
+       tall: 42.88/53 * 0.17/0.1468 = 0.9370 , 52.92/53 * 0.17/0.1262 = 1.3450
+     The previous hand-picked values (0.91 / 1.18 vertically) left the
+     rings ~16% and ~12% too short, so the mark visibly grew in height
+     when it took over. Both ratios are viewport-independent — ring box
+     and mark box both scale with --logo-width — which is why there's no
+     mobile override for them any more. */
+  --final-horizontal-sx: 1.1563;
+  --final-horizontal-sy: 1.0899;
+
+  --final-vertical-sx: 0.937;
+  --final-vertical-sy: 1.345;
 
   /* Fixed + a real z-index so this establishes its own stacking
      context: without that, its z-indexed children (logo-stage,
@@ -20,8 +56,8 @@
   height: 100vh;
   min-height: 720px;
   overflow: hidden;
-  background: #222323;
-  color: #f4efea;
+  background: var(--color-preloader-bg);
+  color: var(--color-icon);
 
   opacity: 1;
   visibility: visible;
@@ -31,6 +67,15 @@
     visibility 0s 600ms;
 }
 
+/* Touch half of the scroll lock (the pointer/keyboard half lives in
+   preloader.js). pinch-zoom is deliberately still allowed — blocking
+   panning for the intro's duration is fine, blocking a reader's ability
+   to zoom is not. Declarative and layout-free: unlike overflow:hidden it
+   doesn't drop the scrollbar, so nothing reflows when it lifts. */
+html.is-preloader-intro {
+  touch-action: pinch-zoom;
+}
+
 .oenofy-intro.is-preloader-hidden {
   opacity: 0;
   visibility: hidden;
@@ -38,8 +83,6 @@
 }
 
 .oenofy-intro__logo-stage {
-  --logo-width: clamp(260px, 33vw, 430px);
-  --logo-height: calc(var(--logo-width) * 0.12796);
 
   position: absolute;
   left: 50%;
@@ -51,9 +94,10 @@
 
   transform: translate(-50%, -50%) scale(1);
 
-  transition:
-    top 1700ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1700ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Transform only — the flight used to animate `top` as well, which is a
+     layout property (no compositor fast path) and made the final resting
+     place depend on two separate values. It's all in the transform now. */
+  transition: transform var(--icon-up-duration) cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .oenofy-intro__split-logo,
@@ -112,7 +156,7 @@
   width: calc(var(--logo-width) * 0.1468);
   height: calc(var(--logo-width) * 0.1262);
 
-  border: var(--icon-stroke-final) solid #F4EFEA;
+  border: var(--icon-stroke) solid currentColor;
   border-radius: 999px;
 
   opacity: 0;
@@ -159,6 +203,10 @@
 
 /* FINAL PNG LOGO */
 
+/* Centred on the stage's own centre — which is also the stage's
+   transform-origin, so the mark's centre is invariant under the flight's
+   scale. preloader.js relies on that: it only has to solve for the
+   stage's centre, not for this element's box. */
 .oenofy-final-logo {
   position: absolute;
   left: 50%;
@@ -166,6 +214,7 @@
   z-index: 5;
 
   width: calc(var(--logo-width) * 0.17);
+  aspect-ratio: 1;
 
   opacity: 0;
 
@@ -173,7 +222,15 @@
 
   pointer-events: none;
 
+  /* Instant, deliberately: the reveal is a single-frame swap onto the
+     nav mark's rect, and a fade would show both marks at once. */
   transition: opacity 0ms linear;
+}
+
+.oenofy-final-logo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .oenofy-intro.is-final-logo-visible .oenofy-final-logo {
@@ -213,37 +270,35 @@
   --sy: var(--final-vertical-sy);
 }
 
+/* Resting place of the flight. The three custom properties are written by
+   preloader.js from a live measurement of the navbar mark, so the mark
+   lands on the nav's rect exactly, at every viewport and root font-size.
+   The fallbacks reproduce the old hand-tuned landing and only apply if
+   the nav mark can't be found (i.e. preloader used without a navbar). */
 .oenofy-intro.is-icon-up .oenofy-intro__logo-stage {
-  top: 5%;
-  transform: translate(-46%, -50%) scale(0.70);
+  transform:
+    translate(
+      calc(-50% + var(--icon-up-dx, calc(var(--logo-width) * 0.04))),
+      calc(-50% + var(--icon-up-dy, -43vh))
+    )
+    scale(var(--icon-up-scale, 0.7));
 }
 
 @media (max-width: 767px) {
 
   .oenofy-intro {
-    --icon-stroke-final: 2.55px;
-
-    --final-horizontal-sx: 1.10;
-    --final-horizontal-sy: 0.92;
-
-    --final-vertical-sx: 0.86;
-    --final-vertical-sy: 1.14;
+    /* Stroke and convergence scales are all ratios of --logo-width, so
+       this is the only token that needs a mobile value. */
+    --logo-width: clamp(230px, 70vw, 330px);
 
     min-height: 620px;
   }
 
   .oenofy-intro__logo-stage {
-    --logo-width: clamp(230px, 70vw, 330px);
     top: 49%;
   }
 
-  .oenofy-final-logo {
-    width: calc(var(--logo-width) * 0.17);
-  }
-
-  .oenofy-intro.is-icon-up .oenofy-intro__logo-stage {
-    top: 8%;
-    transform: translate(-50%, -50%) scale(0.70);
-  }
+  /* No .is-icon-up override here any more: the landing is measured from
+     the live nav mark, so it's already correct on mobile. */
 
 }

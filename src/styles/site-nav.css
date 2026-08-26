@@ -10,15 +10,14 @@
   padding: 1.5rem 7.5rem;
   pointer-events: none;
   font-family: var(--font-montserrat);
-  /* Slide (hide/show) + background fade when scroll state changes. */
-  transition: transform 0.4s ease, background-color 0.3s ease,
-    backdrop-filter 0.3s ease;
+  /* Slide (hide/show) + blur fade when scroll state changes. The bar
+     never takes a background fill, so background-color isn't animated. */
+  transition: transform 0.4s ease, backdrop-filter 0.3s ease;
 }
 
 /* Scrolled down: blur only, no background fill. Text/logo switch from
    light (default) to dark. */
 .c-nav.is-scrolled {
-  background-color: transparent;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
 }
@@ -73,8 +72,9 @@
 }
 
 .c-nav__mark svg {
-  width: 3.4375rem;
-  height: 3.4375rem;
+  display: block;
+  width: 4em;
+  height: 4em;
   /* Smooth resize when the scrolled state kicks in. */
   transition: width 0.2s ease, height 0.2s ease;
 }
