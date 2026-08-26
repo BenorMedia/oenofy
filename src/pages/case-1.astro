@@ -37,8 +37,14 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
          appears. Title fades out and the case image scrubs upward as
          you scroll through (see case-1-page.js). -->
     <section class="c-case-hero" data-case-hero>
+      <a href="#" class="c-configure-button">Configure</a>
       <div class="c-case-hero__stage">
-        <h1 class="c-case-hero__title" data-case-hero-title>Case 001</h1>
+        <!-- The load reveal sits on this wrapper, not the h1: the h1's own
+             opacity is already driven by the scroll fade-out in
+             case-1-page.js, and one element can't carry both. -->
+        <div class="c-case-hero__title-wrap cc-fade-up-load">
+          <h1 class="c-case-hero__title" data-case-hero-title>Case 001</h1>
+        </div>
         <div class="c-case-hero__img" data-case-hero-img>
           <Image src={heroCaseImg} alt="Case 001" />
         </div>
@@ -48,7 +54,7 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
     <!-- Intro — freeform for now per instruction; QA notes to follow. -->
     <section class="c-case-intro">
       <div class="c-case-intro__top">
-        <div class="c-case-intro__designer">
+        <div class="c-case-intro__designer cc-fade-up">
           <span class="c-case-intro__label">Case 001</span>
           <div class="c-case-intro__portrait-wrap">
             <p class="c-case-intro__signature">Maxime Lis</p>
@@ -59,7 +65,7 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
             />
           </div>
         </div>
-        <div class="c-case-intro__copy">
+        <div class="c-case-intro__copy cc-fade-up" data-fade-delay="0.2">
           <p class="c-case-intro__copy-bold">
             For its first collector edition, Oenofy partnered with
             French designer Maxime Lis to create an object that
@@ -117,7 +123,7 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
       <div class="c-case-product__media">
         <Image src={productImg5} alt="" class="cc-fill_cover" />
       </div>
-      <div class="c-case-product__copy">
+      <div class="c-case-product__copy cc-fade-up">
         <p class="c-case-product__copy-bold">
           Produced in France in a limited annual edition of up to fifty
           pieces, each Malle is handcrafted from carefully selected
@@ -156,7 +162,7 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
     <!-- Product 2 — image carousel, replicates the homepage slider
          (centered, infinite, draggable) with a floating Configure
          button top-right. See case-1-slider.js. -->
-    <div class="c-case-slider">
+    <div class="c-case-slider cc-fade-up">
       <a href="#" class="c-configure-button">Configure</a>
       <div class="c-case-slider__viewport" data-case-slider>
         <div class="c-case-slider__track" data-case-slider-track>
@@ -197,7 +203,7 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
       style={`background-image: url(${product2Bg.src})`}
     >
       <div class="c-case-quote__overlay"></div>
-      <blockquote class="c-case-quote__text">
+      <blockquote class="c-case-quote__text cc-fade-up">
         &ldquo;Where wine becomes part of a collectible design
         object&rdquo;
       </blockquote>
@@ -205,10 +211,10 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
 
     <!-- Product 4 — image left, Case 001 title + closing copy right. -->
     <section class="c-case-final">
-      <div class="c-case-final__media">
+      <div class="c-case-final__media cc-fade-up">
         <Image src={productImg3} alt="Case 001" class="cc-fill_cover" />
       </div>
-      <div class="c-case-final__copy">
+      <div class="c-case-final__copy cc-fade-up" data-fade-delay="0.2">
         <h2 class="c-case-final__title">Case 001</h2>
         <p class="c-case-final__copy-bold">
           The Case 001 was conceived as an object designed to remain
@@ -229,7 +235,7 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
 
     <!-- Production — copy left (incl. accent quote), image right. -->
     <section class="c-case-production">
-      <div class="c-case-production__copy">
+      <div class="c-case-production__copy cc-fade-up">
         <p class="c-case-production__copy-body">
           Every object is produced in France by specialist artisan
           workshops selected for their expertise in precision metalwork
@@ -249,7 +255,7 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
           &ldquo;Designed to remain.&rdquo;
         </blockquote>
       </div>
-      <div class="c-case-production__media">
+      <div class="c-case-production__media cc-fade-up" data-fade-delay="0.2">
         <Image src={productImg4} alt="" class="cc-fill_cover" />
       </div>
     </section>
@@ -257,10 +263,10 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
     <!-- Wine Selection — image left, title + copy (incl. accent quote)
          right. -->
     <section class="c-case-wine">
-      <div class="c-case-wine__media">
+      <div class="c-case-wine__media cc-fade-up">
         <Image src={productImg6} alt="" class="cc-fill_cover" />
       </div>
-      <div class="c-case-wine__copy">
+      <div class="c-case-wine__copy cc-fade-up" data-fade-delay="0.2">
         <h2 class="c-case-wine__title">Wine Selection</h2>
         <p class="c-case-wine__copy-body">
           Every Collection contains eight exceptional bottles selected

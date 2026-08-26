@@ -38,6 +38,21 @@
   overflow: visible;
 }
 
+/* Holds the on-load reveal for the hero title. It exists so the two hero
+   animations don't collide: this element carries the load fade-up (opacity +
+   offset) while the h1 inside keeps the scroll-driven fade-out in
+   case-1-page.js. Two elements means two opacities, which multiply — on one
+   element the scrub would overwrite the load reveal on its first update.
+
+   inset: 0 makes its box identical to .c-case-hero__stage, so the h1's own
+   50%/50% centring resolves exactly as before, and z-index 1 keeps the title
+   behind .c-case-hero__img (z-index 2) as it was. */
+.c-case-hero__title-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
 .c-case-hero__title {
   position: absolute;
   top: 50%;
@@ -350,6 +365,12 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* Safe here, unlike on .c-events-beyond__media: `fixed` makes the
+     background's positioning area the viewport, and this section already IS
+     viewport-sized (100% width, 100vh), so `cover` resolves to the same box
+     and the image isn't enlarged. Requires no transformed ancestor —
+     .c-case-main-wrapper is only positioned, so the effect holds. */
+  background-attachment: fixed;
   display: flex;
   align-items: flex-end;
 }
