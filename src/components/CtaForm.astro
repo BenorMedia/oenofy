@@ -10,12 +10,29 @@ import formBg from "../assets/home/form.png";
 interface Props {
   title?: string;
   intro?: string;
+  reveal?: boolean;
+  configuration?: boolean;
+  idPrefix?: string;
 }
 
 const {
   title = "Request A Quote Or Customization",
   intro = "Every Oenofy collection begins with a conversation.<br />Share your project with us and we will prepare a personalised proposal based on your objectives, destination and collection profile.",
+  reveal = true,
+  configuration = false,
+  idPrefix = "",
 } = Astro.props;
+
+// Field ids have to stay unique per instance: a page can carry both its own
+// CtaForm and the copy inside the configurator overlay, and duplicated ids
+// would point every <label for> at the first form.
+const id = (name: string) => (idPrefix ? `${idPrefix}-${name}` : name);
+
+// Inside the configurator overlay the scroll reveal has to be switched off:
+// cc-fade-up leaves the element at opacity 0 and fade-up.js resolves absolute
+// scroll positions that a fixed overlay never reaches, so the form would
+// simply never appear.
+const revealClass = reveal ? "cc-fade-up" : "";
 
 // Delivery destinations — main EU countries + USA (placeholder list).
 const countries = [
@@ -46,33 +63,72 @@ const countries = [
 <section class="c-form">
   <Image src={formBg} alt="" class="cc-fill_cover" />
   <div class="c-form__inner">
-    <h2 class="c-form__title cc-fade-up">{title}</h2>
-    <p class="c-form__intro cc-fade-up" set:html={intro}></p>
+    <h2 class:list={["c-form__title", revealClass]}>{title}</h2>
+    <p class:list={["c-form__intro", revealClass]} set:html={intro}></p>
 
-    <form class="c-form__form cc-fade-up" novalidate>
+    <form class:list={["c-form__form", revealClass]} novalidate>
+      {
+        configuration && (
+          <div class="c-form__field c-form__field--wide c-form__config">
+            <span class="c-form__label">Your configuration</span>
+            <p class="c-form__config-value" data-form-configuration />
+            <input
+              type="hidden"
+              name="configuration"
+              data-form-configuration-input
+            />
+          </div>
+        )
+      }
+
       <div class="c-form__row c-form__row--triple">
         <div class="c-form__field">
-          <label class="c-form__label" for="firstName">First Name *</label>
-          <input class="c-form__input" id="firstName" name="firstName" type="text" />
+          <label class="c-form__label" for={id("firstName")}>First Name *</label>
+          <input
+            class="c-form__input"
+            id={id("firstName")}
+            name="firstName"
+            type="text"
+            required
+          />
+          <p class="c-form__error" data-form-error role="alert" hidden></p>
         </div>
         <div class="c-form__field">
-          <label class="c-form__label" for="lastName">Last Name *</label>
-          <input class="c-form__input" id="lastName" name="lastName" type="text" />
+          <label class="c-form__label" for={id("lastName")}>Last Name *</label>
+          <input
+            class="c-form__input"
+            id={id("lastName")}
+            name="lastName"
+            type="text"
+            required
+          />
+          <p class="c-form__error" data-form-error role="alert" hidden></p>
         </div>
         <div class="c-form__field">
-          <label class="c-form__label" for="email">Email address *</label>
-          <input class="c-form__input" id="email" name="email" type="email" />
+          <label class="c-form__label" for={id("email")}>Email address *</label>
+          <input
+            class="c-form__input"
+            id={id("email")}
+            name="email"
+            type="email"
+            required
+          />
+          <p class="c-form__error" data-form-error role="alert" hidden></p>
         </div>
       </div>
 
       <div class="c-form__row c-form__row--triple">
         <div class="c-form__field">
-          <label class="c-form__label" for="phone">Contact number</label>
-          <input class="c-form__input" id="phone" name="phone" type="tel" />
+          <label class="c-form__label" for={id("phone")}>Contact number</label>
+          <input class="c-form__input" id={id("phone")} name="phone" type="tel" />
         </div>
         <div class="c-form__field">
-          <label class="c-form__label" for="delivery">Delivery to</label>
-          <select class="c-form__input c-form__select" id="delivery" name="delivery">
+          <label class="c-form__label" for={id("delivery")}>Delivery to</label>
+          <select
+            class="c-form__input c-form__select"
+            id={id("delivery")}
+            name="delivery"
+          >
             <option value="" selected hidden></option>
             {countries.map((c) => <option value={c}>{c}</option>)}
           </select>
@@ -80,12 +136,12 @@ const countries = [
       </div>
 
       <div class="c-form__field c-form__field--wide">
-        <label class="c-form__label" for="message">
+        <label class="c-form__label" for={id("message")}>
           Anything to add to your request ?
         </label>
         <input
           class="c-form__input c-form__input--message"
-          id="message"
+          id={id("message")}
           name="message"
           type="text"
           placeholder="Please specify any spacial request , any wish, special occasion or finish if non standard we will find a solution."
@@ -103,11 +159,11 @@ const countries = [
             <span>Yes, I'd love to receive news and personnalized invitations from Oenofy</span>
           </label>
         </div>
-        <button type="button" class="c-form__send">Send</button>
+        <button type="submit" class="c-form__send">Send</button>
       </div>
     </form>
 
-    <p class="c-form__legal cc-fade-up">
+    <p class:list={["c-form__legal", revealClass]}>
       By submitting this request, you acknowledge that you have read our
       Privacy Policy<br />
       Submitting a request does not constitute an order or create any payment
@@ -117,3 +173,7 @@ const countries = [
     </p>
   </div>
 </section>
+
+<script>
+  import "../scripts/cta-form.js";
+</script>

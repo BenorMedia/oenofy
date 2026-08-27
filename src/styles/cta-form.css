@@ -2,6 +2,9 @@
    Moved out of home.css so the component is self-contained and can be
    dropped on any page. Imported by src/components/CtaForm.astro. */
 .c-form {
+  /* No error colour in the brand palette — a muted brick that reads clearly
+     against the light form background without fighting the beige and gold. */
+  --form-error: #a4452f;
   position: relative;
   min-height: 100vh;
   box-sizing: border-box;
@@ -94,6 +97,18 @@
 
 .c-form__input:focus {
   border-bottom-color: var(--color-text-dark);
+}
+
+.c-form__input.is-invalid {
+  border-bottom-color: var(--form-error);
+}
+
+.c-form__error {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--form-error);
 }
 
 .c-form__input--message::placeholder {
@@ -201,4 +216,17 @@
   .c-form__legal {
     font-size: 13px !important;
   }
+}
+
+/* Read-only configuration row — only rendered when <CtaForm configuration />
+   is used (the configurator overlay). The value is written at runtime by
+   src/scripts/configurator.js. */
+
+.c-form__config-value {
+  margin: 0;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(57, 56, 57, 0.25);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-accent);
 }
