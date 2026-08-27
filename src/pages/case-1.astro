@@ -12,10 +12,97 @@ import productImg3 from "../assets/case-1/product-img3.png";
 import productImg4 from "../assets/case-1/product-img4.png";
 import productImg5 from "../assets/case-1/product-img5.png";
 import productImg6 from "../assets/case-1/product-img6.png";
+import technicalDetail from "../assets/case-1/technical-detail.png";
 import "../styles/case-1.css";
 
 const pageBg = await getImage({ src: pageBgImg, format: "webp" });
 const product2Bg = await getImage({ src: productImg2, format: "webp" });
+
+// Technical details accordion — built from the case's reference sheet in
+// src/data/cases.js, so the product copy has exactly one home and a second
+// case only has to fill in its own object.
+const { specifications, materials, craftsmanship, wine } = case001.details;
+
+// An empty value renders as a bare label, the way the design shows
+// "With packaging:" with nothing after it.
+const labelled = (label: string, value: string) =>
+  value ? `${label}: ${value}` : `${label}:`;
+
+const technicalSections = [
+  {
+    id: "specifications",
+    title: "Specifications",
+    groups: [
+      {
+        title: "Dimensions",
+        lines: [
+          labelled("Length", specifications.dimensions.length),
+          labelled("Width", specifications.dimensions.width),
+          labelled("Height", specifications.dimensions.height),
+        ],
+      },
+      {
+        title: "Weight",
+        lines: [
+          labelled("Without bottles", specifications.weight.withoutBottles),
+          labelled("With bottles", specifications.weight.withBottles),
+          labelled("With packaging", specifications.weight.withPackaging),
+        ],
+      },
+      {
+        title: "Bottle Capacity",
+        lines: [`${specifications.bottleCapacity} Bottles`],
+      },
+    ],
+  },
+  {
+    id: "materials",
+    title: "Materials & Finishes",
+    groups: [
+      { title: "Exterior Metal", lines: materials.exteriorMetal },
+      { title: "Interior Materials", lines: [materials.interior] },
+      {
+        title: "Available Finishes",
+        lines: materials.finishes.map(
+          (finish: any) => `${finish.name} - ${finish.description}`
+        ),
+      },
+    ],
+  },
+  {
+    id: "craftsmanship",
+    title: "Craftsmanship",
+    groups: craftsmanship.map((entry: any) => ({
+      title: entry.title,
+      lines: [entry.copy],
+    })),
+  },
+  {
+    id: "wine",
+    title: "Wine Composition",
+    groups: [
+      {
+        title: "Domaine Selection",
+        lines: [
+          wine.selections.domaine.intro,
+          wine.selections.domaine.examplesLabel,
+        ],
+        items: wine.selections.domaine.examples,
+      },
+      {
+        title: "Château Selection",
+        lines: [
+          wine.selections.chateau.intro,
+          wine.selections.chateau.examplesLabel,
+        ],
+        items: wine.selections.chateau.examples,
+      },
+      { title: "Bottle Formats", lines: [wine.bottleFormats] },
+      { title: "Vintage Selection", lines: [wine.vintageSelection] },
+      { title: "Bespoke Configuration", lines: [wine.bespokeConfiguration] },
+    ],
+  },
+];
 ---
 
 <BaseLayout
@@ -298,6 +385,76 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
         <blockquote class="c-case-wine__quote">
           &ldquo;Crafted around wine.<br />Designed for a lifetime.&rdquo;
         </blockquote>
+      </div>
+    </section>
+
+    <!-- Technical details — accordion over the case's reference data. One
+         panel open at a time, the first open on load, matching the design. -->
+    <section class="c-case-tech">
+      <h2 class="c-case-tech__title cc-fade-up">
+        Technical details<br />about {case001.name.toUpperCase()}.
+      </h2>
+
+      <div class="c-case-tech__media cc-fade-up" data-fade-delay="0.15">
+        <Image src={technicalDetail} alt="" class="cc-fill_cover" />
+      </div>
+
+      <div class="c-case-tech__list">
+        {
+          technicalSections.map((section, i) => (
+            <div
+              class:list={["c-case-tech__item", "cc-fade-up", { "is-open": i === 0 }]}
+              data-fade-delay={(0.08 * i).toFixed(2)}
+              data-case-accordion
+            >
+              <h3 class="c-case-tech__heading">
+                <button
+                  type="button"
+                  class="c-case-tech__trigger"
+                  id={`tech-trigger-${section.id}`}
+                  aria-expanded={i === 0 ? "true" : "false"}
+                  aria-controls={`tech-panel-${section.id}`}
+                  data-case-accordion-trigger
+                >
+                  {`${String(i + 1).padStart(2, "0")} - ${section.title}`}
+                </button>
+              </h3>
+
+              <div
+                class="c-case-tech__panel"
+                id={`tech-panel-${section.id}`}
+                role="region"
+                aria-labelledby={`tech-trigger-${section.id}`}
+                data-case-accordion-panel
+              >
+                <div class="c-case-tech__clip">
+                  <div class="c-case-tech__groups">
+                    {section.groups.map((group: any) => (
+                      <div class="c-case-tech__group">
+                        <p class="c-case-tech__group-title">{group.title}</p>
+                        {group.lines.map((line: string) => (
+                          <p class="c-case-tech__line">{line}</p>
+                        ))}
+                        {group.items && (
+                          <ul class="c-case-tech__slots">
+                            {group.items.map((item: string, n: number) => (
+                              <li class="c-case-tech__slot">
+                                <span class="c-case-tech__slot-index">
+                                  {n + 1} -
+                                </span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
       </div>
     </section>
   </div>

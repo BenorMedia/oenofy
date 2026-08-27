@@ -98,3 +98,39 @@ if (galleryVideo) {
     onLeaveBack: () => galleryVideo.pause(),
   });
 }
+
+// Technical details — one panel open at a time, matching the design (the
+// first is open on load, set in the markup).
+//
+// Opening a panel changes the height of everything below it, and the
+// .cc-fade-up reveals resolve absolute scroll positions from an offsetTop
+// chain, so ScrollTrigger has to be handed fresh measurements once the panel
+// has finished growing or shrinking.
+const accordionItems = Array.from(
+  document.querySelectorAll("[data-case-accordion]")
+);
+
+accordionItems.forEach((item) => {
+  const trigger = item.querySelector("[data-case-accordion-trigger]");
+  const panel = item.querySelector("[data-case-accordion-panel]");
+  if (!trigger || !panel) return;
+
+  trigger.addEventListener("click", () => {
+    const opening = !item.classList.contains("is-open");
+
+    accordionItems.forEach((other) => {
+      other.classList.remove("is-open");
+      const otherTrigger = other.querySelector("[data-case-accordion-trigger]");
+      if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
+    });
+
+    if (opening) {
+      item.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+    }
+  });
+
+  panel.addEventListener("transitionend", (event) => {
+    if (event.propertyName === "grid-template-rows") ScrollTrigger.refresh();
+  });
+});

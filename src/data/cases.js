@@ -101,7 +101,7 @@ export const case001 = {
   details: {
     specifications: {
       dimensions: { length: "91 cm", width: "38 cm", height: "21 cm" },
-      weight: { withoutBottles: "35 Kg", withBottles: "44 Kg" },
+      weight: { withoutBottles: "35 Kg", withBottles: "44 Kg", withPackaging: "" },
       bottleCapacity: 8,
     },
 
