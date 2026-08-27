@@ -1,37 +1,103 @@
-/* Configurator page — section styles scoped here, following the same
-   c- / cc- / is- convention as the rest of the site. REM by default;
-   PX only where a mobile breakpoint needs it.
+/* Configurator — the step-by-step case builder overlay.
+   Same c- / cc- / is- convention as the rest of the site, REM by default,
+   PX only inside the mobile breakpoint.
 
-   DRAFT: client hasn't finalized direction yet. This first pass
-   replicates the "Case 001" reference screen (product view + material
-   switch + Finish CTA) at 100vh; sections after it will grow once real
-   content/flows are confirmed. */
+   Rendered by src/components/Configurator.astro; src/scripts/configurator.js
+   only flips classes and data attributes, so every transition below is the
+   single source of truth for how a screen change looks.
 
-/* Viewport wrapper — hero + summary bar together fill exactly 100vh,
-   so the summary bar sits fully visible at the bottom of first view
-   instead of spilling below the fold. */
+   Screen state lives on the root as [data-screen="step|overview|form"],
+   detail state as [data-detail="on"]. */
 
-.c-configurator-viewport {
+.c-configurator {
+  /* Above the nav (99999): it is a popup over the page, so the nav stays
+     covered on every screen until the popup is closed. */
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  font-family: var(--font-montserrat);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.c-configurator.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.5s ease, visibility 0s;
+}
+
+/* Page behind the overlay is frozen by input blocking in the script; this
+   only covers touch, which fires no cancellable wheel event. Panels that
+   scroll internally opt back in. */
+html.is-configurator-open {
+  touch-action: none;
+}
+
+.c-configurator [data-configurator-scroll] {
+  touch-action: pan-y;
+}
+
+.c-configurator [hidden] {
+  display: none;
+}
+
+/* Close */
+
+.c-configurator__close {
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
+  z-index: 5;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-montserrat);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+}
+
+.c-configurator__close:hover {
+  opacity: 1;
+}
+
+/* Viewport — stage and summary bar together fill exactly one screen, so the
+   summary sits at the bottom edge instead of spilling below the fold. */
+
+.c-configurator__viewport {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 
-/* Hero / product stage */
+/* Stage */
 
-.c-configurator-hero {
+.c-configurator__stage {
   position: relative;
-  width: 100%;
   flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
-  font-family: var(--font-montserrat);
-  /* Soft studio-light gradient + diagonal warm beam, per reference. */
+}
+
+/* Soft studio light + a diagonal warm beam, per the reference screens. The
+   confirmation screen sits on the same ground so the flow never changes
+   backdrop. */
+.c-configurator__stage,
+.c-configurator__success {
   background: linear-gradient(160deg, #e7ebee 0%, #f2f0ec 45%, #fbf9f6 100%);
 }
 
-.c-configurator-hero::before {
+.c-configurator__stage::before,
+.c-configurator__success::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -45,7 +111,64 @@
   pointer-events: none;
 }
 
-.c-configurator-hero__title {
+/* Detail views — the thumbs after the first are full photographs, not
+   renders on a transparent ground, so they take over the whole stage
+   background rather than replacing the floating case. */
+
+.c-configurator__detail {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.c-configurator__detail.is-active {
+  opacity: 1;
+}
+
+/* Between the photograph and the UI: the labels, options and title are all
+   #393839 and would vanish over the dark wood detail. Tune with the token. */
+.c-configurator__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--color-text-light);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.c-configurator[data-detail="on"] .c-configurator__scrim {
+  opacity: var(--detail-scrim, 0.55);
+}
+
+/* Renders — stacked and crossfaded. Each carries its own --render-width from
+   the data: the two shots are framed differently, so a shared box would crop
+   one or shrink the other. */
+
+.c-configurator__render {
+  position: absolute;
+  top: 50%;
+  left: 49%;
+  z-index: 1;
+  width: var(--render-width, 34rem);
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.c-configurator__render.is-active {
+  opacity: 1;
+}
+
+/* A detail view replaces the case entirely. */
+.c-configurator[data-detail="on"] .c-configurator__render.is-active {
+  opacity: 0;
+}
+
+/* Step title */
+
+.c-configurator__title {
   position: absolute;
   top: 14%;
   left: 6%;
@@ -58,74 +181,164 @@
   line-height: 1.1;
   letter-spacing: 0.03em;
   color: var(--color-text-dark);
+  transition: opacity 0.45s ease;
 }
 
-.c-configurator-hero__product {
+.c-configurator:not([data-screen="step"]) .c-configurator__title {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Overview headline — deliberately Montserrat, not Conso like the step
+   title, per the overview design. */
+
+.c-configurator__overview {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+/* Headline and details are placed from their own coordinates in the overview
+   design rather than flowing one under the other: the gap between them is
+   most of the stage, and a margin that large stops tracking the design as
+   soon as the viewport changes height. */
+.c-configurator__overview-headline {
+  position: absolute;
+  top: 31%;
+  left: 6%;
+}
+
+.c-configurator__overview-details {
+  position: absolute;
+  top: 66%;
+  left: 6%;
+}
+
+.c-configurator[data-screen="overview"] .c-configurator__overview {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.c-configurator__overview-eyebrow,
+.c-configurator__overview-name {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.c-configurator__overview-eyebrow {
+  color: var(--color-accent);
+}
+
+.c-configurator__overview-name {
+  color: var(--color-text-dark);
+}
+
+.c-configurator__overview-selection {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.c-configurator__overview-price {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.4rem 0 0;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--color-text-dark);
+}
+
+/* Thumbnails — vertical rail, right edge. The first is the main view and
+   returns the stage to the configured render; the rest open a detail. */
+
+.c-configurator__thumbs {
   position: absolute;
   top: 50%;
-  left: 54%;
-  z-index: 1;
-  width: 34rem;
-  transform: translate(-50%, -50%);
-}
-
-.c-configurator-hero__product img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Thumbnails — vertical stack, right edge */
-
-.c-configurator-hero__thumbs {
-  position: absolute;
-  top: 50%;
-  right: 4.5rem;
+  right: 10rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 3.5rem;
   transform: translateY(-50%);
+  transition: opacity 0.4s ease;
 }
 
-.c-configurator-hero__thumb {
+.c-configurator:not([data-screen="step"]) .c-configurator__thumbs {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.c-configurator__thumb {
   width: 4.5rem;
   height: 4.5rem;
   padding: 0;
   border: 2px solid transparent;
   border-radius: 50%;
   overflow: hidden;
-  cursor: pointer;
   background: none;
+  cursor: pointer;
   transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.c-configurator-hero__thumb img {
+.c-configurator__thumb img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.c-configurator-hero__thumb:hover {
+.c-configurator__thumb:hover {
   transform: scale(1.08);
 }
 
-.c-configurator-hero__thumb.is-active {
+.c-configurator__thumb.is-active {
   border-color: var(--color-accent);
 }
 
-/* Material controls — bottom-left */
+/* Step controls — bottom-left. Panels are absolutely stacked on a zero-height
+   anchor so they crossfade in place without shifting each other. */
 
-.c-configurator-hero__controls {
+.c-configurator__controls {
   position: absolute;
-  bottom: 13%;
+  bottom: 11%;
   left: 6%;
   z-index: 2;
+  transition: opacity 0.4s ease;
 }
 
-.c-configurator-hero__label {
-  margin: 0 0 1.5rem;
+.c-configurator:not([data-screen="step"]) .c-configurator__controls {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.c-configurator__step {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.c-configurator__step.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+.c-configurator__label {
+  margin: 0 0 2.75rem;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -133,13 +346,13 @@
   color: var(--color-text-dark);
 }
 
-.c-configurator-hero__materials {
+.c-configurator__options {
   display: flex;
   align-items: center;
   gap: 1.75rem;
 }
 
-.c-configurator-hero__material {
+.c-configurator__option {
   padding: 0;
   border: none;
   background: none;
@@ -151,20 +364,25 @@
   transition: color 0.25s ease;
 }
 
-.c-configurator-hero__material.is-active {
+.c-configurator__option:hover {
+  color: rgba(57, 57, 57, 0.75);
+}
+
+.c-configurator__option.is-selected {
   font-weight: 700;
   color: var(--color-accent);
 }
 
-/* Finish CTA — bottom-center */
+/* CTA — bottom-centre. Always named after the screen it leads to. */
 
-.c-configurator-hero__finish {
+.c-configurator__cta {
   position: absolute;
-  bottom: 12%;
+  bottom: 7%;
   left: 50%;
   z-index: 2;
   transform: translateX(-50%);
   padding: 0.85rem 2.5rem;
+  min-width: 11.5rem;
   border: none;
   border-radius: 15rem;
   background: var(--color-text-dark);
@@ -173,36 +391,76 @@
   font-weight: 700;
   color: var(--color-text-light);
   cursor: pointer;
-  transition: background 0.25s ease;
+  transition: background 0.25s ease, bottom 0.5s ease, opacity 0.4s ease;
 }
 
-.c-configurator-hero__finish:hover {
+.c-configurator__cta:hover {
   background: rgba(57, 56, 57, 0.85);
 }
 
-/* Summary bar — sits directly below the 100vh hero */
-
-.c-configurator-summary {
-  flex: 0 0 auto;
-  padding: 2rem 6%;
-  background: var(--color-bg-page);
+.c-configurator[data-screen="overview"] .c-configurator__cta {
+  bottom: 9%;
 }
 
-.c-configurator-summary__name {
+.c-configurator[data-screen="form"] .c-configurator__cta,
+.c-configurator[data-screen="success"] .c-configurator__cta {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Summary bar — collapses away on the overview and form screens, where the
+   stage runs the full height of the viewport. max-height rather than height
+   so the collapse can transition. */
+
+.c-configurator__summary {
+  flex: 0 0 auto;
+  max-height: 20rem;
+  padding: 2.5rem 6%;
+  overflow: hidden;
+  background: var(--color-bg-page);
+  transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.35s ease;
+}
+
+.c-configurator:not([data-screen="step"]) .c-configurator__summary {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.c-configurator__summary-name {
   margin: 0 0 0.4rem;
   font-size: 1.125rem;
   font-weight: 700;
   color: var(--color-text-dark);
 }
 
-.c-configurator-summary__material {
+.c-configurator__summary-selection {
   margin: 0 0 0.6rem;
   font-size: 1rem;
   font-weight: 400;
   color: rgba(57, 57, 57, 0.6);
 }
 
-.c-configurator-summary__price {
+/* Each answered value is a shortcut back to its own step. */
+.c-configurator__summary-value {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.c-configurator__summary-value:hover {
+  color: var(--color-accent);
+}
+
+.c-configurator__summary-price {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -212,34 +470,320 @@
   color: var(--color-text-dark);
 }
 
-.c-configurator-summary__info {
+/* (i) — opens the pricing/availability modal from either the summary bar or
+   the overview. */
+
+.c-configurator__info-trigger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 1.25rem;
   height: 1.25rem;
+  padding: 0;
   border: 1px solid rgba(57, 57, 57, 0.5);
   border-radius: 50%;
+  background: none;
+  font-family: var(--font-montserrat);
   font-size: 0.75rem;
   font-style: italic;
+  font-weight: 700;
+  line-height: 1;
   color: rgba(57, 57, 57, 0.7);
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.c-configurator__info-trigger:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Form screen — the CtaForm component, scrolling inside the overlay. */
+
+.c-configurator__form {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--color-bg-page);
+  transition: opacity 0.5s ease;
+}
+
+.c-configurator[data-screen="form"] .c-configurator__form {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.c-configurator__form-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.c-configurator__back {
+  position: absolute;
+  top: 2.75rem;
+  left: 3.75rem;
+  z-index: 1;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-montserrat);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.c-configurator__back:hover {
+  color: var(--color-accent);
+}
+
+/* Confirmation screen */
+
+.c-configurator__success {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 3.75rem;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.c-configurator[data-screen="success"] .c-configurator__success {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.c-configurator__success-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 78rem;
+  color: var(--color-text-dark);
+}
+
+.c-configurator__success-headline {
+  margin: 0 0 2.75rem;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  font-size: 2.25rem;
+  line-height: 1.2;
+}
+
+.c-configurator__success-headline:last-of-type {
+  margin-bottom: 0;
+}
+
+.c-configurator__success-copy {
+  margin: 3.75rem 0 0;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.c-configurator__success-note {
+  margin: 2rem 0 0;
+  font-size: 1.0625rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+/* Reuses the CTA pill, so the last button of the flow matches every button
+   before it. Positioned in flow rather than pinned to the stage. */
+.c-configurator__success-close {
+  position: static;
+  margin-top: 4rem;
+  transform: none;
+}
+
+/* Review page — /configurator has no content of its own beyond the trigger,
+   so the overlay is exercised through exactly the same path as /case-n. */
+
+.c-configurator-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  min-height: 100vh;
+  padding: 7rem 3.75rem;
+  text-align: center;
+  font-family: var(--font-montserrat);
+  background: linear-gradient(160deg, #e7ebee 0%, #f2f0ec 45%, #fbf9f6 100%);
+}
+
+.c-configurator-page__title {
+  margin: 0;
+  font-family: var(--font-conso);
+  font-weight: 400;
+  font-size: 4.5rem;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+}
+
+.c-configurator-page__note {
+  margin: 0;
+  max-width: 44rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(57, 56, 57, 0.7);
+}
+
+.c-configurator-page__cta {
+  padding: 0.85rem 2.5rem;
+  border: none;
+  border-radius: 15rem;
+  background: var(--color-text-dark);
+  font-family: var(--font-montserrat);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.c-configurator-page__cta:hover {
+  background: rgba(57, 56, 57, 0.85);
+}
+
+/* Info modal — sits above every screen, including the form. */
+
+.c-configurator__info {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+
+.c-configurator.is-info-open .c-configurator__info {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.35s ease, visibility 0s;
+}
+
+.c-configurator__info-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(34, 35, 35, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.c-configurator__info-panel {
+  position: relative;
+  width: 72%;
+  max-width: 86.75rem;
+  max-height: 80vh;
+  padding: 5.5rem 7.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-icon);
+  color: var(--color-text-dark);
+}
+
+.c-configurator__info-close {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-montserrat);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.c-configurator__info-close:hover {
+  color: var(--color-accent);
+}
+
+.c-configurator__info-section + .c-configurator__info-section {
+  margin-top: 3.5rem;
+}
+
+.c-configurator__info-title {
+  margin: 0 0 1.5rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.c-configurator__info-copy {
+  margin: 0 0 1.375rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: justify;
+}
+
+.c-configurator__info-copy:last-child {
+  margin-bottom: 0;
 }
 
 /* Mobile */
 
 @media (max-width: 768px) {
-  .c-configurator-hero__title {
+  .c-configurator__close {
+    top: 16px !important;
+    right: 20px !important;
+  }
+
+  .c-configurator__title {
     top: 8% !important;
     font-size: 40px !important;
   }
 
-  .c-configurator-hero__product {
+  .c-configurator__render {
     top: 42% !important;
     left: 50% !important;
-    width: 80vw !important;
+    width: 88vw !important;
   }
 
-  .c-configurator-hero__thumbs {
+  .c-configurator__overview-headline {
+    top: 18% !important;
+    left: 24px !important;
+  }
+
+  .c-configurator__overview-details {
+    top: 62% !important;
+    left: 24px !important;
+  }
+
+  .c-configurator__overview-eyebrow,
+  .c-configurator__overview-name {
+    font-size: 30px !important;
+  }
+
+  .c-configurator__overview-selection {
+    font-size: 18px !important;
+  }
+
+  .c-configurator__overview-price {
+    font-size: 22px !important;
+  }
+
+  .c-configurator__thumbs {
     top: auto !important;
     bottom: 26% !important;
     right: 50% !important;
@@ -248,31 +792,93 @@
     transform: translateX(50%) !important;
   }
 
-  .c-configurator-hero__thumb {
+  .c-configurator__thumb {
     width: 48px !important;
     height: 48px !important;
   }
 
-  .c-configurator-hero__controls {
+  .c-configurator__controls {
     left: 50% !important;
     bottom: 15% !important;
     text-align: center !important;
     transform: translateX(-50%) !important;
   }
 
-  .c-configurator-hero__label {
+  /* Centred on mobile, so the panels anchor from the middle instead of the
+     left edge they use on desktop. */
+  .c-configurator__step {
+    left: 50% !important;
+    transform: translate(-50%, 12px) !important;
+  }
+
+  .c-configurator__step.is-active {
+    transform: translate(-50%, 0) !important;
+  }
+
+  .c-configurator__label {
+    margin-bottom: 20px !important;
     font-size: 14px !important;
   }
 
-  .c-configurator-hero__materials {
+  .c-configurator__options {
     justify-content: center !important;
   }
 
-  .c-configurator-hero__finish {
+  .c-configurator__cta {
     bottom: 6% !important;
   }
 
-  .c-configurator-summary {
+  .c-configurator__summary {
     padding: 32px 24px !important;
+  }
+
+  .c-configurator__back {
+    top: 20px !important;
+    left: 24px !important;
+  }
+
+  .c-configurator__info-panel {
+    width: 100% !important;
+    max-height: 88vh !important;
+    padding: 64px 24px 40px !important;
+  }
+
+  .c-configurator__info-close {
+    top: 20px !important;
+    right: 20px !important;
+  }
+
+  .c-configurator__info-copy {
+    text-align: left !important;
+  }
+
+  .c-configurator__success {
+    padding: 80px 24px !important;
+  }
+
+  .c-configurator__success-headline {
+    margin-bottom: 20px !important;
+    font-size: 24px !important;
+  }
+
+  .c-configurator__success-copy {
+    margin-top: 32px !important;
+    font-size: 15px !important;
+  }
+
+  .c-configurator__success-note {
+    font-size: 15px !important;
+  }
+
+  .c-configurator__success-close {
+    margin-top: 32px !important;
+  }
+
+  .c-configurator-page {
+    padding: 120px 24px !important;
+  }
+
+  .c-configurator-page__title {
+    font-size: 40px !important;
   }
 }

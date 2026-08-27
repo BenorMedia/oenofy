@@ -1,0 +1,296 @@
+---
+import { Image } from "astro:assets";
+import CtaForm from "./CtaForm.astro";
+import { infoSections, successMessage } from "../data/cases.js";
+import "../styles/configurator.css";
+
+// Configurator overlay — the step-by-step case builder.
+//
+// Rendered from a case object in src/data/cases.js, so every page that sells
+// a case mounts the same component with its own data. It is always a popup:
+// it starts closed and any [data-configurator-open] element on the page opens
+// it. There is no page-embedded mode, so /configurator and /case-n run the
+// exact same code path.
+//
+// Every screen is in the DOM from the start and the script only flips classes
+// and data attributes, which keeps all the motion in configurator.css — the
+// same split the preloader uses.
+
+interface Props {
+  caseData: any;
+}
+
+const { caseData } = Astro.props;
+
+const details = caseData.thumbs.filter((thumb: any) => thumb.detail);
+const overviewCta = "Send a request";
+---
+
+<div
+  class="c-configurator"
+  data-configurator
+  data-screen="step"
+  data-detail=""
+  data-case-name={caseData.name}
+  data-base-render={caseData.renders[0].id}
+  data-overview-cta={overviewCta}
+  role="dialog"
+  aria-modal="true"
+  aria-label={`Configure ${caseData.name}`}
+  aria-hidden="true"
+>
+  <button
+    type="button"
+    class="c-configurator__close"
+    data-configurator-close
+    aria-label="Close configurator"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <div class="c-configurator__viewport">
+    <section class="c-configurator__stage">
+      <!-- Detail photographs — full-bleed, one per thumb that has one. -->
+      {
+        details.map((thumb: any) => (
+          <Image
+            src={thumb.detail}
+            alt=""
+            class="c-configurator__detail cc-fill_cover"
+            data-detail-view={thumb.id}
+          />
+        ))
+      }
+
+      <!-- Keeps the dark UI legible over whichever detail is showing. -->
+      <div class="c-configurator__scrim" aria-hidden="true"></div>
+
+      <!-- Stage renders, stacked and crossfaded. -->
+      {
+        caseData.renders.map((render: any) => (
+          <Image
+            src={render.src}
+            alt={render.alt}
+            class="c-configurator__render"
+            style={`--render-width: ${render.width}`}
+            data-render-view={render.id}
+          />
+        ))
+      }
+
+      <!-- Step title — Conso, top-left. A <p>, not a heading: the page behind
+           the overlay already owns the h1. Swapped for the overview headline
+           below on the last screen; the script moves aria-hidden between the
+           two so the case name is never announced twice. -->
+      <p class="c-configurator__title" data-configurator-title>
+        {caseData.name}
+      </p>
+
+      <!-- Overview headline — Montserrat, further down the stage, carrying
+           the full selection and the price. -->
+      <div
+        class="c-configurator__overview"
+        data-configurator-overview
+        aria-hidden="true"
+      >
+        <div class="c-configurator__overview-headline">
+          <p class="c-configurator__overview-eyebrow">Your</p>
+          <p class="c-configurator__overview-name">{caseData.name}</p>
+        </div>
+
+        <div class="c-configurator__overview-details">
+          <p
+            class="c-configurator__overview-selection"
+            data-configurator-selection
+          >
+          </p>
+          <p class="c-configurator__overview-price">
+            <span>{caseData.price}</span>
+            <button
+              type="button"
+              class="c-configurator__info-trigger"
+              data-configurator-info-open
+              aria-label="Pricing and availability information"
+            >
+              <span aria-hidden="true">i</span>
+            </button>
+          </p>
+        </div>
+      </div>
+
+      <div class="c-configurator__thumbs">
+        {
+          caseData.thumbs.map((thumb: any, i: number) => (
+            <button
+              type="button"
+              class:list={["c-configurator__thumb", { "is-active": i === 0 }]}
+              data-thumb={thumb.id}
+              data-thumb-detail={thumb.detail ? "true" : "false"}
+              aria-label={thumb.label}
+              aria-pressed={i === 0 ? "true" : "false"}
+            >
+              <Image src={thumb.thumb} alt="" width={160} />
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Step panels — absolutely stacked so they crossfade in place. -->
+      <div class="c-configurator__controls">
+        {
+          caseData.steps.map((step: any, i: number) => (
+            <div
+              class:list={["c-configurator__step", { "is-active": i === 0 }]}
+              data-step-index={i}
+              data-cta={step.cta}
+              data-render={step.render ?? ""}
+              aria-hidden={i === 0 ? "false" : "true"}
+            >
+              <p class="c-configurator__label">{step.label}</p>
+              <div
+                class="c-configurator__options"
+                role="tablist"
+                aria-label={step.label}
+              >
+                {step.options.map((option: any, j: number) => (
+                  <button
+                    type="button"
+                    class:list={[
+                      "c-configurator__option",
+                      { "is-selected": j === 0 },
+                    ]}
+                    data-option={option.id}
+                    data-option-label={option.label}
+                    role="tab"
+                    aria-selected={j === 0 ? "true" : "false"}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <button
+        type="button"
+        class="c-configurator__cta"
+        data-configurator-cta></button>
+    </section>
+
+    <!-- Summary bar — the answered steps, each a shortcut back to its own
+         screen. Collapses away from the overview onwards. -->
+    <div class="c-configurator__summary">
+      <p class="c-configurator__summary-name">{caseData.name}</p>
+      <p class="c-configurator__summary-selection">
+        {
+          caseData.steps.map((step: any, i: number) => (
+            <span
+              class="c-configurator__summary-part"
+              data-summary-part={i}
+              hidden
+            >
+              {i > 0 && <span class="c-configurator__summary-sep">, </span>}
+              <button
+                type="button"
+                class="c-configurator__summary-value"
+                data-summary-step={i}
+              />
+            </span>
+          ))
+        }
+      </p>
+      <p class="c-configurator__summary-price">
+        <span>{caseData.price}</span>
+        <button
+          type="button"
+          class="c-configurator__info-trigger"
+          data-configurator-info-open
+          aria-label="Pricing and availability information"
+        >
+          <span aria-hidden="true">i</span>
+        </button>
+      </p>
+    </div>
+  </div>
+
+  <!-- Form screen. reveal={false} is required: cc-fade-up leaves the form at
+       opacity 0 and fade-up.js resolves absolute scroll positions that a
+       fixed overlay never reaches, so the form would stay invisible.
+       idPrefix keeps the field ids distinct from a CtaForm the host page may
+       already be rendering further down. -->
+  <div class="c-configurator__form" data-configurator-form>
+    <div class="c-configurator__form-scroll" data-configurator-scroll>
+      <button type="button" class="c-configurator__back" data-configurator-back>
+        &larr; Back to overview
+      </button>
+      <CtaForm reveal={false} configuration idPrefix="configurator" />
+    </div>
+  </div>
+
+  <!-- Confirmation screen. Nothing is sent anywhere yet: the script moves
+       here straight from the form's Send, so the flow can be reviewed end to
+       end before a backend exists. -->
+  <div class="c-configurator__success" data-configurator-success>
+    <div class="c-configurator__success-inner">
+      {
+        successMessage.headlines.map((headline) => (
+          <p class="c-configurator__success-headline">{headline}</p>
+        ))
+      }
+      <p
+        class="c-configurator__success-copy"
+        set:html={successMessage.copy}
+      />
+      <p class="c-configurator__success-note">{successMessage.note}</p>
+      <button
+        type="button"
+        class="c-configurator__cta c-configurator__success-close"
+        data-configurator-close
+      >
+        {successMessage.close}
+      </button>
+    </div>
+  </div>
+
+  <!-- Pricing / availability modal, opened from either (i). -->
+  <div class="c-configurator__info" data-configurator-info>
+    <div
+      class="c-configurator__info-backdrop"
+      data-configurator-info-close
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="c-configurator__info-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Pricing and availability information"
+      data-configurator-scroll
+    >
+      <button
+        type="button"
+        class="c-configurator__info-close"
+        data-configurator-info-close
+        aria-label="Close"
+      >
+        <span aria-hidden="true">X</span>
+      </button>
+      {
+        infoSections.map((section) => (
+          <section class="c-configurator__info-section">
+            <h2 class="c-configurator__info-title">{section.title}</h2>
+            {section.paragraphs.map((paragraph) => (
+              <p class="c-configurator__info-copy" set:html={paragraph} />
+            ))}
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  import "../scripts/configurator.js";
+</script>
