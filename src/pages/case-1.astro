@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Configurator from "../components/Configurator.astro";
+import { case001 } from "../data/cases.js";
 import { Image, getImage } from "astro:assets";
 import heroCaseImg from "../assets/case-1/hero-case.png";
 import pageBgImg from "../assets/case-1/page-bg.png";
@@ -37,7 +39,9 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
          appears. Title fades out and the case image scrubs upward as
          you scroll through (see case-1-page.js). -->
     <section class="c-case-hero" data-case-hero>
-      <a href="#" class="c-configure-button">Configure</a>
+      <button type="button" class="c-configure-button" data-configurator-open>
+        Configure
+      </button>
       <div class="c-case-hero__stage">
         <!-- The load reveal sits on this wrapper, not the h1: the h1's own
              opacity is already driven by the scroll fade-out in
@@ -163,7 +167,9 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
          (centered, infinite, draggable) with a floating Configure
          button top-right. See case-1-slider.js. -->
     <div class="c-case-slider cc-fade-up">
-      <a href="#" class="c-configure-button">Configure</a>
+      <button type="button" class="c-configure-button" data-configurator-open>
+        Configure
+      </button>
       <div class="c-case-slider__viewport" data-case-slider>
         <div class="c-case-slider__track" data-case-slider-track>
           {[productImg1, productImg2, productImg3, productImg1, productImg2, productImg3].map((img) => (
@@ -295,6 +301,8 @@ const product2Bg = await getImage({ src: productImg2, format: "webp" });
       </div>
     </section>
   </div>
+
+  <Configurator caseData={case001} />
 </BaseLayout>
 
 <script>

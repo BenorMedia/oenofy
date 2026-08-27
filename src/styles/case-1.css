@@ -255,7 +255,11 @@
   padding: 8rem 0;
 }
 
+/* A <button>, not a link: it opens the configurator overlay rather than
+   navigating, so the element resets live here. */
 .c-configure-button {
+  border: none;
+  cursor: pointer;
   position: absolute;
   top: 7rem;
   right: 4rem;
