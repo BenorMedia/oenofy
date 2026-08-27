@@ -1,0 +1,110 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import heroCase from "../assets/configurator/hero-case.png";
+import thumbExploded from "../assets/configurator/product-img4.png";
+import thumbSlats from "../assets/configurator/product-img2.png";
+import thumbEdge from "../assets/configurator/intro-img.png";
+import thumbWood from "../assets/configurator/collection1.jpg";
+import "../styles/configurator.css";
+
+// DRAFT PAGE — client direction not finalized. First pass replicates
+// the "Case 001" configurator screen provided (product view + material
+// switch + Finish CTA). Interactivity is intentionally minimal: tab
+// switch updates active state + summary line; no real pricing/3D logic
+// yet, swap in once the client locks direction.
+---
+
+<BaseLayout
+  title="Configurator — OENOFY"
+  description="Build your Oenofy collection."
+  navVariant="dark"
+>
+  <div class="c-configurator-viewport">
+  <section class="c-configurator-hero">
+    <h1 class="c-configurator-hero__title">Case 001</h1>
+
+    <div class="c-configurator-hero__product">
+      <Image src={heroCase} alt="Case 001" />
+    </div>
+
+    <div class="c-configurator-hero__thumbs">
+      <button
+        type="button"
+        class="c-configurator-hero__thumb is-active"
+        data-thumb
+        aria-label="View exploded parts"
+      >
+        <Image src={thumbExploded} alt="" />
+      </button>
+      <button
+        type="button"
+        class="c-configurator-hero__thumb"
+        data-thumb
+        aria-label="View compartments detail"
+      >
+        <Image src={thumbSlats} alt="" />
+      </button>
+      <button
+        type="button"
+        class="c-configurator-hero__thumb"
+        data-thumb
+        aria-label="View edge detail"
+      >
+        <Image src={thumbEdge} alt="" />
+      </button>
+      <button
+        type="button"
+        class="c-configurator-hero__thumb"
+        data-thumb
+        aria-label="View interior wood detail"
+      >
+        <Image src={thumbWood} alt="" />
+      </button>
+    </div>
+
+    <div class="c-configurator-hero__controls">
+      <p class="c-configurator-hero__label">Choose Your Material</p>
+      <div class="c-configurator-hero__materials" role="tablist">
+        <button
+          type="button"
+          class="c-configurator-hero__material is-active"
+          data-material="Stainless"
+          role="tab"
+          aria-selected="true"
+        >
+          Stainless
+        </button>
+        <button
+          type="button"
+          class="c-configurator-hero__material"
+          data-material="Brass"
+          role="tab"
+          aria-selected="false"
+        >
+          Brass
+        </button>
+      </div>
+    </div>
+
+    <button type="button" class="c-configurator-hero__finish">Finish</button>
+  </section>
+
+  <div class="c-configurator-summary">
+    <p class="c-configurator-summary__name">Case 001</p>
+    <p class="c-configurator-summary__material" data-summary-material>
+      Stainless
+    </p>
+    <p class="c-configurator-summary__price">
+      <span data-summary-price>19 500€</span>
+      <span class="c-configurator-summary__info" aria-label="Pricing information"
+        >i</span
+      >
+    </p>
+  </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import "../scripts/configurator-page.js";
+</script>
