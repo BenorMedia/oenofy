@@ -192,7 +192,14 @@
   background: #fff;
 }
 
+/* The whole card is the link.
+   display: block is load-bearing, not cosmetic. An <a> is inline by default,
+   and an inline box ignores `height`, does not stick properly, and reports an
+   offsetHeight of roughly one line — which collection-page.js reads to size
+   the scrub window (`nextStickyTop() + card.offsetHeight`). Inline, the
+   scale 1 -> 0.7 collapses into ~24px of scroll instead of a full card. */
 .c-collection-cases__card {
+  display: block;
   position: sticky;
   top: 6rem;
   height: 40rem;
@@ -233,6 +240,12 @@
   font-weight: 500;
   color: var(--color-text-dark);
   transition: opacity 0.2s ease;
+}
+
+/* As a <div> the card had no hover state; as a link it needs one, and the
+   transition above was already declared waiting for it. */
+.c-collection-cases__card:hover .c-collection-cases__link {
+  opacity: 0.6;
 }
 
 @media (max-width: 768px) {
