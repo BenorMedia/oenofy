@@ -17,9 +17,10 @@ document.querySelectorAll(".c-form__form").forEach((form) => {
   const fields = Array.from(form.querySelectorAll("[required]"));
   if (!fields.length) return;
 
+  // Keyed by field name rather than by position: the age confirmation lives
+  // in the checkbox column, not in a .c-form__field like the text inputs.
   function errorFor(field) {
-    const wrap = field.closest(".c-form__field");
-    return wrap ? wrap.querySelector("[data-form-error]") : null;
+    return form.querySelector(`[data-form-error="${field.name}"]`);
   }
 
   // "First Name *" -> "First Name", so editing a label can never leave its
@@ -31,8 +32,14 @@ document.querySelectorAll(".c-form__form").forEach((form) => {
   }
 
   function problemWith(field) {
+    // Wording that a label can't produce on its own, e.g. the age
+    // confirmation, comes from the markup.
+    const missing = field.dataset.errorMessage || `${nameOf(field)} is required.`;
+
+    if (field.type === "checkbox") return field.checked ? "" : missing;
+
     const value = field.value.trim();
-    if (!value) return `${nameOf(field)} is required.`;
+    if (!value) return missing;
     if (field.type === "email" && !EMAIL.test(value)) {
       return "Enter a valid email address.";
     }
@@ -56,6 +63,7 @@ document.querySelectorAll(".c-form__form").forEach((form) => {
       if (field.classList.contains("is-invalid")) show(field, problemWith(field));
     };
     field.addEventListener("input", recheck);
+    field.addEventListener("change", recheck);
     field.addEventListener("blur", recheck);
   });
 

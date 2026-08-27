@@ -91,7 +91,7 @@ const countries = [
             type="text"
             required
           />
-          <p class="c-form__error" data-form-error role="alert" hidden></p>
+          <p class="c-form__error" data-form-error="firstName" role="alert" hidden></p>
         </div>
         <div class="c-form__field">
           <label class="c-form__label" for={id("lastName")}>Last Name *</label>
@@ -102,7 +102,7 @@ const countries = [
             type="text"
             required
           />
-          <p class="c-form__error" data-form-error role="alert" hidden></p>
+          <p class="c-form__error" data-form-error="lastName" role="alert" hidden></p>
         </div>
         <div class="c-form__field">
           <label class="c-form__label" for={id("email")}>Email address *</label>
@@ -113,7 +113,7 @@ const countries = [
             type="email"
             required
           />
-          <p class="c-form__error" data-form-error role="alert" hidden></p>
+          <p class="c-form__error" data-form-error="email" role="alert" hidden></p>
         </div>
       </div>
 
@@ -150,10 +150,21 @@ const countries = [
 
       <div class="c-form__submit-row">
         <div class="c-form__checks">
-          <label class="c-form__check">
-            <input type="checkbox" name="age" />
-            <span>I confirm that I am of legal drinking age in my country of residence</span>
-          </label>
+          <div class="c-form__check-group">
+            <label class="c-form__check">
+              <input
+                type="checkbox"
+                name="age"
+                required
+                data-error-message="Please confirm you are of legal drinking age."
+              />
+              <span>
+                I confirm that I am of legal drinking age in my country of
+                residence *
+              </span>
+            </label>
+            <p class="c-form__error" data-form-error="age" role="alert" hidden></p>
+          </div>
           <label class="c-form__check">
             <input type="checkbox" name="newsletter" checked />
             <span>Yes, I'd love to receive news and personnalized invitations from Oenofy</span>
